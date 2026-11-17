@@ -1,0 +1,156 @@
+[
+  {
+    "id": "list-1",
+    "title": "Shopping list 1",
+    "buy": "Wed 18 Nov",
+    "covers": "Thu 19 to Wed 25 Nov",
+    "estimate": "Rough estimate $180 to $210 (not checked against live prices)",
+    "groups": [
+      {
+        "store": "Butcher",
+        "items": [
+          { "id": "chicken-thigh-800", "text": "Chicken thigh fillets, 800 g" },
+          { "id": "beef-mince-1kg", "text": "Beef mince, 1 kg" }
+        ]
+      },
+      {
+        "store": "Seafood",
+        "items": [
+          { "id": "salmon-fillets-2", "text": "Salmon fillets, 2 (about 300 to 350 g)" },
+          { "id": "prawns-300", "text": "Raw peeled prawns, frozen, 300 g" },
+          { "id": "canned-salmon-1", "text": "Canned pink salmon, 1 x 210 g (for the optional catch-up plate)" }
+        ]
+      },
+      {
+        "store": "Fruit and veg grocer",
+        "items": [
+          { "id": "spinach-2", "text": "Baby spinach, 2 bags" },
+          { "id": "avocado-4", "text": "Avocados, 4" },
+          { "id": "bananas", "text": "Bananas, 1 bunch" },
+          { "id": "apples-6", "text": "Apples, 6" },
+          { "id": "kiwi-4", "text": "Kiwi fruit, 4" },
+          { "id": "onions-5", "text": "Brown onions, 5" },
+          { "id": "garlic-1", "text": "Garlic, 1 head" },
+          { "id": "ginger", "text": "Ginger, 1 small piece" },
+          { "id": "capsicum-3", "text": "Capsicum, 3" },
+          { "id": "carrots-6", "text": "Carrots, 6" },
+          { "id": "broccoli-2", "text": "Broccoli, 2 heads" },
+          { "id": "potatoes-1kg", "text": "Potatoes, 1 kg" },
+          { "id": "cucumber-2", "text": "Cucumber, 2" },
+          { "id": "lemons-2", "text": "Lemons, 2" },
+          { "id": "lettuce-1", "text": "Lettuce, 1 small" }
+        ]
+      },
+      {
+        "store": "Woolworths: fridge",
+        "items": [
+          { "id": "eggs-18", "text": "Eggs, 18" },
+          { "id": "yoghurt-1kg", "text": "Natural full-fat yoghurt, 1 kg" },
+          { "id": "cheese-500", "text": "Tasty cheese, 500 g" },
+          { "id": "tofu-450", "text": "Firm tofu, 450 g" }
+        ]
+      },
+      {
+        "store": "Woolworths: pantry and frozen",
+        "items": [
+          { "id": "rice-2kg", "text": "Basmati rice, 2 kg" },
+          { "id": "pasta-500", "text": "Dried pasta shapes, 500 g" },
+          { "id": "tortillas-2", "text": "Small soft tortillas or wraps, 2 packs" },
+          { "id": "bread-2", "text": "Wholemeal bread, 2 loaves" },
+          { "id": "oats-500", "text": "Rolled oats, 500 g" },
+          { "id": "weetbix", "text": "Weet-Bix, 1 box" },
+          { "id": "infant-cereal", "text": "Iron-fortified infant cereal, 1 box" },
+          { "id": "red-lentils-500", "text": "Red lentils, 500 g" },
+          { "id": "black-beans-1", "text": "Canned black beans, 1" },
+          { "id": "chickpeas-2", "text": "Canned chickpeas, 2" },
+          { "id": "crushed-tomatoes-4", "text": "Canned crushed tomatoes, 4" },
+          { "id": "baked-beans-1", "text": "No-salt-added baked beans, 1 can" },
+          { "id": "stock-nsa", "text": "No-salt-added stock" },
+          { "id": "soy-sauce-low-salt", "text": "Low-salt soy sauce" },
+          { "id": "ground-almonds-150", "text": "Ground almonds, 150 g" },
+          { "id": "tahini", "text": "Tahini" },
+          { "id": "peanut-butter", "text": "100% peanut butter" },
+          { "id": "almond-butter", "text": "Almond butter" },
+          { "id": "spices-1", "text": "Spices: ground cumin, ground coriander, turmeric, smoked paprika, garam masala, dried mixed herbs" },
+          { "id": "korma-paste", "text": "Korma paste (check the label for salt)" },
+          { "id": "frozen-peas-corn", "text": "Frozen peas and corn" },
+          { "id": "frozen-berries-500", "text": "Frozen mixed berries, 500 g" }
+        ]
+      },
+      {
+        "store": "Check you have",
+        "items": [
+          { "id": "staples-oil", "text": "Olive or neutral oil" },
+          { "id": "staples-butter", "text": "Butter (for omelettes and scrambled egg)" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-2",
+    "title": "Shopping list 2",
+    "buy": "Tue 24 Nov",
+    "covers": "Thu 26 Nov to Wed 2 Dec",
+    "estimate": "Rough estimate $120 to $145 (not checked against live prices). Recipes for this week are coming.",
+    "groups": [
+      {
+        "store": "Butcher",
+        "items": [
+          { "id": "chicken-thigh-600", "text": "Chicken thigh fillets, 600 g" },
+          { "id": "beef-chuck-700", "text": "Beef chuck or gravy beef cubes, 700 g" }
+        ]
+      },
+      {
+        "store": "Seafood",
+        "items": [
+          { "id": "prawns-350", "text": "Raw peeled prawns, frozen, 350 g" },
+          { "id": "canned-salmon-2", "text": "Canned pink salmon, 2 x 210 g" }
+        ]
+      },
+      {
+        "store": "Fruit and veg grocer",
+        "items": [
+          { "id": "spinach-3", "text": "Baby spinach, 3 bags" },
+          { "id": "capsicum-3b", "text": "Capsicum, 3" },
+          { "id": "zucchini-2", "text": "Zucchini, 2" },
+          { "id": "carrots-4", "text": "Carrots, 4" },
+          { "id": "green-beans-400", "text": "Green beans, 400 g" },
+          { "id": "mushrooms-250", "text": "Mushrooms, 250 g" },
+          { "id": "potatoes-1kg-b", "text": "Potatoes, 1 kg" },
+          { "id": "cherry-tomatoes-2", "text": "Cherry tomatoes, 2 punnets" },
+          { "id": "onions-4", "text": "Onions, 4" },
+          { "id": "garlic-1b", "text": "Garlic, 1 head" },
+          { "id": "lemons-2b", "text": "Lemons, 2" },
+          { "id": "fruit-top-up", "text": "Bananas, apples, kiwi and berries as needed" },
+          { "id": "avocado-3", "text": "Avocados, 3" }
+        ]
+      },
+      {
+        "store": "Woolworths: fridge",
+        "items": [
+          { "id": "eggs-12", "text": "Eggs, 12" },
+          { "id": "yoghurt-1kg-b", "text": "Natural yoghurt, 1 kg" },
+          { "id": "feta-200", "text": "Feta, 200 g" },
+          { "id": "ricotta-250", "text": "Ricotta, 250 g" },
+          { "id": "milk-1l", "text": "Milk, 1 L (for pancakes)" }
+        ]
+      },
+      {
+        "store": "Woolworths: pantry",
+        "items": [
+          { "id": "couscous-500", "text": "Couscous, 500 g" },
+          { "id": "linguine-500", "text": "Linguine, 500 g" },
+          { "id": "noodles-1", "text": "Noodles, 1 pack" },
+          { "id": "flour", "text": "Plain flour (for pancakes)" },
+          { "id": "chickpeas-1", "text": "Canned chickpeas, 1" },
+          { "id": "tomatoes-2", "text": "Canned crushed tomatoes, 2" },
+          { "id": "coconut-milk-1", "text": "Coconut milk, 1 can" },
+          { "id": "sesame-seeds", "text": "Sesame seeds" },
+          { "id": "bread-2b", "text": "Bread, 2 loaves" },
+          { "id": "tofu-2", "text": "Firm tofu, 2 packs" },
+          { "id": "spices-2", "text": "Spices: cinnamon, ground ginger, smoked paprika, Moroccan blend or ras el hanout" }
+        ]
+      }
+    ]
+  }
+]

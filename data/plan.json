@@ -1,0 +1,53 @@
+{
+  "note": "Week 1 is ready. More days are added as each fortnight is planned.",
+  "days": [
+    {
+      "date": "2026-11-18",
+      "breakfast": null,
+      "dinner": "catch-up-plate",
+      "note": "Optional: one easy dinner to catch up soy, sesame and fish before the plan starts. Shop day. Cook the prawns for tomorrow's breakfast tonight."
+    },
+    {
+      "date": "2026-11-19",
+      "breakfast": "avocado-prawn-toast",
+      "dinner": "chicken-chickpea-korma",
+      "note": "Cook the korma as a double batch and keep portions for lunches."
+    },
+    {
+      "date": "2026-11-20",
+      "breakfast": "weetbix-peanut-banana",
+      "dinner": "beef-black-bean-tacos",
+      "note": "Save a cup of taco mince for a lunch wrap."
+    },
+    {
+      "date": "2026-11-21",
+      "breakfast": "spinach-omelette-strips",
+      "dinner": "salmon-tray-bake",
+      "note": "Leftover taco mince makes a good wrap for lunch."
+    },
+    {
+      "date": "2026-11-22",
+      "breakfast": "yoghurt-berry-tahini-cereal",
+      "dinner": "slow-cooker-beef-lentil-ragu",
+      "note": "Start the slow cooker after breakfast. It makes enough for tomorrow too."
+    },
+    {
+      "date": "2026-11-23",
+      "breakfast": "oat-porridge-peanut",
+      "dinner": "slow-cooker-beef-lentil-ragu",
+      "note": "Ragu leftovers. Reheat until steaming hot and cook fresh pasta."
+    },
+    {
+      "date": "2026-11-24",
+      "breakfast": "baked-beans-cheese-toast",
+      "dinner": "prawn-tofu-egg-fried-rice",
+      "note": "Cook the rice early so it can cool. Shopping list 2 today."
+    },
+    {
+      "date": "2026-11-25",
+      "breakfast": "scrambled-egg-hummus-toast",
+      "dinner": "red-lentil-dahl",
+      "note": "Make the hummus first (see Recipes). Freeze 2 dahl portions."
+    }
+  ]
+}
