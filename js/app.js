@@ -12,6 +12,11 @@ const state = {
   supabase: null,
   user: null,
   checks: {},
+  extras: [],
+  extrasReady: false,
+  extrasError: "",
+  roster: {},
+  rosterError: "",
   recipeFilter: { type: "all", q: "" },
 };
 
@@ -25,6 +30,16 @@ const ALLERGENS = {
   sesame: "Sesame",
   fish: "Fish",
   shellfish: "Shellfish",
+};
+
+const SHIFTS = {
+  D: { label: "Day", cls: "d" },
+  "D/T": { label: "Day+T", cls: "d" },
+  E: { label: "Eve", cls: "e" },
+  "E/T": { label: "Eve+T", cls: "e" },
+  N: { label: "Night", cls: "n" },
+  OC: { label: "On call", cls: "oc" },
+  ADO: { label: "ADO", cls: "ado" },
 };
 
 const LS_PREFIX = "hm:ticks:";
@@ -60,13 +75,29 @@ function localISO(d = new Date()) {
   return `${y}-${m}-${day}`;
 }
 
-function fmtDate(iso) {
+function parseISO(iso) {
   const [y, m, d] = iso.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString("en-AU", {
+  return new Date(y, m - 1, d);
+}
+
+function fmtDate(iso) {
+  return parseISO(iso).toLocaleDateString("en-AU", {
     weekday: "short",
     day: "numeric",
     month: "short",
   });
+}
+
+function mondayOf(iso) {
+  const dt = parseISO(iso);
+  dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
+  return dt;
+}
+
+function addDays(dt, n) {
+  const c = new Date(dt);
+  c.setDate(c.getDate() + n);
+  return c;
 }
 
 let statusTimer = null;
@@ -142,19 +173,81 @@ function updateProgress() {
     const boxes = d.querySelectorAll("input[data-list]");
     const done = [...boxes].filter((b) => b.checked).length;
     const out = d.querySelector(".progress");
-    if (out) out.textContent = ` (${done}/${boxes.length})`;
+    if (out) out.textContent = boxes.length ? ` (${done}/${boxes.length})` : "";
   });
+}
+
+/* ---------- shared data: roster and extras ---------- */
+
+async function loadRoster() {
+  state.roster = {};
+  state.rosterError = "";
+  if (!state.supabase || !state.user) return;
+  const { data, error } = await state.supabase.from("roster").select("day,code");
+  if (error) {
+    state.rosterError = error.message;
+    return;
+  }
+  for (const r of data) state.roster[r.day] = r.code;
+}
+
+async function loadExtras() {
+  if (!state.supabase || !state.user) {
+    state.extras = [];
+    state.extrasReady = false;
+    state.extrasError = "";
+    return;
+  }
+  const { data, error } = await state.supabase
+    .from("shopping_extras")
+    .select("id,item,created_at")
+    .order("created_at");
+  if (error) {
+    state.extrasError = error.message;
+    state.extrasReady = false;
+    return;
+  }
+  state.extrasError = "";
+  state.extras = data;
+  state.extrasReady = true;
+}
+
+async function addExtra(text) {
+  const { error } = await state.supabase.from("shopping_extras").insert({ item: text });
+  if (error) {
+    setStatus("Couldn't add that item: " + error.message);
+    return;
+  }
+  await loadExtras();
+  drawExtras();
+}
+
+async function removeExtra(id) {
+  const { error } = await state.supabase.from("shopping_extras").delete().eq("id", id);
+  if (error) {
+    setStatus("Couldn't remove that item: " + error.message);
+    return;
+  }
+  await state.supabase.from("meal_checks").delete().eq("list_key", "extras").eq("item_key", id);
+  delete state.checks[tickKey("extras", id)];
+  await loadExtras();
+  drawExtras();
 }
 
 /* ---------- Supabase ---------- */
 
 let channel = null;
+let extrasChannel = null;
 
 function startRealtime() {
   if (!state.supabase) return;
   if (channel) {
     state.supabase.removeChannel(channel);
     channel = null;
+  }
+  if (extrasChannel) {
+    state.supabase.removeChannel(extrasChannel);
+    extrasChannel = null;
   }
   if (!state.user) return;
   channel = state.supabase
@@ -167,6 +260,20 @@ function startRealtime() {
       refreshTicks();
     })
     .subscribe();
+  // Separate channel so a missing extras table can never break tick sync.
+  if (state.extrasReady) {
+    extrasChannel = state.supabase
+      .channel("extras_live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "shopping_extras" }, async () => {
+        await loadExtras();
+        drawExtras();
+      })
+      .subscribe();
+  }
+}
+
+async function loadSharedData() {
+  await Promise.all([loadRemoteChecks(), loadRoster(), loadExtras()]);
 }
 
 async function initSupabase() {
@@ -183,7 +290,7 @@ async function initSupabase() {
       if (!changed) return;
       // Avoid calling Supabase inside this callback directly.
       setTimeout(async () => {
-        await loadRemoteChecks();
+        await loadSharedData();
         startRealtime();
         updateNav();
         route();
@@ -209,6 +316,13 @@ function chips(list) {
   );
 }
 
+function shiftChip(iso) {
+  const code = state.roster[iso];
+  if (!code) return null;
+  const s = SHIFTS[code] || { label: code, cls: "" };
+  return h("span", { class: `shift shift-${s.cls}`, title: code }, s.label);
+}
+
 function dayAllergens(day) {
   const set = new Set();
   for (const id of [day.breakfast, day.dinner]) {
@@ -218,16 +332,17 @@ function dayAllergens(day) {
   return [...set];
 }
 
-function recipeLink(id) {
+function recipeLink(id, short) {
   const r = state.byId[id];
-  return r ? h("a", { href: `#/recipe/${id}` }, r.title) : null;
+  if (!r) return null;
+  return h("a", { href: `#/recipe/${id}` }, short ? r.short || r.title : r.title);
 }
 
 function dayCard(day) {
   return h(
     "article",
     { class: "card" },
-    h("h3", null, fmtDate(day.date)),
+    h("h3", null, fmtDate(day.date), " ", shiftChip(day.date)),
     day.breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
     day.dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
     chips(dayAllergens(day)),
@@ -255,7 +370,64 @@ function viewToday() {
     null,
     h("h2", null, heading),
     dayCard(day),
-    h("p", { class: "muted" }, h("a", { href: "#/plan" }, "See the full plan"))
+    h("p", { class: "muted" }, h("a", { href: "#/plan" }, "See the full plan and calendar"))
+  );
+}
+
+function viewCalendar() {
+  const dates = [...state.plan.map((d) => d.date), ...Object.keys(state.roster)].sort();
+  if (!dates.length) return null;
+  const today = localISO();
+  const byDate = Object.fromEntries(state.plan.map((d) => [d.date, d]));
+  const lastMonday = mondayOf(dates[dates.length - 1]);
+  const weeks = [];
+  for (let w = mondayOf(dates[0]); w <= lastMonday; w = addDays(w, 7)) {
+    const cells = [];
+    for (let i = 0; i < 7; i++) {
+      const dt = addDays(w, i);
+      const iso = localISO(dt);
+      const p = byDate[iso];
+      const weekend = dt.getDay() === 0 || dt.getDay() === 6;
+      cells.push(
+        h(
+          "div",
+          { class: "cal-cell" + (iso === today ? " today" : "") + (weekend ? " weekend" : "") },
+          h(
+            "div",
+            { class: "cal-date" },
+            dt.toLocaleDateString("en-AU", { weekday: "short", day: "numeric" }),
+            " ",
+            shiftChip(iso)
+          ),
+          p && p.dinner
+            ? h("div", { class: "cal-meal" }, h("span", { class: "label" }, "Dinner"), recipeLink(p.dinner, true))
+            : null,
+          p && p.breakfast
+            ? h("div", { class: "cal-meal" }, h("span", { class: "label" }, "Baby"), recipeLink(p.breakfast, true))
+            : null
+        )
+      );
+    }
+    weeks.push(
+      h(
+        "div",
+        { class: "cal-week-wrap" },
+        h("div", { class: "cal-week-title" }, "Week of " + fmtDate(localISO(w))),
+        h("div", { class: "cal-week" }, cells)
+      )
+    );
+  }
+  let hint = null;
+  if (state.supabase && !state.user) hint = "Log in to see your shifts on the calendar.";
+  else if (state.rosterError) hint = "Shifts aren't set up yet. Run the roster SQL in Supabase.";
+  else if (state.supabase && state.user && !Object.keys(state.roster).length) hint = "No shifts loaded yet.";
+  return h(
+    "section",
+    null,
+    h("h2", null, "Calendar"),
+    hint ? h("p", { class: "muted" }, hint) : null,
+    weeks,
+    h("p", { class: "note" }, "Shifts: Day, Eve (evening), Night, On call, ADO (accrued day off). +T means teaching.")
   );
 }
 
@@ -263,7 +435,8 @@ function viewPlan(planNote) {
   return h(
     "section",
     null,
-    h("h2", null, "Plan"),
+    viewCalendar(),
+    h("h2", null, "Day by day"),
     planNote ? h("p", { class: "muted" }, planNote) : null,
     state.plan.map(dayCard)
   );
@@ -400,7 +573,7 @@ function noteForm(recipeId, box) {
   );
 }
 
-function tickItem(listId, item) {
+function tickItem(listId, item, extra) {
   const id = `t-${listId}-${item.id}`;
   const cb = h("input", {
     type: "checkbox",
@@ -413,7 +586,81 @@ function tickItem(listId, item) {
       updateProgress();
     },
   });
-  return h("li", null, cb, h("label", { for: id }, item.text));
+  return h("li", null, cb, h("label", { for: id }, item.text), extra || null);
+}
+
+/* Extras: household items that aren't part of the meal plan */
+
+function extrasContent() {
+  if (!state.supabase) return [h("p", { class: "muted" }, "Extras need shared sync to be switched on.")];
+  if (!state.user) return [h("p", { class: "muted" }, "Log in to add household items like cleaning supplies.")];
+  if (state.extrasError) {
+    return [h("p", { class: "error" }, "Extras aren't set up yet. Run the extras SQL in Supabase. (" + state.extrasError + ")")];
+  }
+  const input = h("input", {
+    type: "text",
+    placeholder: "Add an item, e.g. dishwasher tablets",
+    maxlength: "200",
+    "aria-label": "New shopping item",
+  });
+  const form = h(
+    "form",
+    {
+      class: "row",
+      onsubmit: async (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = "";
+        await addExtra(text);
+      },
+    },
+    input,
+    h("button", { type: "submit" }, "Add")
+  );
+  const items = state.extras.length
+    ? h(
+        "ul",
+        { class: "ticks" },
+        state.extras.map((x) =>
+          tickItem(
+            "extras",
+            { id: x.id, text: x.item },
+            h(
+              "button",
+              {
+                type: "button",
+                class: "secondary small",
+                "aria-label": "Remove " + x.item,
+                onclick: () => removeExtra(x.id),
+              },
+              "Remove"
+            )
+          )
+        )
+      )
+    : h("p", { class: "muted" }, "Nothing here yet.");
+  const clear = state.extras.some((x) => isChecked("extras", x.id))
+    ? h(
+        "button",
+        {
+          type: "button",
+          class: "secondary",
+          onclick: async () => {
+            for (const x of state.extras.filter((y) => isChecked("extras", y.id))) await removeExtra(x.id);
+          },
+        },
+        "Remove ticked items"
+      )
+    : null;
+  return [items, form, clear];
+}
+
+function drawExtras() {
+  const box = document.getElementById("extras-box");
+  if (!box) return;
+  box.replaceChildren(...extrasContent().filter(Boolean));
+  refreshTicks();
 }
 
 function viewShopping() {
@@ -427,8 +674,8 @@ function viewShopping() {
     null,
     h("h2", null, "Shopping"),
     h("p", { class: "muted" }, note),
-    state.shopping.map((list, idx) => {
-      const d = h(
+    state.shopping.map((list, idx) =>
+      h(
         "details",
         { class: "list card", "data-list": list.id, open: idx === 0 },
         h("summary", null, `${list.title}: ${list.buy}`, h("span", { class: "progress" })),
@@ -448,17 +695,24 @@ function viewShopping() {
             class: "secondary",
             onclick: async () => {
               if (!window.confirm("Clear all ticks on " + list.title + "?")) return;
-              for (const g of list.groups) for (const it of g.items) {
-                if (isChecked(list.id, it.id)) await setChecked(list.id, it.id, false);
-              }
+              for (const g of list.groups)
+                for (const it of g.items) {
+                  if (isChecked(list.id, it.id)) await setChecked(list.id, it.id, false);
+                }
               refreshTicks();
             },
           },
           "Clear ticks"
         )
-      );
-      return d;
-    })
+      )
+    ),
+    h(
+      "details",
+      { class: "list card", "data-list": "extras", open: true },
+      h("summary", null, "Household extras", h("span", { class: "progress" })),
+      h("p", { class: "note" }, "Cleaning supplies, toiletries and anything else that isn't for the meals."),
+      h("div", { id: "extras-box" }, extrasContent().filter(Boolean))
+    )
   );
 }
 
@@ -476,7 +730,7 @@ function viewAccount() {
       "section",
       null,
       h("h2", null, "Account"),
-      h("p", null, "You're logged in. Ticks and notes sync live."),
+      h("p", null, "You're logged in. Ticks, extras, notes and shifts sync live."),
       h(
         "button",
         {
@@ -577,7 +831,7 @@ async function init() {
   }
   loadLocalChecks();
   await initSupabase();
-  await loadRemoteChecks();
+  await loadSharedData();
   startRealtime();
   updateNav();
   window.addEventListener("hashchange", () => route(true));

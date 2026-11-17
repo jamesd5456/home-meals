@@ -6,7 +6,10 @@
     "cuisine": "Indian",
     "time": "40 min",
     "serves": "6 serves (2 adults, baby, plus leftovers)",
-    "allergens": ["tree-nut", "dairy"],
+    "allergens": [
+      "tree-nut",
+      "dairy"
+    ],
     "iron": "Chicken thigh and chickpeas. Serve with a vitamin C food such as capsicum or tomato to help absorption.",
     "ingredients": [
       "1 tbsp oil",
@@ -35,7 +38,8 @@
       "Serve over rice. Cool the leftovers quickly and put them in the fridge."
     ],
     "baby": "Shred the chicken or cut into soft strips, lightly squash the chickpeas, and keep the sauce thick so it clings. Serve with rice she can scoop or toast fingers. No added salt.",
-    "notes": "Cooked as a double batch on purpose so there are portions for lunches. Fridge for up to 3 days, or freeze for longer."
+    "notes": "Cooked as a double batch on purpose so there are portions for lunches. Fridge for up to 3 days, or freeze for longer.",
+    "short": "Chicken korma"
   },
   {
     "id": "beef-black-bean-tacos",
@@ -44,7 +48,10 @@
     "cuisine": "Mexican",
     "time": "25 min",
     "serves": "4 to 6 serves, with some mince left over",
-    "allergens": ["wheat", "dairy"],
+    "allergens": [
+      "wheat",
+      "dairy"
+    ],
     "iron": "Beef mince and black beans. Capsicum and a squeeze of lemon add vitamin C.",
     "ingredients": [
       "1 tbsp oil",
@@ -71,7 +78,8 @@
       "Set aside about a cup of the mince for a lunch wrap."
     ],
     "baby": "Soft strips of mince with squashed black beans, mashed avocado on tortilla strips, and a little melted cheese. No added salt.",
-    "notes": "Leftover mince keeps in the fridge for up to 3 days."
+    "notes": "Leftover mince keeps in the fridge for up to 3 days.",
+    "short": "Beef tacos"
   },
   {
     "id": "salmon-tray-bake",
@@ -80,7 +88,11 @@
     "cuisine": "Modern Australian",
     "time": "35 min",
     "serves": "2 adults and a baby",
-    "allergens": ["fish", "sesame", "dairy"],
+    "allergens": [
+      "fish",
+      "sesame",
+      "dairy"
+    ],
     "iron": "Salmon has a little iron but is not a high-iron meal. The beef meals around it make up for this.",
     "ingredients": [
       "600 g potatoes, diced about 1.5 cm",
@@ -99,7 +111,8 @@
       "Remove the salmon skin and check for bones before serving."
     ],
     "baby": "Flake the salmon and check carefully for bones. Squash the potato and steam the broccoli florets a little longer so they are soft. A spoonful of the drizzle on the side.",
-    "notes": "Not ideal for reheating, so eat it fresh."
+    "notes": "Not ideal for reheating, so eat it fresh.",
+    "short": "Salmon bake"
   },
   {
     "id": "slow-cooker-beef-lentil-ragu",
@@ -108,7 +121,9 @@
     "cuisine": "Italian",
     "time": "20 min prep, 6 to 8 hours slow cook",
     "serves": "6 serves (dinner plus leftovers)",
-    "allergens": ["wheat"],
+    "allergens": [
+      "wheat"
+    ],
     "iron": "Beef mince and red lentils together make this a strong iron meal.",
     "ingredients": [
       "500 g beef mince",
@@ -131,7 +146,8 @@
       "Cool the leftovers quickly and refrigerate for the next day."
     ],
     "baby": "Pasta shapes she can grip, with a thick ragu that clings. Squash any big lentils. Cheese is optional. No added salt.",
-    "notes": "Fridge for up to 3 days. It also freezes well."
+    "notes": "Fridge for up to 3 days. It also freezes well.",
+    "short": "Beef ragu"
   },
   {
     "id": "prawn-tofu-egg-fried-rice",
@@ -140,7 +156,11 @@
     "cuisine": "Asian",
     "time": "30 min (plus cooling the rice)",
     "serves": "5 to 6 serves, with lunch leftovers",
-    "allergens": ["shellfish", "soy", "egg"],
+    "allergens": [
+      "shellfish",
+      "soy",
+      "egg"
+    ],
     "iron": "Egg, tofu and prawn each add some iron. Peas and capsicum or lemon on the side add vitamin C.",
     "ingredients": [
       "1 1/2 cups basmati rice (dry), cooked and cooled",
@@ -164,7 +184,8 @@
       "Fold in the tofu and egg. Adults add soy sauce at the table."
     ],
     "baby": "Serve her portion before any soy sauce goes in. Chop the prawns finely, never whole pieces, and use soft tofu cubes. Rice clumps are easy to pick up.",
-    "notes": "Cool leftover rice quickly and refrigerate within an hour. Reheat once until steaming hot."
+    "notes": "Cool leftover rice quickly and refrigerate within an hour. Reheat once until steaming hot.",
+    "short": "Prawn fried rice"
   },
   {
     "id": "red-lentil-dahl",
@@ -173,7 +194,9 @@
     "cuisine": "Indian",
     "time": "35 min",
     "serves": "6 serves (freeze 2)",
-    "allergens": ["dairy"],
+    "allergens": [
+      "dairy"
+    ],
     "iron": "Lentils and spinach. The lemon juice adds vitamin C to help absorption.",
     "ingredients": [
       "1 tbsp oil",
@@ -201,7 +224,8 @@
       "Cool, then freeze 2 portions in single-serve containers."
     ],
     "baby": "Thick dahl loaded onto toast fingers or a pre-loaded spoon, with yoghurt on the side. No added salt.",
-    "notes": "Fridge for up to 3 days. Frozen portions are handy for busy days."
+    "notes": "Fridge for up to 3 days. Frozen portions are handy for busy days.",
+    "short": "Lentil dahl"
   },
   {
     "id": "catch-up-plate",
@@ -210,7 +234,13 @@
     "cuisine": "Easy plate",
     "time": "15 min",
     "serves": "A baby plate. Build an adult side around it.",
-    "allergens": ["soy", "fish", "sesame", "dairy", "wheat"],
+    "allergens": [
+      "soy",
+      "fish",
+      "sesame",
+      "dairy",
+      "wheat"
+    ],
     "iron": "Tofu and canned salmon each add some iron.",
     "ingredients": [
       "100 g firm tofu, cut into small cubes",
@@ -226,7 +256,8 @@
       "Serve the tofu, salmon and toast fingers with the dip."
     ],
     "baby": "Tofu cubes soft enough to squash between fingers. Mashed salmon on toast fingers. Dip on the side.",
-    "notes": "Optional. Offered before the plan starts so the less frequent foods do not go much beyond a week."
+    "notes": "Optional. Offered before the plan starts so the less frequent foods do not go much beyond a week.",
+    "short": "Tofu + salmon plate"
   },
   {
     "id": "avocado-prawn-toast",
@@ -235,7 +266,10 @@
     "cuisine": "Baby breakfast",
     "time": "10 min",
     "serves": "1 baby serve",
-    "allergens": ["shellfish", "wheat"],
+    "allergens": [
+      "shellfish",
+      "wheat"
+    ],
     "iron": "Lower iron than most breakfasts, so make sure dinner is a good iron meal.",
     "ingredients": [
       "1/4 ripe avocado",
@@ -249,7 +283,8 @@
       "Breastfeed as usual."
     ],
     "baby": "Prawn is minced finely, never whole pieces. Follow the Food Follower app for the amount and what to watch for. For severe signs of a reaction, follow your ASCIA action plan guidance and call 000.",
-    "notes": "Offer it earlier in the day when the baby is well, with a parent watching her afterwards."
+    "notes": "Offer it earlier in the day when the baby is well, with a parent watching her afterwards.",
+    "short": "Avocado + prawn toast"
   },
   {
     "id": "weetbix-peanut-banana",
@@ -258,7 +293,10 @@
     "cuisine": "Baby breakfast",
     "time": "5 min",
     "serves": "1 baby serve",
-    "allergens": ["wheat", "peanut"],
+    "allergens": [
+      "wheat",
+      "peanut"
+    ],
     "iron": "Weet-Bix is fortified with iron (check the pack).",
     "ingredients": [
       "1 Weet-Bix",
@@ -272,7 +310,8 @@
       "Thin the peanut butter with a little warm water, then swirl it through."
     ],
     "baby": "Smooth and soft. Never offer whole nuts or lumps of peanut butter.",
-    "notes": ""
+    "notes": "",
+    "short": "Weet-Bix + PB"
   },
   {
     "id": "spinach-omelette-strips",
@@ -281,7 +320,11 @@
     "cuisine": "Baby breakfast",
     "time": "10 min",
     "serves": "1 baby serve",
-    "allergens": ["egg", "wheat", "dairy"],
+    "allergens": [
+      "egg",
+      "wheat",
+      "dairy"
+    ],
     "iron": "Egg and spinach.",
     "ingredients": [
       "1 egg",
@@ -295,7 +338,8 @@
       "Cut into strips and serve with toast fingers."
     ],
     "baby": "Make sure the egg is cooked through. Strips are easy for her to hold.",
-    "notes": ""
+    "notes": "",
+    "short": "Omelette strips"
   },
   {
     "id": "yoghurt-berry-tahini-cereal",
@@ -304,7 +348,10 @@
     "cuisine": "Baby breakfast",
     "time": "5 min",
     "serves": "1 baby serve",
-    "allergens": ["dairy", "sesame"],
+    "allergens": [
+      "dairy",
+      "sesame"
+    ],
     "iron": "Iron-fortified infant cereal stirred through.",
     "ingredients": [
       "3 tbsp full-fat natural yoghurt",
@@ -318,7 +365,8 @@
       "Swirl in the tahini and top with mashed berries."
     ],
     "baby": "Berries mashed so there are no whole skins to choke on. Thin the tahini if it is thick.",
-    "notes": ""
+    "notes": "",
+    "short": "Yoghurt + tahini"
   },
   {
     "id": "oat-porridge-peanut",
@@ -327,7 +375,9 @@
     "cuisine": "Baby breakfast",
     "time": "10 min",
     "serves": "1 baby serve",
-    "allergens": ["peanut"],
+    "allergens": [
+      "peanut"
+    ],
     "iron": "Iron-fortified infant cereal stirred through.",
     "ingredients": [
       "3 tbsp rolled oats",
@@ -342,7 +392,8 @@
       "Stir in the infant cereal, apple and peanut butter."
     ],
     "baby": "Warm, not hot, and smooth enough for a spoon or fingers.",
-    "notes": ""
+    "notes": "",
+    "short": "Oat porridge"
   },
   {
     "id": "baked-beans-cheese-toast",
@@ -351,7 +402,10 @@
     "cuisine": "Baby breakfast",
     "time": "5 min",
     "serves": "1 baby serve",
-    "allergens": ["wheat", "dairy"],
+    "allergens": [
+      "wheat",
+      "dairy"
+    ],
     "iron": "Beans give plant iron. Add a vitamin C food such as a few slices of capsicum or tomato.",
     "ingredients": [
       "3 tbsp no-salt-added baked beans, lightly squashed",
@@ -364,7 +418,8 @@
       "Pop under the grill briefly, or microwave for 10 seconds, until the cheese melts."
     ],
     "baby": "Let it cool before serving. Squash any whole beans.",
-    "notes": ""
+    "notes": "",
+    "short": "Beans on toast"
   },
   {
     "id": "scrambled-egg-hummus-toast",
@@ -373,7 +428,11 @@
     "cuisine": "Baby breakfast",
     "time": "10 min",
     "serves": "1 baby serve",
-    "allergens": ["egg", "sesame", "wheat"],
+    "allergens": [
+      "egg",
+      "sesame",
+      "wheat"
+    ],
     "iron": "Egg and chickpeas.",
     "ingredients": [
       "1 egg",
@@ -387,7 +446,8 @@
       "Serve with the scrambled egg."
     ],
     "baby": "Soft, fully cooked egg. Hummus spread thin.",
-    "notes": ""
+    "notes": "",
+    "short": "Egg + hummus toast"
   },
   {
     "id": "hummus",
@@ -396,7 +456,9 @@
     "cuisine": "Basics",
     "time": "5 min",
     "serves": "About 1 1/2 cups",
-    "allergens": ["sesame"],
+    "allergens": [
+      "sesame"
+    ],
     "iron": "Chickpeas and tahini.",
     "ingredients": [
       "1 x 400 g can chickpeas, drained (keep a little liquid)",
@@ -410,6 +472,7 @@
       "Taste and add more lemon if you like."
     ],
     "baby": "No added salt in her portion. Spread thinly on toast fingers.",
-    "notes": "Keeps in the fridge for about 3 days."
+    "notes": "Keeps in the fridge for about 3 days.",
+    "short": "Hummus"
   }
 ]
