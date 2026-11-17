@@ -1,4 +1,15 @@
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config.js";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, FORTNIGHT_BUDGET } from "./config.js";
+import {
+  addDaysISO,
+  ageDays,
+  diffDays,
+  fortnightFor,
+  freezerSummary,
+  groupPrep,
+  nightRunStatus,
+  shiftAdvice,
+  summariseSpend,
+} from "./logic.js";
 
 const app = document.getElementById("app");
 const statusEl = document.getElementById("status");
@@ -17,6 +28,13 @@ const state = {
   extrasError: "",
   roster: {},
   rosterError: "",
+  freezer: [],
+  freezerReady: false,
+  freezerError: "",
+  spend: [],
+  spendReady: false,
+  spendError: "",
+  spendOffset: 0,
   recipeFilter: { type: "all", q: "" },
 };
 
@@ -168,12 +186,36 @@ function refreshTicks() {
   updateProgress();
 }
 
+// "Have it" flags live in meal_checks under list_key "have:<list>", so they sync like ticks.
+function syncHave() {
+  document.querySelectorAll("li[data-have-list]").forEach((li) => {
+    const on = isChecked(li.dataset.haveList, li.dataset.item);
+    li.classList.toggle("have", on);
+    li.dataset.have = on ? "1" : "0";
+    const btn = li.querySelector(".have-btn");
+    if (btn) {
+      btn.textContent = on ? "Need it" : "Have it";
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+  });
+}
+
+async function toggleHave(listId, itemId) {
+  await setChecked("have:" + listId, itemId, !isChecked("have:" + listId, itemId));
+  refreshTicks();
+}
+
 function updateProgress() {
+  syncHave();
   document.querySelectorAll("details[data-list]").forEach((d) => {
-    const boxes = d.querySelectorAll("input[data-list]");
-    const done = [...boxes].filter((b) => b.checked).length;
+    const all = [...d.querySelectorAll("input[data-list]")];
+    const boxes = all.filter((b) => !b.closest("li") || b.closest("li").dataset.have !== "1");
+    const have = all.length - boxes.length;
+    const done = boxes.filter((b) => b.checked).length;
     const out = d.querySelector(".progress");
-    if (out) out.textContent = boxes.length ? ` (${done}/${boxes.length})` : "";
+    if (!out) return;
+    if (!all.length) out.textContent = "";
+    else out.textContent = ` (${done}/${boxes.length}${have ? `, ${have} already have` : ""})`;
   });
 }
 
@@ -212,6 +254,41 @@ async function loadExtras() {
   state.extrasReady = true;
 }
 
+async function loadFreezer() {
+  state.freezer = [];
+  state.freezerReady = false;
+  state.freezerError = "";
+  if (!state.supabase || !state.user) return;
+  const { data, error } = await state.supabase
+    .from("meal_freezer")
+    .select("id,item,portions,made_on,recipe_key")
+    .order("made_on");
+  if (error) {
+    state.freezerError = error.message;
+    return;
+  }
+  state.freezer = data;
+  state.freezerReady = true;
+}
+
+async function loadSpend() {
+  state.spend = [];
+  state.spendReady = false;
+  state.spendError = "";
+  if (!state.supabase || !state.user) return;
+  const { data, error } = await state.supabase
+    .from("meal_spend")
+    .select("id,spent_on,store,amount,note")
+    .order("spent_on", { ascending: false })
+    .limit(400);
+  if (error) {
+    state.spendError = error.message;
+    return;
+  }
+  state.spend = data;
+  state.spendReady = true;
+}
+
 async function addExtra(text) {
   const { error } = await state.supabase.from("shopping_extras").insert({ item: text });
   if (error) {
@@ -238,6 +315,8 @@ async function removeExtra(id) {
 
 let channel = null;
 let extrasChannel = null;
+let freezerChannel = null;
+let spendChannel = null;
 
 function startRealtime() {
   if (!state.supabase) return;
@@ -248,6 +327,14 @@ function startRealtime() {
   if (extrasChannel) {
     state.supabase.removeChannel(extrasChannel);
     extrasChannel = null;
+  }
+  if (freezerChannel) {
+    state.supabase.removeChannel(freezerChannel);
+    freezerChannel = null;
+  }
+  if (spendChannel) {
+    state.supabase.removeChannel(spendChannel);
+    spendChannel = null;
   }
   if (!state.user) return;
   channel = state.supabase
@@ -270,10 +357,28 @@ function startRealtime() {
       })
       .subscribe();
   }
+  if (state.freezerReady) {
+    freezerChannel = state.supabase
+      .channel("freezer_live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "meal_freezer" }, async () => {
+        await loadFreezer();
+        drawFreezer();
+      })
+      .subscribe();
+  }
+  if (state.spendReady) {
+    spendChannel = state.supabase
+      .channel("spend_live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "meal_spend" }, async () => {
+        await loadSpend();
+        drawSpend();
+      })
+      .subscribe();
+  }
 }
 
 async function loadSharedData() {
-  await Promise.all([loadRemoteChecks(), loadRoster(), loadExtras()]);
+  await Promise.all([loadRemoteChecks(), loadRoster(), loadExtras(), loadFreezer(), loadSpend()]);
 }
 
 async function initSupabase() {
@@ -352,11 +457,88 @@ function dayCard(day) {
 
 /* ---------- views ---------- */
 
+function fmtMoney(n) {
+  return "$" + Number(n).toFixed(2);
+}
+
+// Freezer vs the next run of night shifts (one packed meal per night). compact = Today page version.
+function nightBanner(compact) {
+  if (!state.supabase) return null;
+  const quiet = (msg) => (compact ? null : h("p", { class: "muted" }, msg));
+  if (!state.user) return quiet("Log in to see your night runs.");
+  if (!Object.keys(state.roster).length) return quiet("No shifts loaded yet, so night runs can't be worked out.");
+  const st = nightRunStatus(state.roster, state.freezerReady ? state.freezer : [], localISO());
+  if (!st) return quiet("No night runs on the roster in the next 90 days.");
+  if (compact && st.startsInDays > 21) return null;
+  const when = st.underway
+    ? "Night run under way"
+    : st.startsInDays === 0
+      ? "Night run starts today"
+      : `Night run in ${st.startsInDays} day${st.startsInDays === 1 ? "" : "s"}`;
+  const nights = `${st.run.nights} night${st.run.nights === 1 ? "" : "s"}`;
+  let line;
+  let cls = "banner";
+  if (!state.freezerReady) {
+    line = "The freezer page isn't set up yet, so portions can't be counted.";
+  } else if (st.short === 0) {
+    line = `${st.portions} freezer portion${st.portions === 1 ? "" : "s"} for ${nights}. Covered.`;
+    cls += " ok";
+  } else {
+    line = `${st.portions} freezer portion${st.portions === 1 ? "" : "s"} for ${nights}. Cook ${st.short} more.`;
+    cls += " warn";
+  }
+  return h(
+    "a",
+    { class: cls, href: "#/freezer" },
+    h("strong", null, when),
+    ` (${fmtDate(st.run.start)}${st.run.end !== st.run.start ? " to " + fmtDate(st.run.end) : ""})`,
+    h("span", null, line)
+  );
+}
+
+function prepList(groups) {
+  return groups.map((g) =>
+    h("div", { class: "prep" }, h("div", { class: "store" }, g.label), h("ul", null, g.items.map((i) => h("li", null, i.text))))
+  );
+}
+
+function tonightCard(day) {
+  const dinner = day.dinner ? state.byId[day.dinner] : null;
+  const breakfast = day.breakfast ? state.byId[day.breakfast] : null;
+  const advice = shiftAdvice(state.roster[day.date]);
+  return h(
+    "article",
+    { class: "card" },
+    h("h3", null, fmtDate(day.date), " ", shiftChip(day.date)),
+    advice ? h("p", { class: "advice" }, advice) : null,
+    day.jamesMeal ? h("p", null, h("span", { class: "label" }, "Your meal"), day.jamesMeal) : null,
+    dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
+    dinner ? h("p", { class: "note" }, `${dinner.time} | ${dinner.serves}`) : null,
+    dinner && dinner.baby ? h("div", { class: "baby" }, h("strong", null, "Baby version: "), dinner.baby) : null,
+    breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
+    chips(dayAllergens(day)),
+    prepList(groupPrep(day.prep).filter((g) => g.when !== "night-before")),
+    day.note ? h("p", { class: "note" }, day.note) : null
+  );
+}
+
+function tomorrowCard(day) {
+  const setup = groupPrep(day.prep).filter((g) => g.when === "night-before");
+  return h(
+    "article",
+    { class: "card" },
+    h("h3", null, "Tomorrow: ", fmtDate(day.date), " ", shiftChip(day.date)),
+    day.dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
+    day.breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
+    prepList(setup)
+  );
+}
+
 function viewToday() {
   if (!state.plan.length) return h("p", { class: "muted" }, "No plan loaded yet.");
   const today = localISO();
   let day = state.plan.find((d) => d.date === today);
-  let heading = "Today";
+  let heading = "Tonight";
   if (!day) {
     day = state.plan.find((d) => d.date > today);
     heading = "Next up";
@@ -365,11 +547,17 @@ function viewToday() {
       heading = "Latest planned day";
     }
   }
+  const tomorrow = day.date === today ? state.plan.find((d) => d.date === addDaysISO(today, 1)) : null;
+  const hint =
+    state.supabase && !state.user ? h("p", { class: "muted" }, "Log in to see your shift and night runs here.") : null;
   return h(
     "section",
     null,
     h("h2", null, heading),
-    dayCard(day),
+    nightBanner(true),
+    hint,
+    tonightCard(day),
+    tomorrow ? tomorrowCard(tomorrow) : null,
     h("p", { class: "muted" }, h("a", { href: "#/plan" }, "See the full plan and calendar"))
   );
 }
@@ -573,8 +761,8 @@ function noteForm(recipeId, box) {
   );
 }
 
-function tickItem(listId, item, extra) {
-  const id = `t-${listId}-${item.id}`;
+function tickItem(listId, item, extra, opts = {}) {
+  const id = `t-${listId}-${item.id}${opts.suffix || ""}`;
   const cb = h("input", {
     type: "checkbox",
     id,
@@ -586,7 +774,27 @@ function tickItem(listId, item, extra) {
       updateProgress();
     },
   });
-  return h("li", null, cb, h("label", { for: id }, item.text), extra || null);
+  const haveBtn = opts.have
+    ? h(
+        "button",
+        {
+          type: "button",
+          class: "secondary small have-btn",
+          "aria-pressed": "false",
+          title: "Mark as already in the pantry or fridge, so it drops off the buy count",
+          onclick: () => toggleHave(listId, item.id),
+        },
+        "Have it"
+      )
+    : null;
+  return h(
+    "li",
+    opts.have ? { "data-have-list": "have:" + listId, "data-item": item.id } : null,
+    cb,
+    h("label", { for: id }, item.text),
+    haveBtn,
+    extra || null
+  );
 }
 
 /* Extras: household items that aren't part of the meal plan */
@@ -663,6 +871,25 @@ function drawExtras() {
   refreshTicks();
 }
 
+// Anything still unticked (and not marked "have it") on the previous list, once its shop day has passed.
+function carriedOver(idx) {
+  const prev = state.shopping[idx - 1];
+  if (!prev || !prev.buyDate || prev.buyDate >= localISO()) return null;
+  const left = [];
+  for (const g of prev.groups)
+    for (const it of g.items) {
+      if (isChecked(prev.id, it.id) || isChecked("have:" + prev.id, it.id)) continue;
+      left.push({ id: it.id, text: `${it.text} (${g.store})` });
+    }
+  if (!left.length) return null;
+  return h(
+    "div",
+    null,
+    h("div", { class: "store" }, `Carried over from ${prev.title}`),
+    h("ul", { class: "ticks" }, left.map((it) => tickItem(prev.id, it, null, { have: true, suffix: "-c" })))
+  );
+}
+
 function viewShopping() {
   const note = state.supabase
     ? state.user
@@ -680,12 +907,13 @@ function viewShopping() {
         { class: "list card", "data-list": list.id, open: idx === 0 },
         h("summary", null, `${list.title}: ${list.buy}`, h("span", { class: "progress" })),
         h("p", { class: "note" }, `Covers ${list.covers}. ${list.estimate}`),
+        carriedOver(idx),
         list.groups.map((g) =>
           h(
             "div",
             null,
             h("div", { class: "store" }, g.store),
-            h("ul", { class: "ticks" }, g.items.map((it) => tickItem(list.id, it)))
+            h("ul", { class: "ticks" }, g.items.map((it) => tickItem(list.id, it, null, { have: true })))
           )
         ),
         h(
@@ -709,10 +937,296 @@ function viewShopping() {
     h(
       "details",
       { class: "list card", "data-list": "extras", open: true },
-      h("summary", null, "Household extras", h("span", { class: "progress" })),
-      h("p", { class: "note" }, "Cleaning supplies, toiletries and anything else that isn't for the meals."),
+      h("summary", null, "Extras and one-off items", h("span", { class: "progress" })),
+      h("p", { class: "note" }, "Anything not on the lists above: a forgotten ingredient, cleaning supplies, toiletries. Either of you can add to it from your phone."),
       h("div", { id: "extras-box" }, extrasContent().filter(Boolean))
     )
+  );
+}
+
+/* Freezer inventory */
+
+function notReady(name, ready, error, sqlName) {
+  if (!state.supabase) return [h("p", { class: "muted" }, `${name} needs shared sync to be switched on.`)];
+  if (!state.user) return [h("p", { class: "muted" }, `Log in to see and update the ${name.toLowerCase()}.`)];
+  if (error) {
+    return [
+      h("p", { class: "error" }, `${name} isn't set up yet. Run sql/${sqlName} in Supabase, then refresh. (${error})`),
+    ];
+  }
+  return null;
+}
+
+async function adjustFreezer(it, delta) {
+  const next = Number(it.portions) + delta;
+  const { error } =
+    next <= 0
+      ? await state.supabase.from("meal_freezer").delete().eq("id", it.id)
+      : await state.supabase.from("meal_freezer").update({ portions: next }).eq("id", it.id);
+  if (error) setStatus("Couldn't update the freezer: " + error.message);
+  await loadFreezer();
+  drawFreezer();
+}
+
+async function removeFreezer(it) {
+  if (!window.confirm(`Remove ${it.item} from the freezer list?`)) return;
+  const { error } = await state.supabase.from("meal_freezer").delete().eq("id", it.id);
+  if (error) setStatus("Couldn't remove that: " + error.message);
+  await loadFreezer();
+  drawFreezer();
+}
+
+function freezerRow(it, today) {
+  const age = ageDays(it.made_on, today);
+  const oldish = age >= 90;
+  return h(
+    "article",
+    { class: "card" },
+    h("h3", null, it.item, " ", h("span", { class: "chip" }, `${it.portions} portion${it.portions === 1 ? "" : "s"}`)),
+    h(
+      "p",
+      { class: "note" },
+      `Made ${fmtDate(it.made_on)} (${age <= 0 ? "today" : age === 1 ? "yesterday" : age + " days ago"})`,
+      oldish ? " | Use soon: over 3 months" : ""
+    ),
+    h(
+      "div",
+      { class: "row" },
+      h(
+        "button",
+        { type: "button", class: "secondary small", onclick: () => adjustFreezer(it, -1) },
+        it.portions <= 1 ? "Used the last one" : "Used one"
+      ),
+      h("button", { type: "button", class: "secondary small", onclick: () => adjustFreezer(it, 1) }, "Add one"),
+      h("button", { type: "button", class: "secondary small", onclick: () => removeFreezer(it) }, "Remove")
+    )
+  );
+}
+
+function freezerContent() {
+  const blocked = notReady("Freezer", state.freezerReady, state.freezerError, "2026-11-freezer-and-spend.sql");
+  if (blocked) return blocked;
+  const today = localISO();
+  return [
+    nightBanner(false),
+    h(
+      "p",
+      { class: "muted" },
+      `${freezerSummary(state.freezer)} portion${freezerSummary(state.freezer) === 1 ? "" : "s"} in the freezer. Count adult-sized portions that you can take to work.`
+    ),
+    state.freezer.length ? state.freezer.map((it) => freezerRow(it, today)) : h("p", { class: "muted" }, "Nothing in the freezer yet."),
+    h("p", { class: "note" }, "The 3 month flag is a rough quality guide only, not a food safety rule."),
+  ];
+}
+
+function drawFreezer() {
+  const box = document.getElementById("freezer-box");
+  if (box) box.replaceChildren(...freezerContent().flat().filter(Boolean));
+}
+
+function freezerForm() {
+  const item = h("input", {
+    type: "text",
+    placeholder: "What is it? e.g. Red lentil dahl",
+    maxlength: "120",
+    required: true,
+    list: "freezer-recipes",
+    "aria-label": "Freezer item",
+  });
+  const portions = h("input", { type: "number", min: "1", max: "50", value: "2", "aria-label": "Portions" });
+  const made = h("input", { type: "date", value: localISO(), "aria-label": "Date made" });
+  const titles = state.recipes.filter((r) => r.type === "dinner" || r.type === "basics");
+  return h(
+    "form",
+    {
+      class: "card",
+      onsubmit: async (e) => {
+        e.preventDefault();
+        const text = item.value.trim();
+        const n = parseInt(portions.value, 10);
+        if (!text || !(n >= 1 && n <= 50)) return;
+        const match = titles.find((r) => r.title.toLowerCase() === text.toLowerCase());
+        const { error } = await state.supabase
+          .from("meal_freezer")
+          .insert({ item: text, portions: n, made_on: made.value || localISO(), recipe_key: match ? match.id : null });
+        if (error) {
+          setStatus("Couldn't add that: " + error.message);
+          return;
+        }
+        item.value = "";
+        await loadFreezer();
+        drawFreezer();
+      },
+    },
+    h("h3", null, "Add to the freezer"),
+    h("datalist", { id: "freezer-recipes" }, titles.map((r) => h("option", { value: r.title }))),
+    item,
+    h("div", { class: "row" }, h("label", { class: "inline" }, "Portions", portions), h("label", { class: "inline" }, "Made", made)),
+    h("button", { type: "submit" }, "Add")
+  );
+}
+
+function viewFreezer() {
+  return h(
+    "section",
+    null,
+    h("h2", null, "Freezer"),
+    state.freezerReady ? freezerForm() : null,
+    h("div", { id: "freezer-box" }, freezerContent().flat().filter(Boolean))
+  );
+}
+
+/* Grocery spend */
+
+const SPEND_STORES = ["Woolworths", "Butcher", "Fruit grocer", "Seafood", "Other"];
+
+async function removeSpend(e) {
+  if (!window.confirm(`Remove ${fmtMoney(e.amount)} at ${e.store}?`)) return;
+  const { error } = await state.supabase.from("meal_spend").delete().eq("id", e.id);
+  if (error) setStatus("Couldn't remove that: " + error.message);
+  await loadSpend();
+  drawSpend();
+}
+
+function spendContent() {
+  const blocked = notReady("Spend tracker", state.spendReady, state.spendError, "2026-11-freezer-and-spend.sql");
+  if (blocked) return blocked;
+  const today = localISO();
+  const fn = fortnightFor(today, state.spendOffset);
+  const sum = summariseSpend(state.spend, fn, FORTNIGHT_BUDGET, today);
+  const stepper = h(
+    "div",
+    { class: "row" },
+    h(
+      "button",
+      {
+        type: "button",
+        class: "secondary small",
+        onclick: () => {
+          state.spendOffset -= 1;
+          drawSpend();
+        },
+      },
+      "< Earlier"
+    ),
+    h("span", { class: "grow" }, `${fmtDate(fn.start)} to ${fmtDate(fn.end)}${sum.isCurrent ? " (this fortnight)" : ""}`),
+    h(
+      "button",
+      {
+        type: "button",
+        class: "secondary small",
+        disabled: state.spendOffset >= 0,
+        onclick: () => {
+          state.spendOffset += 1;
+          drawSpend();
+        },
+      },
+      "Later >"
+    )
+  );
+  const stores = Object.entries(sum.byStore).sort((a, b) => b[1] - a[1]);
+  const status = sum.over
+    ? `${fmtMoney(-sum.remaining)} over budget`
+    : `${fmtMoney(sum.remaining)} left`;
+  const pace = sum.isCurrent
+    ? `Day ${sum.dayNumber} of 14. An even pace would be about ${fmtMoney(sum.paceTarget)} by today${
+        sum.total > sum.paceTarget ? ", so you're running ahead of it." : "."
+      }`
+    : null;
+  return [
+    stepper,
+    h(
+      "div",
+      { class: "card" },
+      h("div", { class: "big" }, fmtMoney(sum.total), h("span", { class: "muted" }, ` of ${fmtMoney(FORTNIGHT_BUDGET)}`)),
+      h("div", { class: "bar" + (sum.over ? " over" : "") }, h("span", { style: `width:${sum.pct}%` })),
+      h("p", null, status),
+      pace ? h("p", { class: "note" }, pace) : null,
+      stores.length
+        ? h("ul", { class: "plain" }, stores.map(([name, amt]) => h("li", null, `${name}: ${fmtMoney(amt)}`)))
+        : null
+    ),
+    sum.entries.length
+      ? sum.entries.map((e) =>
+          h(
+            "article",
+            { class: "card spend-row" },
+            h("div", null, h("strong", null, fmtMoney(e.amount)), ` ${e.store}`, h("div", { class: "note" }, fmtDate(e.spent_on) + (e.note ? " | " + e.note : ""))),
+            h("button", { type: "button", class: "secondary small", "aria-label": "Remove entry", onclick: () => removeSpend(e) }, "Remove")
+          )
+        )
+      : h("p", { class: "muted" }, "Nothing logged for this fortnight yet."),
+    h(
+      "p",
+      { class: "note" },
+      "Counts all family groceries, not just the meal lists. Fortnights run Wednesday to Tuesday, from the first shop day of each plan."
+    ),
+  ];
+}
+
+function drawSpend() {
+  const box = document.getElementById("spend-box");
+  if (box) box.replaceChildren(...spendContent().flat().filter(Boolean));
+}
+
+function spendForm() {
+  const date = h("input", { type: "date", value: localISO(), required: true, "aria-label": "Date" });
+  const store = h(
+    "select",
+    { "aria-label": "Store" },
+    SPEND_STORES.map((n) => h("option", { value: n }, n))
+  );
+  const amount = h("input", {
+    type: "text",
+    inputmode: "decimal",
+    placeholder: "Total, e.g. 182.40",
+    required: true,
+    "aria-label": "Amount in dollars",
+  });
+  const note = h("input", { type: "text", placeholder: "Note (optional)", maxlength: "200", "aria-label": "Note" });
+  return h(
+    "form",
+    {
+      class: "card",
+      onsubmit: async (e) => {
+        e.preventDefault();
+        const n = Math.round(Number(amount.value.replace(/[$,\s]/g, "")) * 100) / 100;
+        if (!Number.isFinite(n) || n <= 0 || n >= 5000) {
+          setStatus("Enter the shop total as a dollar amount, like 182.40.");
+          return;
+        }
+        const when = date.value || localISO();
+        const { error } = await state.supabase
+          .from("meal_spend")
+          .insert({ spent_on: when, store: store.value, amount: n, note: note.value.trim() || null });
+        if (error) {
+          setStatus("Couldn't save that: " + error.message);
+          return;
+        }
+        amount.value = "";
+        note.value = "";
+        // Jump to the fortnight the entry landed in so you can see it.
+        state.spendOffset = diffDays(fortnightFor(when).start, fortnightFor(localISO()).start) / 14;
+        await loadSpend();
+        drawSpend();
+      },
+    },
+    h("h3", null, "Log a shop"),
+    h("div", { class: "row" }, date, store),
+    h("div", { class: "row" }, amount),
+    h("div", { class: "row" }, note),
+    h("button", { type: "submit" }, "Add")
+  );
+}
+
+function viewSpend() {
+  state.spendOffset = Math.min(state.spendOffset, 0);
+  return h(
+    "section",
+    null,
+    h("h2", null, "Spend"),
+    state.spendReady ? spendForm() : null,
+    h("div", { id: "spend-box" }, spendContent().flat().filter(Boolean))
   );
 }
 
@@ -730,7 +1244,7 @@ function viewAccount() {
       "section",
       null,
       h("h2", null, "Account"),
-      h("p", null, "You're logged in. Ticks, extras, notes and shifts sync live."),
+      h("p", null, "You're logged in. Ticks, extras, notes, shifts, freezer and spend sync live."),
       h(
         "button",
         {
@@ -795,6 +1309,12 @@ function route(scrollTop) {
       break;
     case "shopping":
       view = viewShopping();
+      break;
+    case "freezer":
+      view = viewFreezer();
+      break;
+    case "spend":
+      view = viewSpend();
       break;
     case "account":
       view = viewAccount();

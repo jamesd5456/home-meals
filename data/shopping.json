@@ -3,6 +3,7 @@
     "id": "list-1",
     "title": "Shopping list 1",
     "buy": "Wed 18 Nov",
+    "buyDate": "2026-11-18",
     "covers": "Thu 19 to Wed 25 Nov",
     "estimate": "Rough estimate $180 to $210 (not checked against live prices)",
     "groups": [
@@ -90,6 +91,7 @@
     "id": "list-2",
     "title": "Shopping list 2",
     "buy": "Tue 24 Nov",
+    "buyDate": "2026-11-24",
     "covers": "Thu 26 Nov to Wed 2 Dec",
     "estimate": "Rough estimate $120 to $145 (not checked against live prices). Recipes for this week are coming.",
     "groups": [
