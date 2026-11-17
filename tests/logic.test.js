@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   addDaysISO, diffDays, fortnightFor, summariseSpend, nightRuns, nightRunStatus,
   freezerSummary, ageDays, shiftAdvice, groupPrep,
+  parseQty, currentListIndex, classifyExtra, groupForAisle,
 } from "../js/logic.js";
 
 // dates
@@ -81,5 +82,30 @@ const g = groupPrep([
 ]);
 assert.deepEqual(g.map((x) => x.when), ["morning", "after-dinner", "night-before"]);
 assert.deepEqual(groupPrep(null), []);
+
+// shopping quantities
+assert.deepEqual(parseQty("Chicken thigh fillets, 800 g"), { name: "Chicken thigh fillets", qty: 800, unit: "g" });
+assert.deepEqual(parseQty("Eggs, 18"), { name: "Eggs", qty: 18, unit: "" });
+assert.deepEqual(parseQty("Raw peeled prawns, frozen, 300 g"), { name: "Raw peeled prawns, frozen", qty: 300, unit: "g" });
+assert.deepEqual(parseQty("Milk, 1 L (for pancakes)"), { name: "Milk", qty: 1, unit: "L (for pancakes)" });
+assert.equal(parseQty("Spices: ground cumin, ground coriander, turmeric"), null);
+assert.equal(parseQty("Tahini"), null);
+
+// current list and extras sorting
+const lists = [{ buyDate: "2026-11-18" }, { buyDate: "2026-11-24" }];
+assert.equal(currentListIndex(lists, "2026-11-18"), 0);
+assert.equal(currentListIndex(lists, "2026-11-19"), 1);
+assert.equal(currentListIndex(lists, "2026-12-01"), 1);
+assert.equal(classifyExtra("dishwasher tablets"), "household");
+assert.equal(classifyExtra("chicken breast"), "butcher");
+assert.equal(classifyExtra("canned tomatoes"), "pantry");
+assert.equal(classifyExtra("blueberries"), "produce");
+assert.equal(classifyExtra("full cream milk"), "fridge");
+assert.equal(classifyExtra("frozen peas"), "pantry");
+assert.equal(classifyExtra("zzz"), "other");
+const groups = [{ store: "Butcher" }, { store: "Fruit and veg grocer" }, { store: "Woolworths: pantry and frozen" }];
+assert.equal(groupForAisle(groups, "produce"), 1);
+assert.equal(groupForAisle(groups, "pantry"), 2);
+assert.equal(groupForAisle(groups, "fridge"), -1);
 
 console.log("logic tests passed");

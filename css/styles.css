@@ -133,3 +133,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 ul.ticks li.have label { color: var(--muted); }
 ul.ticks li.have { opacity: 0.6; }
 ul.ticks li .have-btn { flex: none; }
+
+/* editable shopping amounts */
+ul.ticks li .qty { display: inline-flex; align-items: center; gap: 4px; flex: none; }
+ul.ticks li input.buyqty { width: 4.6em; padding: 6px; text-align: right; }
+ul.ticks li .qty .unit { color: var(--muted); font-size: 0.9rem; max-width: 9em; }
+ul.ticks li .planqty { font-size: 0.75rem; }

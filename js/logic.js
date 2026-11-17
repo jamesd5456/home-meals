@@ -145,3 +145,52 @@ export function groupPrep(prep) {
   }
   return groups;
 }
+
+/* ---------- shopping quantities and extras ---------- */
+
+// Split "Chicken thigh fillets, 800 g" into a name, a number and a unit so the number can be edited.
+// Returns null when there's no trailing quantity (spice lists, "Tahini"), and those stay plain text.
+export function parseQty(text) {
+  const m = /^(.+?),\s*(\d+(?:\.\d+)?)\s*(kg|g|ml|L|bags?|heads?|packs?|punnets?|loaves|loaf|cans?|boxes|box|bunch)?\b\s*(.*)$/i.exec(text);
+  if (!m) return null;
+  const unit = [m[3], m[4]].filter(Boolean).join(" ");
+  return { name: m[1].trim(), qty: Number(m[2]), unit };
+}
+
+// The list you're shopping for now: the first one whose shop day hasn't passed, else the last.
+export function currentListIndex(lists, todayISO) {
+  const i = lists.findIndex((l) => l.buyDate && l.buyDate >= todayISO);
+  return i === -1 ? Math.max(0, lists.length - 1) : i;
+}
+
+// Rough aisle for a free-text extra. Order matters: household first, then tinned/frozen, then fresh.
+const AISLES = [
+  ["household", /dishwasher|detergent|soap|toilet|paper towel|bin liner|nappy|nappies|wipes|shampoo|conditioner|toothpaste|cleaner|spray|laundry|sponge|cling wrap|foil|baking paper|zip.?lock|tissue|deodorant|sunscreen|batter(y|ies)|light ?bulb/i],
+  ["pantry", /\b(tin|tinned|can|canned|frozen)\b|baked beans|rice|pasta|bread|flour|\boil\b|sugar|oats|cereal|weet.?bix|noodle|sauce|stock|lentil|chickpea|spice|salt|pepper|biscuit|cracker|jam|coffee|tea\b|tortilla|wrap|couscous|peanut butter|tahini/i],
+  ["fridge", /milk|yoghurt|yogurt|cheese|\beggs?\b|butter|cream|feta|ricotta|tofu|hummus|margarine|dip/i],
+  ["butcher", /chicken|beef|pork|mince|sausage|steak|bacon|\bham\b|turkey|chop|rump|brisket/i],
+  ["seafood", /fish|salmon|prawn|tuna|barramundi|squid|calamari/i],
+  ["produce", /apple|banana|kiwi|berr(y|ies)|lemon|lime|orange|avocado|spinach|lettuce|tomato|onion|garlic|ginger|capsicum|carrot|broccoli|potato|cucumber|zucchini|mushroom|pumpkin|corn|beans|herb|parsley|basil|mint|fruit|veg|cabbage|celery|pear|mango|grape|cauliflower|sweet potato|peas/i],
+];
+
+export function classifyExtra(text) {
+  for (const [key, re] of AISLES) if (re.test(text)) return key;
+  return "other";
+}
+
+// Which group of a list an aisle belongs in, matched against the group's store name.
+const STORE_MATCH = {
+  butcher: /butcher/i,
+  seafood: /seafood/i,
+  produce: /fruit|veg|produce/i,
+  fridge: /fridge/i,
+  pantry: /pantry/i,
+  household: /household/i,
+};
+
+export function groupForAisle(groups, aisle) {
+  const re = STORE_MATCH[aisle];
+  return re ? groups.findIndex((g) => re.test(g.store)) : -1;
+}
+
+export const OTHER_GROUP = "Household and other";

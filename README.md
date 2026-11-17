@@ -12,6 +12,6 @@ A shared meal plan, recipe cards and shopping lists. Static site served by GitHu
 
 - **Today**: tonight's dinner with your shift, baby version, prep jobs, tomorrow, and a night run banner.
 - **Plan**, **Recipes**: the calendar and recipe cards.
-- **Shopping**: tick items, mark "Have it" for things already at home, and unticked items carry over to the next list.
+- **Shopping**: tick items, edit how much to buy (type 400 if the plan says 800 g and you have half), mark "Have it", and unticked items carry over to the next list. Extras you add are sorted into the current list by aisle. Run `sql/2026-11-buy-qty.sql` once so amount edits sync between phones.
 - **Freezer**: what's in the freezer, and whether it covers the next run of night shifts.
 - **Spend**: shop totals against the fortnight budget (`FORTNIGHT_BUDGET` in `js/config.js`).

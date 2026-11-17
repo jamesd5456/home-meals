@@ -1,12 +1,17 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY, FORTNIGHT_BUDGET } from "./config.js";
 import {
+  OTHER_GROUP,
   addDaysISO,
   ageDays,
+  classifyExtra,
+  currentListIndex,
   diffDays,
   fortnightFor,
   freezerSummary,
+  groupForAisle,
   groupPrep,
   nightRunStatus,
+  parseQty,
   shiftAdvice,
   summariseSpend,
 } from "./logic.js";
@@ -23,6 +28,8 @@ const state = {
   supabase: null,
   user: null,
   checks: {},
+  buyQty: {},
+  buyQtyError: "",
   extras: [],
   extrasReady: false,
   extrasError: "",
@@ -254,6 +261,58 @@ async function loadExtras() {
   state.extrasReady = true;
 }
 
+// "How much to buy" overrides, e.g. the plan needs 800 g but 400 g is already at home. Keyed list::item.
+const QTY_PREFIX = "hm:qty:";
+
+function loadLocalQty() {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(QTY_PREFIX)) {
+        const n = Number(localStorage.getItem(k));
+        if (Number.isFinite(n)) state.buyQty[k.slice(QTY_PREFIX.length)] = n;
+      }
+    }
+  } catch (e) {
+    /* storage unavailable */
+  }
+}
+
+async function loadRemoteQty() {
+  state.buyQtyError = "";
+  if (!state.supabase || !state.user) return;
+  const { data, error } = await state.supabase.from("meal_buy_qty").select("list_key,item_key,qty");
+  if (error) {
+    state.buyQtyError = error.message;
+    return;
+  }
+  for (const r of data) state.buyQty[tickKey(r.list_key, r.item_key)] = Number(r.qty);
+}
+
+async function setBuyQty(listId, item, planQty, val) {
+  const key = tickKey(listId, item.id);
+  const reset = val === null || val === planQty;
+  if (reset) delete state.buyQty[key];
+  else state.buyQty[key] = val;
+  try {
+    if (reset) localStorage.removeItem(QTY_PREFIX + key);
+    else localStorage.setItem(QTY_PREFIX + key, String(val));
+  } catch (e) {
+    /* ignore */
+  }
+  if (state.supabase && state.user && !state.buyQtyError) {
+    const q = state.supabase.from("meal_buy_qty");
+    const { error } = reset
+      ? await q.delete().eq("list_key", listId).eq("item_key", item.id)
+      : await q.upsert({ list_key: listId, item_key: item.id, qty: val, updated_at: new Date().toISOString() }, { onConflict: "list_key,item_key" });
+    if (error) setStatus("Couldn't sync that quantity: " + error.message);
+  }
+  // Buying none means you have it all, so it drops off the buy count. Typing a number again undoes that.
+  if (val === 0 && !isChecked("have:" + listId, item.id)) await setChecked("have:" + listId, item.id, true);
+  if (val !== 0 && isChecked("have:" + listId, item.id)) await setChecked("have:" + listId, item.id, false);
+  refreshTicks();
+}
+
 async function loadFreezer() {
   state.freezer = [];
   state.freezerReady = false;
@@ -317,6 +376,7 @@ let channel = null;
 let extrasChannel = null;
 let freezerChannel = null;
 let spendChannel = null;
+let qtyChannel = null;
 
 function startRealtime() {
   if (!state.supabase) return;
@@ -336,6 +396,10 @@ function startRealtime() {
     state.supabase.removeChannel(spendChannel);
     spendChannel = null;
   }
+  if (qtyChannel) {
+    state.supabase.removeChannel(qtyChannel);
+    qtyChannel = null;
+  }
   if (!state.user) return;
   channel = state.supabase
     .channel("meal_checks_live")
@@ -348,6 +412,21 @@ function startRealtime() {
     })
     .subscribe();
   // Separate channel so a missing extras table can never break tick sync.
+  if (!state.buyQtyError) {
+    qtyChannel = state.supabase
+      .channel("buy_qty_live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "meal_buy_qty" }, (payload) => {
+        const row = payload.eventType === "DELETE" ? payload.old : payload.new;
+        if (!row || !row.list_key) return;
+        const key = tickKey(row.list_key, row.item_key);
+        if (payload.eventType === "DELETE") delete state.buyQty[key];
+        else state.buyQty[key] = Number(row.qty);
+        document.querySelectorAll("input.buyqty").forEach((i) => {
+          if (i.dataset.key === key && document.activeElement !== i) i.value = state.buyQty[key] ?? i.dataset.plan;
+        });
+      })
+      .subscribe();
+  }
   if (state.extrasReady) {
     extrasChannel = state.supabase
       .channel("extras_live")
@@ -378,7 +457,7 @@ function startRealtime() {
 }
 
 async function loadSharedData() {
-  await Promise.all([loadRemoteChecks(), loadRoster(), loadExtras(), loadFreezer(), loadSpend()]);
+  await Promise.all([loadRemoteChecks(), loadRemoteQty(), loadRoster(), loadExtras(), loadFreezer(), loadSpend()]);
 }
 
 async function initSupabase() {
@@ -787,14 +866,46 @@ function tickItem(listId, item, extra, opts = {}) {
         "Have it"
       )
     : null;
+  const q = opts.qty || null;
   return h(
     "li",
     opts.have ? { "data-have-list": "have:" + listId, "data-item": item.id } : null,
     cb,
-    h("label", { for: id }, item.text),
+    h("label", { for: id }, q ? q.name : item.text),
+    q ? qtyEditor(listId, item, q) : null,
     haveBtn,
     extra || null
   );
+}
+
+// Editable "buy" amount. The plan's number stays visible when you've changed it.
+function qtyEditor(listId, item, q) {
+  const key = tickKey(listId, item.id);
+  const current = state.buyQty[key] ?? q.qty;
+  const unit = q.unit ? " " + q.unit : "";
+  const plan = h("span", { class: "note planqty" }, current !== q.qty ? `plan: ${q.qty}${unit}` : "");
+  const input = h("input", {
+    type: "number",
+    class: "buyqty",
+    min: "0",
+    step: "any",
+    inputmode: "decimal",
+    value: String(current),
+    "data-key": key,
+    "data-plan": String(q.qty),
+    "aria-label": `Amount to buy of ${q.name}`,
+    onchange: async (e) => {
+      const raw = e.target.value.trim();
+      const n = raw === "" ? q.qty : Number(raw);
+      if (!Number.isFinite(n) || n < 0) {
+        e.target.value = String(state.buyQty[key] ?? q.qty);
+        return;
+      }
+      await setBuyQty(listId, item, q.qty, n);
+      plan.textContent = n !== q.qty ? `plan: ${q.qty}${unit}` : "";
+    },
+  });
+  return h("span", { class: "qty" }, input, h("span", { class: "unit" }, q.unit || ""), plan);
 }
 
 /* Extras: household items that aren't part of the meal plan */
@@ -826,28 +937,6 @@ function extrasContent() {
     input,
     h("button", { type: "submit" }, "Add")
   );
-  const items = state.extras.length
-    ? h(
-        "ul",
-        { class: "ticks" },
-        state.extras.map((x) =>
-          tickItem(
-            "extras",
-            { id: x.id, text: x.item },
-            h(
-              "button",
-              {
-                type: "button",
-                class: "secondary small",
-                "aria-label": "Remove " + x.item,
-                onclick: () => removeExtra(x.id),
-              },
-              "Remove"
-            )
-          )
-        )
-      )
-    : h("p", { class: "muted" }, "Nothing here yet.");
   const clear = state.extras.some((x) => isChecked("extras", x.id))
     ? h(
         "button",
@@ -861,14 +950,45 @@ function extrasContent() {
         "Remove ticked items"
       )
     : null;
-  return [items, form, clear];
+  return [form, clear];
 }
 
+// Extras are shown inside the current list, so adding or removing one redraws the whole page.
+// Keep whichever lists were open.
 function drawExtras() {
-  const box = document.getElementById("extras-box");
-  if (!box) return;
-  box.replaceChildren(...extrasContent().filter(Boolean));
+  if (!location.hash.startsWith("#/shopping")) return;
+  const open = new Set([...document.querySelectorAll("details[data-list][open]")].map((d) => d.dataset.list));
+  route(false);
+  document.querySelectorAll("details[data-list]").forEach((d) => {
+    d.open = open.has(d.dataset.list);
+  });
   refreshTicks();
+}
+
+// A list's groups with the extras slotted into the matching aisle (or "Household and other").
+function groupsWithExtras(list) {
+  const groups = list.groups.map((g) => ({ store: g.store, items: g.items.map((it) => ({ ...it })) }));
+  for (const x of state.extras) {
+    const aisle = classifyExtra(x.item);
+    let gi = groupForAisle(groups, aisle);
+    if (gi === -1) {
+      gi = groups.findIndex((g) => g.store === OTHER_GROUP);
+      if (gi === -1) {
+        groups.push({ store: OTHER_GROUP, items: [] });
+        gi = groups.length - 1;
+      }
+    }
+    groups[gi].items.push({ id: x.id, text: x.item, extra: true });
+  }
+  return groups;
+}
+
+function extraRemoveBtn(x) {
+  return h(
+    "button",
+    { type: "button", class: "secondary small", "aria-label": "Remove " + x.text, onclick: () => removeExtra(x.id) },
+    "Remove"
+  );
 }
 
 // Anything still unticked (and not marked "have it") on the previous list, once its shop day has passed.
@@ -901,19 +1021,29 @@ function viewShopping() {
     null,
     h("h2", null, "Shopping"),
     h("p", { class: "muted" }, note),
-    state.shopping.map((list, idx) =>
-      h(
+    state.shopping.map((list, idx) => {
+      const isCurrent = idx === currentListIndex(state.shopping, localISO());
+      const groups = isCurrent ? groupsWithExtras(list) : list.groups;
+      return h(
         "details",
-        { class: "list card", "data-list": list.id, open: idx === 0 },
+        { class: "list card", "data-list": list.id, open: isCurrent },
         h("summary", null, `${list.title}: ${list.buy}`, h("span", { class: "progress" })),
         h("p", { class: "note" }, `Covers ${list.covers}. ${list.estimate}`),
         carriedOver(idx),
-        list.groups.map((g) =>
+        groups.map((g) =>
           h(
             "div",
             null,
             h("div", { class: "store" }, g.store),
-            h("ul", { class: "ticks" }, g.items.map((it) => tickItem(list.id, it, null, { have: true })))
+            h(
+              "ul",
+              { class: "ticks" },
+              g.items.map((it) =>
+                it.extra
+                  ? tickItem("extras", it, extraRemoveBtn(it))
+                  : tickItem(list.id, it, null, { have: true, qty: parseQty(it.text) })
+              )
+            )
           )
         ),
         h(
@@ -932,13 +1062,13 @@ function viewShopping() {
           },
           "Clear ticks"
         )
-      )
-    ),
+      );
+    }),
     h(
       "details",
       { class: "list card", "data-list": "extras", open: true },
       h("summary", null, "Extras and one-off items", h("span", { class: "progress" })),
-      h("p", { class: "note" }, "Anything not on the lists above: a forgotten ingredient, cleaning supplies, toiletries. Either of you can add to it from your phone."),
+      h("p", { class: "note" }, "Add anything that isn't on the lists: a forgotten ingredient, cleaning supplies, toiletries. It lands in this week's list under the matching aisle, or under Household and other if I can't tell. Either of you can add from your phone."),
       h("div", { id: "extras-box" }, extrasContent().filter(Boolean))
     )
   );
@@ -1350,6 +1480,7 @@ async function init() {
     return;
   }
   loadLocalChecks();
+  loadLocalQty();
   await initSupabase();
   await loadSharedData();
   startRealtime();
