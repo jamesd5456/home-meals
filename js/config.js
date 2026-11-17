@@ -1,6 +1,5 @@
-// Supabase settings. The anon key is designed to be public: access is protected
-// by row-level security and a two-person allowlist in the database.
-// Never put the service-role key in this file or anywhere in this repo.
-// While these are empty, ticks are saved on this device only.
-export const SUPABASE_URL = "";
-export const SUPABASE_ANON_KEY = "";
+// Supabase settings. The publishable (anon) key is designed to be public: access is
+// protected by row-level security and a two-person allowlist in the database.
+// Never put the service-role or secret key in this file or anywhere in this repo.
+export const SUPABASE_URL = "https://hpbusgjfpgbmlggimmcy.supabase.co";
+export const SUPABASE_ANON_KEY = "sb_publishable_r1KKBNVSLZbUzXnUcRiwjA_O3UgAh2x";
