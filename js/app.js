@@ -1023,7 +1023,7 @@ function viewShopping() {
     h("p", { class: "muted" }, note),
     state.shopping.map((list, idx) => {
       const isCurrent = idx === currentListIndex(state.shopping, localISO());
-      const groups = isCurrent ? groupsWithExtras(list) : list.groups;
+      const groups = (isCurrent ? groupsWithExtras(list) : list.groups).filter((g) => g.items.length);
       return h(
         "details",
         { class: "list card", "data-list": list.id, open: isCurrent },

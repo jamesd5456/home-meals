@@ -5,84 +5,228 @@
     "buy": "Wed 18 Nov",
     "buyDate": "2026-11-18",
     "covers": "Thu 19 to Wed 25 Nov",
-    "estimate": "Rough estimate $180 to $210 (not checked against live prices)",
+    "estimate": "Trimmed on 18 Nov to the exact recipe amounts. Not priced yet: check it in the Woolworths app and send me the total.",
     "groups": [
       {
         "store": "Butcher",
         "items": [
-          { "id": "chicken-thigh-800", "text": "Chicken thigh fillets, 800 g" },
-          { "id": "beef-mince-1kg", "text": "Beef mince, 1 kg" }
+          {
+            "id": "chicken-thigh-800b",
+            "text": "Chicken thigh fillets, 800 g (korma)"
+          },
+          {
+            "id": "beef-mince-1kgb",
+            "text": "Beef mince, 1 kg (tacos 500 g, ragu 500 g)"
+          }
         ]
       },
       {
         "store": "Seafood",
         "items": [
-          { "id": "salmon-fillets-2", "text": "Salmon fillets, 2 (about 300 to 350 g)" },
-          { "id": "prawns-300", "text": "Raw peeled prawns, frozen, 300 g" },
-          { "id": "canned-salmon-1", "text": "Canned pink salmon, 1 x 210 g (for the optional catch-up plate)" }
+          {
+            "id": "salmon-fillets-2b",
+            "text": "Salmon fillets, 2 (about 300 to 350 g, tray bake)"
+          },
+          {
+            "id": "prawns-300b",
+            "text": "Raw peeled prawns, frozen, 300 g (fried rice 250 g, plus a few for Thursday's breakfast)"
+          },
+          {
+            "id": "canned-salmon-1b",
+            "text": "Canned pink salmon, 1 x 210 g (catch-up plate uses half)"
+          }
         ]
       },
       {
         "store": "Fruit and veg grocer",
         "items": [
-          { "id": "spinach-2", "text": "Baby spinach, 2 bags" },
-          { "id": "avocado-4", "text": "Avocados, 4" },
-          { "id": "bananas", "text": "Bananas, 1 bunch" },
-          { "id": "apples-6", "text": "Apples, 6" },
-          { "id": "kiwi-4", "text": "Kiwi fruit, 4" },
-          { "id": "onions-5", "text": "Brown onions, 5" },
-          { "id": "garlic-1", "text": "Garlic, 1 head" },
-          { "id": "ginger", "text": "Ginger, 1 small piece" },
-          { "id": "capsicum-3", "text": "Capsicum, 3" },
-          { "id": "carrots-6", "text": "Carrots, 6" },
-          { "id": "broccoli-2", "text": "Broccoli, 2 heads" },
-          { "id": "potatoes-1kg", "text": "Potatoes, 1 kg" },
-          { "id": "cucumber-2", "text": "Cucumber, 2" },
-          { "id": "lemons-2", "text": "Lemons, 2" },
-          { "id": "lettuce-1", "text": "Lettuce, 1 small" }
+          {
+            "id": "onions-6",
+            "text": "Brown onions, 6 (korma 2, tacos 1, ragu 1, fried rice 1, dahl 1)"
+          },
+          {
+            "id": "garlic-13",
+            "text": "Garlic, 13 cloves (2 small heads)"
+          },
+          {
+            "id": "ginger-4tsp",
+            "text": "Ginger, 4 tsp grated (korma, dahl)"
+          },
+          {
+            "id": "capsicum-1",
+            "text": "Capsicum, 1 (tacos)"
+          },
+          {
+            "id": "carrots-4",
+            "text": "Carrots, 4 (ragu 2, fried rice 2)"
+          },
+          {
+            "id": "broccoli-2b",
+            "text": "Broccoli, 2 heads (tray bake)"
+          },
+          {
+            "id": "potatoes-600",
+            "text": "Potatoes, 600 g (tray bake)"
+          },
+          {
+            "id": "lemons-3",
+            "text": "Lemons, 3 (tray bake, dahl, plus tacos wedges and hummus)"
+          },
+          {
+            "id": "avocado-2",
+            "text": "Avocados, 2 (tacos 1, prawn toast 1/4)"
+          },
+          {
+            "id": "banana-1",
+            "text": "Banana, 1 (1/2 needed, weetbix breakfast)"
+          },
+          {
+            "id": "apple-1",
+            "text": "Apple, 1 (1/4 needed, oat porridge)"
+          },
+          {
+            "id": "lettuce-1b",
+            "text": "Lettuce, 1 small (tacos)"
+          },
+          {
+            "id": "spinach-150",
+            "text": "Baby spinach, about 150 g (korma, omelette, dahl)"
+          }
         ]
       },
       {
         "store": "Woolworths: fridge",
         "items": [
-          { "id": "eggs-18", "text": "Eggs, 18" },
-          { "id": "yoghurt-1kg", "text": "Natural full-fat yoghurt, 1 kg" },
-          { "id": "cheese-500", "text": "Tasty cheese, 500 g" },
-          { "id": "tofu-450", "text": "Firm tofu, 450 g" }
+          {
+            "id": "eggs-6",
+            "text": "Eggs, 6 (5 needed: fried rice 3, omelette 1, scrambled egg 1)"
+          },
+          {
+            "id": "yoghurt-400",
+            "text": "Natural full-fat yoghurt, 400 g (buy the smallest tub)"
+          },
+          {
+            "id": "cheese-110",
+            "text": "Tasty cheese, 110 g (tacos 1 cup, baked beans toast 1 tbsp; buy the smallest block)"
+          },
+          {
+            "id": "tofu-300",
+            "text": "Firm tofu, 300 g (fried rice 200 g, catch-up plate 100 g)"
+          }
         ]
       },
       {
         "store": "Woolworths: pantry and frozen",
         "items": [
-          { "id": "rice-2kg", "text": "Basmati rice, 2 kg" },
-          { "id": "pasta-500", "text": "Dried pasta shapes, 500 g" },
-          { "id": "tortillas-2", "text": "Small soft tortillas or wraps, 2 packs" },
-          { "id": "bread-2", "text": "Wholemeal bread, 2 loaves" },
-          { "id": "oats-500", "text": "Rolled oats, 500 g" },
-          { "id": "weetbix", "text": "Weet-Bix, 1 box" },
-          { "id": "infant-cereal", "text": "Iron-fortified infant cereal, 1 box" },
-          { "id": "red-lentils-500", "text": "Red lentils, 500 g" },
-          { "id": "black-beans-1", "text": "Canned black beans, 1" },
-          { "id": "chickpeas-2", "text": "Canned chickpeas, 2" },
-          { "id": "crushed-tomatoes-4", "text": "Canned crushed tomatoes, 4" },
-          { "id": "baked-beans-1", "text": "No-salt-added baked beans, 1 can" },
-          { "id": "stock-nsa", "text": "No-salt-added stock" },
-          { "id": "soy-sauce-low-salt", "text": "Low-salt soy sauce" },
-          { "id": "ground-almonds-150", "text": "Ground almonds, 150 g" },
-          { "id": "tahini", "text": "Tahini" },
-          { "id": "peanut-butter", "text": "100% peanut butter" },
-          { "id": "almond-butter", "text": "Almond butter" },
-          { "id": "spices-1", "text": "Spices: ground cumin, ground coriander, turmeric, smoked paprika, garam masala, dried mixed herbs" },
-          { "id": "korma-paste", "text": "Korma paste (check the label for salt)" },
-          { "id": "frozen-peas-corn", "text": "Frozen peas and corn" },
-          { "id": "frozen-berries-500", "text": "Frozen mixed berries, 500 g" }
+          {
+            "id": "rice-1100",
+            "text": "Basmati rice, 1.1 kg (5 1/2 cups dry: korma, fried rice, dahl)"
+          },
+          {
+            "id": "pasta-500b",
+            "text": "Dried pasta shapes, 500 g (ragu)"
+          },
+          {
+            "id": "tortillas-8",
+            "text": "Small soft tortillas, 8 (tacos)"
+          },
+          {
+            "id": "bread-6",
+            "text": "Wholemeal bread, 6 slices (buy 1 loaf and freeze the rest)"
+          },
+          {
+            "id": "oats-3tbsp",
+            "text": "Rolled oats (3 tbsp needed, oat porridge)"
+          },
+          {
+            "id": "weetbix-1",
+            "text": "Weet-Bix (1 biscuit needed; buy the smallest box)"
+          },
+          {
+            "id": "infant-cereal-2tbsp",
+            "text": "Iron-fortified infant cereal (2 tbsp needed in total)"
+          },
+          {
+            "id": "red-lentils-500b",
+            "text": "Red lentils, 500 g (ragu 200 g, dahl 300 g)"
+          },
+          {
+            "id": "black-beans-1b",
+            "text": "Canned black beans, 1 (tacos)"
+          },
+          {
+            "id": "chickpeas-2b",
+            "text": "Canned chickpeas, 2 (korma, hummus)"
+          },
+          {
+            "id": "crushed-tomatoes-4b",
+            "text": "Canned crushed tomatoes, 4 (korma 1, ragu 2, dahl 1)"
+          },
+          {
+            "id": "baked-beans-3tbsp",
+            "text": "No-salt-added baked beans, 1 can (3 tbsp needed)"
+          },
+          {
+            "id": "soy-sauce-adults",
+            "text": "Low-salt soy sauce (adults at the table with the fried rice; recipe gives no amount)"
+          },
+          {
+            "id": "ground-almonds-60",
+            "text": "Ground almonds, 60 g (korma)"
+          },
+          {
+            "id": "tahini-3tbsp",
+            "text": "Tahini (about 3 1/2 tbsp in total: tray bake, hummus, catch-up plate, yoghurt breakfast)"
+          },
+          {
+            "id": "peanut-butter-1tsp",
+            "text": "100% smooth peanut butter (1 tsp in total)"
+          },
+          {
+            "id": "korma-paste-3tbsp",
+            "text": "Korma paste (3 tbsp needed; check the label for salt)"
+          },
+          {
+            "id": "cumin-5tsp",
+            "text": "Ground cumin (5 tsp in total: korma 1, tacos 2, dahl 2)"
+          },
+          {
+            "id": "coriander-2tsp",
+            "text": "Ground coriander (2 tsp in total: korma 1, tacos 1)"
+          },
+          {
+            "id": "turmeric-2tsp",
+            "text": "Ground turmeric (2 tsp: dahl)"
+          },
+          {
+            "id": "paprika-2tsp",
+            "text": "Smoked paprika (2 tsp: tacos)"
+          },
+          {
+            "id": "garam-masala-1tsp",
+            "text": "Garam masala (1 tsp: dahl)"
+          },
+          {
+            "id": "mixed-herbs-1tbsp",
+            "text": "Dried mixed herbs (1 tbsp: ragu)"
+          },
+          {
+            "id": "peas-corn-1cup",
+            "text": "Frozen peas and corn (1 cup: fried rice)"
+          },
+          {
+            "id": "berries-few",
+            "text": "Frozen mixed berries (a few needed: yoghurt breakfast)"
+          }
         ]
       },
       {
         "store": "Check you have",
         "items": [
-          { "id": "staples-oil", "text": "Olive or neutral oil" },
-          { "id": "staples-butter", "text": "Butter (for omelettes and scrambled egg)" }
+          {
+            "id": "oil-9tbsp",
+            "text": "Olive or neutral oil (about 9 tbsp across the week)"
+          }
         ]
       }
     ]
@@ -93,66 +237,7 @@
     "buy": "Tue 24 Nov",
     "buyDate": "2026-11-24",
     "covers": "Thu 26 Nov to Wed 2 Dec",
-    "estimate": "Rough estimate $120 to $145 (not checked against live prices). Recipes for this week are coming.",
-    "groups": [
-      {
-        "store": "Butcher",
-        "items": [
-          { "id": "chicken-thigh-600", "text": "Chicken thigh fillets, 600 g" },
-          { "id": "beef-chuck-700", "text": "Beef chuck or gravy beef cubes, 700 g" }
-        ]
-      },
-      {
-        "store": "Seafood",
-        "items": [
-          { "id": "prawns-350", "text": "Raw peeled prawns, frozen, 350 g" },
-          { "id": "canned-salmon-2", "text": "Canned pink salmon, 2 x 210 g" }
-        ]
-      },
-      {
-        "store": "Fruit and veg grocer",
-        "items": [
-          { "id": "spinach-3", "text": "Baby spinach, 3 bags" },
-          { "id": "capsicum-3b", "text": "Capsicum, 3" },
-          { "id": "zucchini-2", "text": "Zucchini, 2" },
-          { "id": "carrots-4", "text": "Carrots, 4" },
-          { "id": "green-beans-400", "text": "Green beans, 400 g" },
-          { "id": "mushrooms-250", "text": "Mushrooms, 250 g" },
-          { "id": "potatoes-1kg-b", "text": "Potatoes, 1 kg" },
-          { "id": "cherry-tomatoes-2", "text": "Cherry tomatoes, 2 punnets" },
-          { "id": "onions-4", "text": "Onions, 4" },
-          { "id": "garlic-1b", "text": "Garlic, 1 head" },
-          { "id": "lemons-2b", "text": "Lemons, 2" },
-          { "id": "fruit-top-up", "text": "Bananas, apples, kiwi and berries as needed" },
-          { "id": "avocado-3", "text": "Avocados, 3" }
-        ]
-      },
-      {
-        "store": "Woolworths: fridge",
-        "items": [
-          { "id": "eggs-12", "text": "Eggs, 12" },
-          { "id": "yoghurt-1kg-b", "text": "Natural yoghurt, 1 kg" },
-          { "id": "feta-200", "text": "Feta, 200 g" },
-          { "id": "ricotta-250", "text": "Ricotta, 250 g" },
-          { "id": "milk-1l", "text": "Milk, 1 L (for pancakes)" }
-        ]
-      },
-      {
-        "store": "Woolworths: pantry",
-        "items": [
-          { "id": "couscous-500", "text": "Couscous, 500 g" },
-          { "id": "linguine-500", "text": "Linguine, 500 g" },
-          { "id": "noodles-1", "text": "Noodles, 1 pack" },
-          { "id": "flour", "text": "Plain flour (for pancakes)" },
-          { "id": "chickpeas-1", "text": "Canned chickpeas, 1" },
-          { "id": "tomatoes-2", "text": "Canned crushed tomatoes, 2" },
-          { "id": "coconut-milk-1", "text": "Coconut milk, 1 can" },
-          { "id": "sesame-seeds", "text": "Sesame seeds" },
-          { "id": "bread-2b", "text": "Bread, 2 loaves" },
-          { "id": "tofu-2", "text": "Firm tofu, 2 packs" },
-          { "id": "spices-2", "text": "Spices: cinnamon, ground ginger, smoked paprika, Moroccan blend or ras el hanout" }
-        ]
-      }
-    ]
+    "estimate": "Not built yet. This list is generated from the week 2 recipes, which haven't been written. Once they are, it will list only what they need.",
+    "groups": []
   }
 ]
