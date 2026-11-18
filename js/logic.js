@@ -153,8 +153,13 @@ export function groupPrep(prep) {
 export function parseQty(text) {
   const m = /^(.+?),\s*(\d+(?:\.\d+)?)\s*(kg|g|ml|L|bags?|heads?|packs?|punnets?|loaves|loaf|cans?|boxes|box|bunch)?\b\s*(.*)$/i.exec(text);
   if (!m) return null;
-  const unit = [m[3], m[4]].filter(Boolean).join(" ");
-  return { name: m[1].trim(), qty: Number(m[2]), unit };
+  // Anything from the first "(" on is a recipe note, kept apart from the unit so it can wrap on its own line.
+  const rest = m[4] || "";
+  const p = rest.indexOf("(");
+  const extra = (p >= 0 ? rest.slice(0, p) : rest).trim();
+  const note = p >= 0 ? rest.slice(p).trim() : "";
+  const unit = [m[3], extra].filter(Boolean).join(" ");
+  return { name: m[1].trim(), qty: Number(m[2]), unit, note };
 }
 
 // The list you're shopping for now: the first one whose shop day hasn't passed, else the last.

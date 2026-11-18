@@ -84,10 +84,12 @@ assert.deepEqual(g.map((x) => x.when), ["morning", "after-dinner", "night-before
 assert.deepEqual(groupPrep(null), []);
 
 // shopping quantities
-assert.deepEqual(parseQty("Chicken thigh fillets, 800 g"), { name: "Chicken thigh fillets", qty: 800, unit: "g" });
-assert.deepEqual(parseQty("Eggs, 18"), { name: "Eggs", qty: 18, unit: "" });
-assert.deepEqual(parseQty("Raw peeled prawns, frozen, 300 g"), { name: "Raw peeled prawns, frozen", qty: 300, unit: "g" });
-assert.deepEqual(parseQty("Milk, 1 L (for pancakes)"), { name: "Milk", qty: 1, unit: "L (for pancakes)" });
+assert.deepEqual(parseQty("Chicken thigh fillets, 800 g"), { name: "Chicken thigh fillets", qty: 800, unit: "g", note: "" });
+assert.deepEqual(parseQty("Eggs, 18"), { name: "Eggs", qty: 18, unit: "", note: "" });
+assert.deepEqual(parseQty("Raw peeled prawns, frozen, 300 g"), { name: "Raw peeled prawns, frozen", qty: 300, unit: "g", note: "" });
+assert.deepEqual(parseQty("Milk, 1 L (for pancakes)"), { name: "Milk", qty: 1, unit: "L", note: "(for pancakes)" });
+assert.deepEqual(parseQty("Chicken thigh fillets, 800 g (korma)"), { name: "Chicken thigh fillets", qty: 800, unit: "g", note: "(korma)" });
+assert.deepEqual(parseQty("Canned pink salmon, 1 x 210 g (catch-up plate uses half)"), { name: "Canned pink salmon", qty: 1, unit: "x 210 g", note: "(catch-up plate uses half)" });
 assert.equal(parseQty("Spices: ground cumin, ground coriander, turmeric"), null);
 assert.equal(parseQty("Tahini"), null);
 

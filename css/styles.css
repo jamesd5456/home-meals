@@ -139,3 +139,22 @@ ul.ticks li .qty { display: inline-flex; align-items: center; gap: 4px; flex: no
 ul.ticks li input.buyqty { width: 4.6em; padding: 6px; text-align: right; }
 ul.ticks li .qty .unit { color: var(--muted); font-size: 0.9rem; max-width: 9em; }
 ul.ticks li .planqty { font-size: 0.75rem; }
+
+/* shopping rows that stay inside the screen on a phone */
+[hidden] { display: none !important; }
+main, .card { min-width: 0; overflow-wrap: anywhere; }
+ul.ticks li { flex-wrap: wrap; }
+ul.ticks input[type=checkbox] { margin: 0; }
+ul.ticks label { flex: 1 1 10em; min-width: 0; }
+ul.ticks label .itemnote { display: block; margin: 0; font-size: 0.8rem; }
+ul.ticks li .qty { flex-wrap: wrap; max-width: 100%; }
+ul.ticks li .qty .unit { max-width: none; }
+.done-section { margin-top: 6px; }
+.done-section ul.ticks li { opacity: 0.65; }
+@media (max-width: 560px) {
+  /* checkbox and name on the first line; amount and buttons tucked underneath */
+  ul.ticks label { flex: 1 1 calc(100% - 52px); }
+  ul.ticks li .qty { margin-left: 34px; }
+  ul.ticks li .have-btn, ul.ticks li > button { margin-left: auto; }
+  ul.ticks li.have { opacity: 0.6; }
+}

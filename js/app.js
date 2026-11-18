@@ -212,7 +212,7 @@ async function toggleHave(listId, itemId) {
   refreshTicks();
 }
 
-function updateProgress() {
+function updateProgress(sort = true) {
   syncHave();
   document.querySelectorAll("details[data-list]").forEach((d) => {
     const all = [...d.querySelectorAll("input[data-list]")];
@@ -224,6 +224,56 @@ function updateProgress() {
     if (!all.length) out.textContent = "";
     else out.textContent = ` (${done}/${boxes.length}${have ? `, ${have} already have` : ""})`;
   });
+  if (sort) sortDone();
+}
+
+// Ticked items (and ones marked "have it") drop into a "Ticked off" section at the bottom of
+// their list, in their original order, and go back to their aisle if you untick them.
+function insertOrdered(ul, li) {
+  const o = Number(li.dataset.o);
+  const next = [...ul.children].find((c) => Number(c.dataset.o) > o);
+  ul.insertBefore(li, next || null);
+}
+
+function sortDone() {
+  document.querySelectorAll("details.list[data-list]").forEach((d) => {
+    const lis = [...d.querySelectorAll("div.group li, .done-section li")];
+    if (!lis.length) return;
+    // Remember each item's home aisle and position the first time we see it.
+    lis.forEach((li, i) => {
+      if (!li._home) {
+        li._home = li.parentElement;
+        li.dataset.o = String(i);
+      }
+    });
+    let sec = d.querySelector(".done-section");
+    if (!sec) {
+      sec = h("div", { class: "done-section" }, h("div", { class: "store" }), h("ul", { class: "ticks done" }));
+      const anchor = d.querySelector("button.clear-ticks");
+      if (anchor) d.insertBefore(sec, anchor);
+      else d.appendChild(sec);
+    }
+    const doneUl = sec.querySelector("ul");
+    lis.forEach((li) => {
+      const ae = document.activeElement;
+      if (ae && ae.tagName === "INPUT" && ae.type !== "checkbox" && li.contains(ae)) return; // don't move an amount box while it's being typed in
+      const box = li.querySelector("input[type=checkbox]");
+      const isDone = (box && box.checked) || li.dataset.have === "1";
+      const target = isDone ? doneUl : li._home;
+      if (li.parentElement !== target) insertOrdered(target, li);
+    });
+    d.querySelectorAll("div.group").forEach((g) => {
+      g.hidden = !g.querySelector("li");
+    });
+    sec.hidden = !doneUl.children.length;
+    sec.querySelector(".store").textContent = `Ticked off (${doneUl.children.length})`;
+  });
+}
+
+let sortTimer = null;
+function sortSoon() {
+  clearTimeout(sortTimer);
+  sortTimer = setTimeout(sortDone, 450); // a short beat so a mis-tick can be undone before the item moves
 }
 
 /* ---------- shared data: roster and extras ---------- */
@@ -850,7 +900,8 @@ function tickItem(listId, item, extra, opts = {}) {
     checked: isChecked(listId, item.id),
     onchange: (e) => {
       setChecked(listId, item.id, e.target.checked);
-      updateProgress();
+      updateProgress(false);
+      sortSoon();
     },
   });
   const haveBtn = opts.have
@@ -871,7 +922,7 @@ function tickItem(listId, item, extra, opts = {}) {
     "li",
     opts.have ? { "data-have-list": "have:" + listId, "data-item": item.id } : null,
     cb,
-    h("label", { for: id }, q ? q.name : item.text),
+    h("label", { for: id }, q ? q.name : item.text, q && q.note ? h("span", { class: "note itemnote" }, q.note) : null),
     q ? qtyEditor(listId, item, q) : null,
     haveBtn,
     extra || null
@@ -1033,7 +1084,7 @@ function viewShopping() {
         groups.map((g) =>
           h(
             "div",
-            null,
+            { class: "group" },
             h("div", { class: "store" }, g.store),
             h(
               "ul",
@@ -1050,7 +1101,7 @@ function viewShopping() {
           "button",
           {
             type: "button",
-            class: "secondary",
+            class: "secondary clear-ticks",
             onclick: async () => {
               if (!window.confirm("Clear all ticks on " + list.title + "?")) return;
               for (const g of list.groups)
