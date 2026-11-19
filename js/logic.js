@@ -188,7 +188,7 @@ const AISLE_TO_SECTION = {
   household: "household",
   pantry: "pantry-other",
   fridge: "dairy",
-  butcher: "butcher",
+  butcher: "meat",
   seafood: "meat",
   produce: "fruit-grocer",
   other: "other",

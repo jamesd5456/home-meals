@@ -9,7 +9,7 @@
     },
     {
       "key": "butcher",
-      "label": "Butcher"
+      "label": "Separate butcher (only for meat you choose to buy there)"
     },
     {
       "key": "fruit-grocer",
@@ -25,7 +25,7 @@
     },
     {
       "key": "meat",
-      "label": "Woolworths: fresh seafood and butcher (just right of the eggs)"
+      "label": "Woolworths: butcher and fresh seafood (just right of the eggs)"
     },
     {
       "key": "dairy",
