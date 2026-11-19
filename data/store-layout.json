@@ -1,22 +1,86 @@
 {
   "store": "Woolworths Woolooware Bay",
   "verified": false,
-  "note": "Woolworths sections follow a typical walking order. Not yet checked against the Woolooware Bay aisles: tell Claude the real order (the Woolworths app shows each product's aisle number in store) and it gets updated here.",
+  "note": "Aisle numbers come from the Woolworths app store map for Woolooware Bay (19 Nov 2026). Sections without an aisle number, and a few items placed by best guess, haven't been confirmed in store: if something isn't where the list says, tell Claude and it gets fixed here. Fresh sections come first, then the aisles in number order, then frozen.",
   "sections": [
-    { "key": "home-check", "label": "Check you have at home" },
-    { "key": "butcher", "label": "Butcher" },
-    { "key": "fruit-grocer", "label": "Fruit and veg grocer" },
-    { "key": "bakery", "label": "Woolworths: bread" },
-    { "key": "seafood", "label": "Woolworths: seafood" },
-    { "key": "fridge", "label": "Woolworths: dairy, eggs and tofu" },
-    { "key": "canned", "label": "Woolworths: canned" },
-    { "key": "rice-pasta", "label": "Woolworths: rice, pasta and dried legumes" },
-    { "key": "international", "label": "Woolworths: sauces, pastes and wraps" },
-    { "key": "baking-spices", "label": "Woolworths: baking, herbs and spices" },
-    { "key": "breakfast", "label": "Woolworths: breakfast, baby and spreads" },
-    { "key": "pantry-other", "label": "Woolworths: other pantry" },
-    { "key": "frozen", "label": "Woolworths: frozen" },
-    { "key": "household", "label": "Woolworths: household and cleaning" },
-    { "key": "other", "label": "Other" }
+    {
+      "key": "home-check",
+      "label": "Check you have at home"
+    },
+    {
+      "key": "butcher",
+      "label": "Butcher"
+    },
+    {
+      "key": "fruit-grocer",
+      "label": "Fruit and veg grocer"
+    },
+    {
+      "key": "bakery",
+      "label": "Woolworths: bakery"
+    },
+    {
+      "key": "deli",
+      "label": "Woolworths: deli (eggs are listed here in the app)"
+    },
+    {
+      "key": "meat",
+      "label": "Woolworths: meat and seafood"
+    },
+    {
+      "key": "dairy",
+      "label": "Woolworths: dairy"
+    },
+    {
+      "key": "aisle-2",
+      "label": "Woolworths: wraps and bread rolls",
+      "aisle": "2"
+    },
+    {
+      "key": "aisle-3",
+      "label": "Woolworths: spreads, nuts and bars",
+      "aisle": "3"
+    },
+    {
+      "key": "aisle-4",
+      "label": "Woolworths: cereal and oats",
+      "aisle": "4"
+    },
+    {
+      "key": "aisle-8",
+      "label": "Woolworths: pasta, rice and Asian",
+      "aisle": "8"
+    },
+    {
+      "key": "aisle-9",
+      "label": "Woolworths: canned, oils and sauces",
+      "aisle": "9"
+    },
+    {
+      "key": "aisle-10",
+      "label": "Woolworths: baking, coconut and seeds",
+      "aisle": "10"
+    },
+    {
+      "key": "household",
+      "label": "Woolworths: household and cleaning",
+      "aisle": "11 to 15"
+    },
+    {
+      "key": "baby",
+      "label": "Woolworths: baby (aisle not confirmed)"
+    },
+    {
+      "key": "pantry-other",
+      "label": "Woolworths: other pantry (check the aisle)"
+    },
+    {
+      "key": "frozen",
+      "label": "Woolworths: freezer section"
+    },
+    {
+      "key": "other",
+      "label": "Other"
+    }
   ]
 }

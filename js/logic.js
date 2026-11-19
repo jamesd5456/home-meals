@@ -187,9 +187,9 @@ export function classifyExtra(text) {
 const AISLE_TO_SECTION = {
   household: "household",
   pantry: "pantry-other",
-  fridge: "fridge",
+  fridge: "dairy",
   butcher: "butcher",
-  seafood: "seafood",
+  seafood: "meat",
   produce: "fruit-grocer",
   other: "other",
 };

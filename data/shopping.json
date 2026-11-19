@@ -20,7 +20,7 @@
       {
         "id": "salmon-fillets-2b",
         "text": "Salmon fillets, 2 (about 300 to 350 g, tray bake)",
-        "section": "seafood"
+        "section": "meat"
       },
       {
         "id": "prawns-300b",
@@ -30,7 +30,7 @@
       {
         "id": "canned-salmon-1b",
         "text": "Canned pink salmon, 1 x 210 g (catch-up plate uses half)",
-        "section": "canned"
+        "section": "aisle-9"
       },
       {
         "id": "onions-6",
@@ -100,37 +100,37 @@
       {
         "id": "eggs-6",
         "text": "Eggs, 6 (5 needed: fried rice 3, omelette 1, scrambled egg 1)",
-        "section": "fridge"
+        "section": "deli"
       },
       {
         "id": "yoghurt-400",
         "text": "Natural full-fat yoghurt, 400 g (buy the smallest tub)",
-        "section": "fridge"
+        "section": "dairy"
       },
       {
         "id": "cheese-110",
         "text": "Tasty cheese, 110 g (tacos 1 cup, baked beans toast 1 tbsp; buy the smallest block)",
-        "section": "fridge"
+        "section": "dairy"
       },
       {
         "id": "tofu-300",
         "text": "Firm tofu, 300 g (fried rice 200 g, catch-up plate 100 g)",
-        "section": "fridge"
+        "section": "dairy"
       },
       {
         "id": "rice-1100",
         "text": "Basmati rice, 1.1 kg (5 1/2 cups dry: korma, fried rice, dahl)",
-        "section": "rice-pasta"
+        "section": "aisle-8"
       },
       {
         "id": "pasta-500b",
         "text": "Dried pasta shapes, 500 g (ragu)",
-        "section": "rice-pasta"
+        "section": "aisle-8"
       },
       {
         "id": "tortillas-8",
         "text": "Small soft tortillas, 8 (tacos)",
-        "section": "international"
+        "section": "aisle-2"
       },
       {
         "id": "bread-6",
@@ -140,97 +140,97 @@
       {
         "id": "oats-3tbsp",
         "text": "Rolled oats (3 tbsp needed, oat porridge)",
-        "section": "breakfast"
+        "section": "aisle-4"
       },
       {
         "id": "weetbix-1",
         "text": "Weet-Bix (1 biscuit needed; buy the smallest box)",
-        "section": "breakfast"
+        "section": "aisle-4"
       },
       {
         "id": "infant-cereal-2tbsp",
         "text": "Iron-fortified infant cereal (2 tbsp needed in total)",
-        "section": "breakfast"
+        "section": "baby"
       },
       {
         "id": "red-lentils-500b",
         "text": "Red lentils, 500 g (ragu 200 g, dahl 300 g)",
-        "section": "rice-pasta"
+        "section": "aisle-8"
       },
       {
         "id": "black-beans-1b",
         "text": "Canned black beans, 1 (tacos)",
-        "section": "canned"
+        "section": "aisle-9"
       },
       {
         "id": "chickpeas-2b",
         "text": "Canned chickpeas, 2 (korma, hummus)",
-        "section": "canned"
+        "section": "aisle-9"
       },
       {
         "id": "crushed-tomatoes-4b",
         "text": "Canned crushed tomatoes, 4 (korma 1, ragu 2, dahl 1)",
-        "section": "canned"
+        "section": "aisle-9"
       },
       {
         "id": "baked-beans-3tbsp",
         "text": "No-salt-added baked beans, 1 can (3 tbsp needed)",
-        "section": "canned"
+        "section": "aisle-9"
       },
       {
         "id": "soy-sauce-adults",
         "text": "Low-salt soy sauce (adults at the table with the fried rice; recipe gives no amount)",
-        "section": "international"
+        "section": "aisle-9"
       },
       {
         "id": "ground-almonds-60",
         "text": "Ground almonds, 60 g (korma)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "tahini-3tbsp",
         "text": "Tahini (about 3 1/2 tbsp in total: tray bake, hummus, catch-up plate, yoghurt breakfast)",
-        "section": "international"
+        "section": "aisle-8"
       },
       {
         "id": "peanut-butter-1tsp",
         "text": "100% smooth peanut butter (1 tsp in total)",
-        "section": "breakfast"
+        "section": "aisle-3"
       },
       {
         "id": "korma-paste-3tbsp",
         "text": "Korma paste (3 tbsp needed; check the label for salt)",
-        "section": "international"
+        "section": "aisle-8"
       },
       {
         "id": "cumin-5tsp",
         "text": "Ground cumin (5 tsp in total: korma 1, tacos 2, dahl 2)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "coriander-2tsp",
         "text": "Ground coriander (2 tsp in total: korma 1, tacos 1)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "turmeric-2tsp",
         "text": "Ground turmeric (2 tsp: dahl)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "paprika-2tsp",
         "text": "Smoked paprika (2 tsp: tacos)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "garam-masala-1tsp",
         "text": "Garam masala (1 tsp: dahl)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "mixed-herbs-1tbsp",
         "text": "Dried mixed herbs (1 tbsp: ragu)",
-        "section": "baking-spices"
+        "section": "aisle-10"
       },
       {
         "id": "peas-corn-1cup",
