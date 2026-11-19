@@ -47,11 +47,12 @@
       "date": "2026-11-22",
       "breakfast": "yoghurt-berry-tahini-cereal",
       "dinner": "slow-cooker-beef-lentil-ragu",
-      "note": "Start the slow cooker after breakfast. It makes enough for tomorrow too.",
+      "note": "Start the slow cooker on high after breakfast so the ragu is ready before you leave. It makes enough for tomorrow too.",
+      "jamesMeal": "Ragu with pasta. Pack a portion before you leave.",
       "prep": [
         {
           "when": "morning",
-          "text": "Start the slow cooker after breakfast (beef and lentil ragu)."
+          "text": "Start the slow cooker on high after breakfast (beef and lentil ragu, 3 to 4 hours)."
         }
       ]
     },

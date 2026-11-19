@@ -1,6 +1,6 @@
 # Home Meals site
 
-Standing rule for `data/shopping.json`: a shopping list holds only the ingredients the recipes in `data/recipes.json` use, in the exact amounts they need. No assumed staples, snacks, buffers or spare quantities. Add up the recipe ingredient lines for the meals scheduled in the list's window, and note the recipe beside each item. Where a recipe says "X or Y" use the one that needs no purchase, skip optional items, and where a pack can't be bought in the exact amount write "buy the smallest pack". If a week's recipes don't exist yet, leave its list empty.
+Standing rule for `data/shopping.json`: a shopping list holds only the ingredients the recipes in `data/recipes.json` use, in the exact amounts they need. No assumed staples, snacks, buffers or spare quantities. Add up the recipe ingredient lines for the meals scheduled in the list's window, and note the recipe beside each item. Stock is always preferred over water: never write "stock or water" in a recipe, use no-salt-added stock and put it on the list. In recipe cards, keep ingredient lines clean (no "diced", "chopped" etc.) and put each prep job (cutting, dicing, grating, draining and rinsing, thawing, toasting) into the step where the ingredient is first used. Skip optional items, and where a pack can't be bought in the exact amount write "buy the smallest pack". If a week's recipes don't exist yet, leave its list empty.
 
 Keep personal details (names, dates of birth, roster, health history) out of this public repo. Run `npm test` before pushing.
 
