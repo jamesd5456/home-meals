@@ -1,17 +1,19 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY, FORTNIGHT_BUDGET } from "./config.js";
 import {
-  OTHER_GROUP,
   addDaysISO,
   ageDays,
+  buildGroups,
   classifyExtra,
+  compareTicked,
   currentListIndex,
   diffDays,
   fortnightFor,
   freezerSummary,
-  groupForAisle,
   groupPrep,
+  isDoubleTap,
   nightRunStatus,
   parseQty,
+  sectionForAisle,
   shiftAdvice,
   summariseSpend,
 } from "./logic.js";
@@ -25,9 +27,11 @@ const state = {
   byId: {},
   plan: [],
   shopping: [],
+  layout: { sections: [] },
   supabase: null,
   user: null,
   checks: {},
+  checkedAt: {},
   buyQty: {},
   buyQtyError: "",
   extras: [],
@@ -68,6 +72,7 @@ const SHIFTS = {
 };
 
 const LS_PREFIX = "hm:ticks:";
+const LS_AT_PREFIX = "hm:tickat:";
 
 /* ---------- helpers ---------- */
 
@@ -150,6 +155,9 @@ function loadLocalChecks() {
       const k = localStorage.key(i);
       if (k && k.startsWith(LS_PREFIX)) {
         state.checks[k.slice(LS_PREFIX.length)] = localStorage.getItem(k) === "1";
+      } else if (k && k.startsWith(LS_AT_PREFIX)) {
+        const t = Number(localStorage.getItem(k));
+        if (t) state.checkedAt[k.slice(LS_AT_PREFIX.length)] = t;
       }
     }
   } catch (e) {
@@ -161,74 +169,73 @@ async function loadRemoteChecks() {
   if (!state.supabase || !state.user) return;
   const { data, error } = await state.supabase
     .from("meal_checks")
-    .select("list_key,item_key,checked");
+    .select("list_key,item_key,checked,updated_at");
   if (error) {
     setStatus("Couldn't load shared ticks: " + error.message);
     return;
   }
-  for (const r of data) state.checks[tickKey(r.list_key, r.item_key)] = !!r.checked;
+  for (const r of data) applyRemoteTick(r);
+}
+
+// A tick row from Supabase (initial load or live): its updated_at is when it was last ticked.
+function applyRemoteTick(row) {
+  const key = tickKey(row.list_key, row.item_key);
+  state.checks[key] = !!row.checked;
+  const t = row.updated_at ? Date.parse(row.updated_at) : 0;
+  if (row.checked && t) state.checkedAt[key] = t;
+  else delete state.checkedAt[key];
 }
 
 async function setChecked(list, item, val) {
   const key = tickKey(list, item);
+  const now = Date.now();
   state.checks[key] = val;
+  if (val) state.checkedAt[key] = now;
+  else delete state.checkedAt[key];
   try {
     localStorage.setItem(LS_PREFIX + key, val ? "1" : "0");
+    if (val) localStorage.setItem(LS_AT_PREFIX + key, String(now));
+    else localStorage.removeItem(LS_AT_PREFIX + key);
   } catch (e) {
     /* ignore */
   }
   if (state.supabase && state.user) {
     const { error } = await state.supabase.from("meal_checks").upsert(
-      { list_key: list, item_key: item, checked: val, updated_at: new Date().toISOString() },
+      { list_key: list, item_key: item, checked: val, updated_at: new Date(now).toISOString() },
       { onConflict: "list_key,item_key" }
     );
     if (error) setStatus("Couldn't sync that tick: " + error.message);
   }
 }
 
-function refreshTicks() {
+function refreshTicks(sort = true) {
   document.querySelectorAll("input[data-list]").forEach((cb) => {
     cb.checked = isChecked(cb.dataset.list, cb.dataset.item);
+    const row = cb.closest("li");
+    if (row) row.setAttribute("aria-checked", String(cb.checked));
   });
-  updateProgress();
+  updateProgress(sort);
 }
 
-// "Have it" flags live in meal_checks under list_key "have:<list>", so they sync like ticks.
-function syncHave() {
-  document.querySelectorAll("li[data-have-list]").forEach((li) => {
-    const on = isChecked(li.dataset.haveList, li.dataset.item);
-    li.classList.toggle("have", on);
-    li.dataset.have = on ? "1" : "0";
-    const btn = li.querySelector(".have-btn");
-    if (btn) {
-      btn.textContent = on ? "Need it" : "Have it";
-      btn.setAttribute("aria-pressed", on ? "true" : "false");
-    }
-  });
-}
-
-async function toggleHave(listId, itemId) {
-  await setChecked("have:" + listId, itemId, !isChecked("have:" + listId, itemId));
-  refreshTicks();
+function toggleTick(list, item) {
+  setChecked(list, item, !isChecked(list, item));
+  refreshTicks(false); // show the new state now; the row moves a moment later
+  sortSoon();
 }
 
 function updateProgress(sort = true) {
-  syncHave();
   document.querySelectorAll("details[data-list]").forEach((d) => {
-    const all = [...d.querySelectorAll("input[data-list]")];
-    const boxes = all.filter((b) => !b.closest("li") || b.closest("li").dataset.have !== "1");
-    const have = all.length - boxes.length;
+    const boxes = [...d.querySelectorAll("input[data-list]")];
     const done = boxes.filter((b) => b.checked).length;
     const out = d.querySelector(".progress");
     if (!out) return;
-    if (!all.length) out.textContent = "";
-    else out.textContent = ` (${done}/${boxes.length}${have ? `, ${have} already have` : ""})`;
+    out.textContent = boxes.length ? ` (${done}/${boxes.length})` : "";
   });
   if (sort) sortDone();
 }
 
-// Ticked items (and ones marked "have it") drop into a "Ticked off" section at the bottom of
-// their list, in their original order, and go back to their aisle if you untick them.
+// Ticked items drop into a "Ticked off" section at the bottom of their list, newest tick first, and
+// go back to their aisle (in their original order) if you untick them.
 function insertOrdered(ul, li) {
   const o = Number(li.dataset.o);
   const next = [...ul.children].find((c) => Number(c.dataset.o) > o);
@@ -258,10 +265,18 @@ function sortDone() {
       const ae = document.activeElement;
       if (ae && ae.tagName === "INPUT" && ae.type !== "checkbox" && li.contains(ae)) return; // don't move an amount box while it's being typed in
       const box = li.querySelector("input[type=checkbox]");
-      const isDone = (box && box.checked) || li.dataset.have === "1";
+      const isDone = !!(box && box.checked);
       const target = isDone ? doneUl : li._home;
       if (li.parentElement !== target) insertOrdered(target, li);
     });
+    // Newest tick on top. Only touch the DOM if the order actually changed.
+    const rank = (li) => {
+      const box = li.querySelector("input[type=checkbox]");
+      const t = box ? state.checkedAt[tickKey(box.dataset.list, box.dataset.item)] || 0 : 0;
+      return { li, t, o: Number(li.dataset.o) };
+    };
+    const ordered = [...doneUl.children].map(rank).sort(compareTicked).map((r) => r.li);
+    if (ordered.some((li, i) => li !== doneUl.children[i])) ordered.forEach((li) => doneUl.appendChild(li));
     d.querySelectorAll("div.group").forEach((g) => {
       g.hidden = !g.querySelector("li");
     });
@@ -357,9 +372,6 @@ async function setBuyQty(listId, item, planQty, val) {
       : await q.upsert({ list_key: listId, item_key: item.id, qty: val, updated_at: new Date().toISOString() }, { onConflict: "list_key,item_key" });
     if (error) setStatus("Couldn't sync that quantity: " + error.message);
   }
-  // Buying none means you have it all, so it drops off the buy count. Typing a number again undoes that.
-  if (val === 0 && !isChecked("have:" + listId, item.id)) await setChecked("have:" + listId, item.id, true);
-  if (val !== 0 && isChecked("have:" + listId, item.id)) await setChecked("have:" + listId, item.id, false);
   refreshTicks();
 }
 
@@ -416,6 +428,7 @@ async function removeExtra(id) {
   }
   await state.supabase.from("meal_checks").delete().eq("list_key", "extras").eq("item_key", id);
   delete state.checks[tickKey("extras", id)];
+  delete state.checkedAt[tickKey("extras", id)];
   await loadExtras();
   drawExtras();
 }
@@ -456,8 +469,8 @@ function startRealtime() {
     .on("postgres_changes", { event: "*", schema: "public", table: "meal_checks" }, (payload) => {
       const row = payload.eventType === "DELETE" ? payload.old : payload.new;
       if (!row || !row.list_key) return;
-      state.checks[tickKey(row.list_key, row.item_key)] =
-        payload.eventType === "DELETE" ? false : !!row.checked;
+      if (payload.eventType === "DELETE") applyRemoteTick({ ...row, checked: false });
+      else applyRemoteTick(row);
       refreshTicks();
     })
     .subscribe();
@@ -890,43 +903,59 @@ function noteForm(recipeId, box) {
   );
 }
 
+// Double-tap (or double-click) anywhere on a row to tick it, so a stray touch while scrolling does nothing.
+// Space or Enter on a focused row does the same for keyboard users. The amount box and buttons are left alone.
 function tickItem(listId, item, extra, opts = {}) {
-  const id = `t-${listId}-${item.id}${opts.suffix || ""}`;
   const cb = h("input", {
     type: "checkbox",
-    id,
+    class: "tickbox",
+    tabindex: "-1",
+    "aria-hidden": "true",
     "data-list": listId,
     "data-item": item.id,
     checked: isChecked(listId, item.id),
-    onchange: (e) => {
-      setChecked(listId, item.id, e.target.checked);
-      updateProgress(false);
-      sortSoon();
-    },
+    onclick: (e) => e.preventDefault(),
   });
-  const haveBtn = opts.have
-    ? h(
-        "button",
-        {
-          type: "button",
-          class: "secondary small have-btn",
-          "aria-pressed": "false",
-          title: "Mark as already in the pantry or fridge, so it drops off the buy count",
-          onclick: () => toggleHave(listId, item.id),
-        },
-        "Have it"
-      )
-    : null;
   const q = opts.qty || null;
-  return h(
+  let lastTap = null;
+  let armTimer = null;
+  const li = h(
     "li",
-    opts.have ? { "data-have-list": "have:" + listId, "data-item": item.id } : null,
+    {
+      class: "tickrow",
+      role: "checkbox",
+      tabindex: "0",
+      "aria-checked": String(isChecked(listId, item.id)),
+      title: "Double-tap to tick off",
+      onclick: (e) => {
+        if (e.target.closest("input.buyqty, button, a, .qty")) {
+          lastTap = null;
+          return;
+        }
+        const cur = { t: Date.now(), x: e.clientX, y: e.clientY };
+        if (isDoubleTap(lastTap, cur)) {
+          lastTap = null;
+          li.classList.remove("armed");
+          toggleTick(listId, item.id);
+        } else {
+          lastTap = cur;
+          li.classList.add("armed"); // first tap registered; a second one ticks it
+          clearTimeout(armTimer);
+          armTimer = setTimeout(() => li.classList.remove("armed"), 450);
+        }
+      },
+      onkeydown: (e) => {
+        if (e.target !== li || (e.key !== " " && e.key !== "Enter")) return;
+        e.preventDefault();
+        toggleTick(listId, item.id);
+      },
+    },
     cb,
-    h("label", { for: id }, q ? q.name : item.text, q && q.note ? h("span", { class: "note itemnote" }, q.note) : null),
+    h("label", null, q ? q.name : item.text, q && q.note ? h("span", { class: "note itemnote" }, q.note) : null),
     q ? qtyEditor(listId, item, q) : null,
-    haveBtn,
     extra || null
   );
+  return li;
 }
 
 // Editable "buy" amount. The plan's number stays visible when you've changed it.
@@ -1016,22 +1045,16 @@ function drawExtras() {
   refreshTicks();
 }
 
-// A list's groups with the extras slotted into the matching aisle (or "Household and other").
-function groupsWithExtras(list) {
-  const groups = list.groups.map((g) => ({ store: g.store, items: g.items.map((it) => ({ ...it })) }));
-  for (const x of state.extras) {
-    const aisle = classifyExtra(x.item);
-    let gi = groupForAisle(groups, aisle);
-    if (gi === -1) {
-      gi = groups.findIndex((g) => g.store === OTHER_GROUP);
-      if (gi === -1) {
-        groups.push({ store: OTHER_GROUP, items: [] });
-        gi = groups.length - 1;
-      }
+// A list's items in store-walk order, with the extras slotted into the matching section
+// (or "Other" if the aisle can't be guessed). Only the current list gets the extras.
+function groupsFor(list, withExtras) {
+  const items = list.items.map((it) => ({ ...it }));
+  if (withExtras) {
+    for (const x of state.extras) {
+      items.push({ id: x.id, text: x.item, extra: true, section: sectionForAisle(classifyExtra(x.item)) });
     }
-    groups[gi].items.push({ id: x.id, text: x.item, extra: true });
   }
-  return groups;
+  return buildGroups(items, state.layout);
 }
 
 function extraRemoveBtn(x) {
@@ -1042,14 +1065,14 @@ function extraRemoveBtn(x) {
   );
 }
 
-// Anything still unticked (and not marked "have it") on the previous list, once its shop day has passed.
+// Anything still unticked on the previous list, once its shop day has passed.
 function carriedOver(idx) {
   const prev = state.shopping[idx - 1];
   if (!prev || !prev.buyDate || prev.buyDate >= localISO()) return null;
   const left = [];
-  for (const g of prev.groups)
+  for (const g of buildGroups(prev.items, state.layout))
     for (const it of g.items) {
-      if (isChecked(prev.id, it.id) || isChecked("have:" + prev.id, it.id)) continue;
+      if (isChecked(prev.id, it.id)) continue;
       left.push({ id: it.id, text: `${it.text} (${g.store})` });
     }
   if (!left.length) return null;
@@ -1057,24 +1080,25 @@ function carriedOver(idx) {
     "div",
     null,
     h("div", { class: "store" }, `Carried over from ${prev.title}`),
-    h("ul", { class: "ticks" }, left.map((it) => tickItem(prev.id, it, null, { have: true, suffix: "-c" })))
+    h("ul", { class: "ticks" }, left.map((it) => tickItem(prev.id, it)))
   );
 }
 
 function viewShopping() {
   const note = state.supabase
     ? state.user
-      ? "Ticks sync live between your phones."
-      : "Log in so ticks sync between your phones. Until then they save on this device only."
-    : "Ticks save on this device only.";
+      ? "Double-tap an item to tick it off. Ticks sync live between your phones."
+      : "Double-tap an item to tick it off. Log in so ticks sync between your phones; until then they save on this device only."
+    : "Double-tap an item to tick it off. Ticks save on this device only.";
   return h(
     "section",
     null,
     h("h2", null, "Shopping"),
     h("p", { class: "muted" }, note),
+    state.layout.note ? h("p", { class: "muted" }, state.layout.note) : null,
     state.shopping.map((list, idx) => {
       const isCurrent = idx === currentListIndex(state.shopping, localISO());
-      const groups = (isCurrent ? groupsWithExtras(list) : list.groups).filter((g) => g.items.length);
+      const groups = groupsFor(list, isCurrent);
       return h(
         "details",
         { class: "list card", "data-list": list.id, open: isCurrent },
@@ -1092,7 +1116,7 @@ function viewShopping() {
               g.items.map((it) =>
                 it.extra
                   ? tickItem("extras", it, extraRemoveBtn(it))
-                  : tickItem(list.id, it, null, { have: true, qty: parseQty(it.text) })
+                  : tickItem(list.id, it, null, { qty: parseQty(it.text) })
               )
             )
           )
@@ -1104,10 +1128,9 @@ function viewShopping() {
             class: "secondary clear-ticks",
             onclick: async () => {
               if (!window.confirm("Clear all ticks on " + list.title + "?")) return;
-              for (const g of list.groups)
-                for (const it of g.items) {
-                  if (isChecked(list.id, it.id)) await setChecked(list.id, it.id, false);
-                }
+              for (const it of list.items) {
+                if (isChecked(list.id, it.id)) await setChecked(list.id, it.id, false);
+              }
               refreshTicks();
             },
           },
@@ -1516,16 +1539,18 @@ function route(scrollTop) {
 
 async function init() {
   try {
-    const [recipes, plan, shopping] = await Promise.all([
+    const [recipes, plan, shopping, layout] = await Promise.all([
       loadJSON("data/recipes.json"),
       loadJSON("data/plan.json"),
       loadJSON("data/shopping.json"),
+      loadJSON("data/store-layout.json"),
     ]);
     state.recipes = recipes;
     state.byId = Object.fromEntries(recipes.map((r) => [r.id, r]));
     state.plan = plan.days;
     planNote = plan.note || "";
     state.shopping = shopping;
+    state.layout = layout;
   } catch (e) {
     app.replaceChildren(h("p", { class: "error" }, "Couldn't load the meal data. Try refreshing."));
     return;

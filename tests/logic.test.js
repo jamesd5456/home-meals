@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {
   addDaysISO, diffDays, fortnightFor, summariseSpend, nightRuns, nightRunStatus,
   freezerSummary, ageDays, shiftAdvice, groupPrep,
-  parseQty, currentListIndex, classifyExtra, groupForAisle,
+  parseQty, currentListIndex, classifyExtra, sectionForAisle, buildGroups, isDoubleTap, compareTicked,
 } from "../js/logic.js";
 
 // dates
@@ -105,9 +105,41 @@ assert.equal(classifyExtra("blueberries"), "produce");
 assert.equal(classifyExtra("full cream milk"), "fridge");
 assert.equal(classifyExtra("frozen peas"), "pantry");
 assert.equal(classifyExtra("zzz"), "other");
-const groups = [{ store: "Butcher" }, { store: "Fruit and veg grocer" }, { store: "Woolworths: pantry and frozen" }];
-assert.equal(groupForAisle(groups, "produce"), 1);
-assert.equal(groupForAisle(groups, "pantry"), 2);
-assert.equal(groupForAisle(groups, "fridge"), -1);
+assert.equal(sectionForAisle("produce"), "fruit-grocer");
+assert.equal(sectionForAisle("pantry"), "pantry-other");
+assert.equal(sectionForAisle("household"), "household");
+assert.equal(sectionForAisle("nonsense"), "other");
+
+// store layout: items come out in layout order, empty sections vanish, unknown sections go to "other"
+const layout = { sections: [
+  { key: "butcher", label: "Butcher" },
+  { key: "canned", label: "Woolworths: canned", aisle: 7 },
+  { key: "frozen", label: "Woolworths: frozen" },
+  { key: "other", label: "Other" },
+] };
+const grp = buildGroups([
+  { id: "a", section: "frozen" }, { id: "b", section: "butcher" }, { id: "c", section: "canned" },
+  { id: "d", section: "nope" }, { id: "e", section: "canned" },
+], layout);
+assert.deepEqual(grp.map((x) => x.store), ["Butcher", "Woolworths: canned (aisle 7)", "Woolworths: frozen", "Other"]);
+assert.deepEqual(grp[1].items.map((x) => x.id), ["c", "e"]);
+assert.deepEqual(grp[3].items.map((x) => x.id), ["d"]);
+// no "other" section in the layout: stragglers still show, at the end
+const g2 = buildGroups([{ id: "a", section: "butcher" }, { id: "z", section: "nope" }], { sections: [{ key: "butcher", label: "Butcher" }] });
+assert.deepEqual(g2.map((x) => x.store), ["Butcher", "Other"]);
+
+// double-tap: two taps close together on (about) the same spot
+assert.equal(isDoubleTap(null, { t: 100, x: 0, y: 0 }), false);
+assert.equal(isDoubleTap({ t: 100, x: 10, y: 10 }, { t: 300, x: 12, y: 11 }), true);
+assert.equal(isDoubleTap({ t: 100, x: 10, y: 10 }, { t: 700, x: 10, y: 10 }), false); // too slow
+assert.equal(isDoubleTap({ t: 100, x: 10, y: 10 }, { t: 250, x: 200, y: 10 }), false); // moved away
+assert.equal(isDoubleTap({ t: 100, x: 10, y: 10 }, { t: 100, x: 10, y: 10 }), false);
+
+// ticked-off order: newest first; untimed ones last in original order
+const ticked = [
+  { id: "old", t: 0, o: 4 }, { id: "first", t: 1000, o: 0 }, { id: "last", t: 3000, o: 2 },
+  { id: "mid", t: 2000, o: 1 }, { id: "old2", t: 0, o: 3 },
+];
+assert.deepEqual(ticked.sort(compareTicked).map((x) => x.id), ["last", "mid", "first", "old2", "old"]);
 
 console.log("logic tests passed");

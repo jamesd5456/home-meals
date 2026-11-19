@@ -130,9 +130,12 @@ form.card select, form.card input[type=number], form.card input[type=date] {
 form.card input[type=text] { width: 100%; margin: 6px 0; }
 form.card .row input[type=text] { margin: 0; }
 button:disabled { opacity: 0.4; cursor: default; }
-ul.ticks li.have label { color: var(--muted); }
-ul.ticks li.have { opacity: 0.6; }
-ul.ticks li .have-btn { flex: none; }
+/* rows tick on double-tap: the box only shows the state, and taps never zoom or select text */
+ul.ticks li.tickrow { touch-action: manipulation; -webkit-user-select: none; user-select: none; cursor: pointer; -webkit-tap-highlight-color: transparent; border-radius: 6px; }
+ul.ticks li.tickrow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ul.ticks li.tickrow.armed { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+ul.ticks input.tickbox { pointer-events: none; }
+ul.ticks li input.buyqty { -webkit-user-select: text; user-select: text; }
 
 /* editable shopping amounts */
 ul.ticks li .qty { display: inline-flex; align-items: center; gap: 4px; flex: none; }
@@ -155,6 +158,5 @@ ul.ticks li .qty .unit { max-width: none; }
   /* checkbox and name on the first line; amount and buttons tucked underneath */
   ul.ticks label { flex: 1 1 calc(100% - 52px); }
   ul.ticks li .qty { margin-left: 34px; }
-  ul.ticks li .have-btn, ul.ticks li > button { margin-left: auto; }
-  ul.ticks li.have { opacity: 0.6; }
+  ul.ticks li > button { margin-left: auto; }
 }

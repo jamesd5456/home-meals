@@ -6,228 +6,246 @@
     "buyDate": "2026-11-18",
     "covers": "Thu 19 to Wed 25 Nov",
     "estimate": "Trimmed on 18 Nov to the exact recipe amounts. Not priced yet: check it in the Woolworths app and send me the total.",
-    "groups": [
+    "items": [
       {
-        "store": "Butcher",
-        "items": [
-          {
-            "id": "chicken-thigh-800b",
-            "text": "Chicken thigh fillets, 800 g (korma)"
-          },
-          {
-            "id": "beef-mince-1kgb",
-            "text": "Beef mince, 1 kg (tacos 500 g, ragu 500 g)"
-          }
-        ]
+        "id": "chicken-thigh-800b",
+        "text": "Chicken thigh fillets, 800 g (korma)",
+        "section": "butcher"
       },
       {
-        "store": "Seafood",
-        "items": [
-          {
-            "id": "salmon-fillets-2b",
-            "text": "Salmon fillets, 2 (about 300 to 350 g, tray bake)"
-          },
-          {
-            "id": "prawns-300b",
-            "text": "Raw peeled prawns, frozen, 300 g (fried rice 250 g, plus a few for Thursday's breakfast)"
-          },
-          {
-            "id": "canned-salmon-1b",
-            "text": "Canned pink salmon, 1 x 210 g (catch-up plate uses half)"
-          }
-        ]
+        "id": "beef-mince-1kgb",
+        "text": "Beef mince, 1 kg (tacos 500 g, ragu 500 g)",
+        "section": "butcher"
       },
       {
-        "store": "Fruit and veg grocer",
-        "items": [
-          {
-            "id": "onions-6",
-            "text": "Brown onions, 6 (korma 2, tacos 1, ragu 1, fried rice 1, dahl 1)"
-          },
-          {
-            "id": "garlic-13",
-            "text": "Garlic, 13 cloves (2 small heads)"
-          },
-          {
-            "id": "ginger-4tsp",
-            "text": "Ginger, 4 tsp grated (korma, dahl)"
-          },
-          {
-            "id": "capsicum-1",
-            "text": "Capsicum, 1 (tacos)"
-          },
-          {
-            "id": "carrots-4",
-            "text": "Carrots, 4 (ragu 2, fried rice 2)"
-          },
-          {
-            "id": "broccoli-2b",
-            "text": "Broccoli, 2 heads (tray bake)"
-          },
-          {
-            "id": "potatoes-600",
-            "text": "Potatoes, 600 g (tray bake)"
-          },
-          {
-            "id": "lemons-3",
-            "text": "Lemons, 3 (tray bake, dahl, plus tacos wedges and hummus)"
-          },
-          {
-            "id": "avocado-2",
-            "text": "Avocados, 2 (tacos 1, prawn toast 1/4)"
-          },
-          {
-            "id": "banana-1",
-            "text": "Banana, 1 (1/2 needed, weetbix breakfast)"
-          },
-          {
-            "id": "apple-1",
-            "text": "Apple, 1 (1/4 needed, oat porridge)"
-          },
-          {
-            "id": "lettuce-1b",
-            "text": "Lettuce, 1 small (tacos)"
-          },
-          {
-            "id": "spinach-150",
-            "text": "Baby spinach, about 150 g (korma, omelette, dahl)"
-          }
-        ]
+        "id": "salmon-fillets-2b",
+        "text": "Salmon fillets, 2 (about 300 to 350 g, tray bake)",
+        "section": "seafood"
       },
       {
-        "store": "Woolworths: fridge",
-        "items": [
-          {
-            "id": "eggs-6",
-            "text": "Eggs, 6 (5 needed: fried rice 3, omelette 1, scrambled egg 1)"
-          },
-          {
-            "id": "yoghurt-400",
-            "text": "Natural full-fat yoghurt, 400 g (buy the smallest tub)"
-          },
-          {
-            "id": "cheese-110",
-            "text": "Tasty cheese, 110 g (tacos 1 cup, baked beans toast 1 tbsp; buy the smallest block)"
-          },
-          {
-            "id": "tofu-300",
-            "text": "Firm tofu, 300 g (fried rice 200 g, catch-up plate 100 g)"
-          }
-        ]
+        "id": "prawns-300b",
+        "text": "Raw peeled prawns, frozen, 300 g (fried rice 250 g, plus a few for Thursday's breakfast)",
+        "section": "frozen"
       },
       {
-        "store": "Woolworths: pantry and frozen",
-        "items": [
-          {
-            "id": "rice-1100",
-            "text": "Basmati rice, 1.1 kg (5 1/2 cups dry: korma, fried rice, dahl)"
-          },
-          {
-            "id": "pasta-500b",
-            "text": "Dried pasta shapes, 500 g (ragu)"
-          },
-          {
-            "id": "tortillas-8",
-            "text": "Small soft tortillas, 8 (tacos)"
-          },
-          {
-            "id": "bread-6",
-            "text": "Wholemeal bread, 6 slices (buy 1 loaf and freeze the rest)"
-          },
-          {
-            "id": "oats-3tbsp",
-            "text": "Rolled oats (3 tbsp needed, oat porridge)"
-          },
-          {
-            "id": "weetbix-1",
-            "text": "Weet-Bix (1 biscuit needed; buy the smallest box)"
-          },
-          {
-            "id": "infant-cereal-2tbsp",
-            "text": "Iron-fortified infant cereal (2 tbsp needed in total)"
-          },
-          {
-            "id": "red-lentils-500b",
-            "text": "Red lentils, 500 g (ragu 200 g, dahl 300 g)"
-          },
-          {
-            "id": "black-beans-1b",
-            "text": "Canned black beans, 1 (tacos)"
-          },
-          {
-            "id": "chickpeas-2b",
-            "text": "Canned chickpeas, 2 (korma, hummus)"
-          },
-          {
-            "id": "crushed-tomatoes-4b",
-            "text": "Canned crushed tomatoes, 4 (korma 1, ragu 2, dahl 1)"
-          },
-          {
-            "id": "baked-beans-3tbsp",
-            "text": "No-salt-added baked beans, 1 can (3 tbsp needed)"
-          },
-          {
-            "id": "soy-sauce-adults",
-            "text": "Low-salt soy sauce (adults at the table with the fried rice; recipe gives no amount)"
-          },
-          {
-            "id": "ground-almonds-60",
-            "text": "Ground almonds, 60 g (korma)"
-          },
-          {
-            "id": "tahini-3tbsp",
-            "text": "Tahini (about 3 1/2 tbsp in total: tray bake, hummus, catch-up plate, yoghurt breakfast)"
-          },
-          {
-            "id": "peanut-butter-1tsp",
-            "text": "100% smooth peanut butter (1 tsp in total)"
-          },
-          {
-            "id": "korma-paste-3tbsp",
-            "text": "Korma paste (3 tbsp needed; check the label for salt)"
-          },
-          {
-            "id": "cumin-5tsp",
-            "text": "Ground cumin (5 tsp in total: korma 1, tacos 2, dahl 2)"
-          },
-          {
-            "id": "coriander-2tsp",
-            "text": "Ground coriander (2 tsp in total: korma 1, tacos 1)"
-          },
-          {
-            "id": "turmeric-2tsp",
-            "text": "Ground turmeric (2 tsp: dahl)"
-          },
-          {
-            "id": "paprika-2tsp",
-            "text": "Smoked paprika (2 tsp: tacos)"
-          },
-          {
-            "id": "garam-masala-1tsp",
-            "text": "Garam masala (1 tsp: dahl)"
-          },
-          {
-            "id": "mixed-herbs-1tbsp",
-            "text": "Dried mixed herbs (1 tbsp: ragu)"
-          },
-          {
-            "id": "peas-corn-1cup",
-            "text": "Frozen peas and corn (1 cup: fried rice)"
-          },
-          {
-            "id": "berries-few",
-            "text": "Frozen mixed berries (a few needed: yoghurt breakfast)"
-          }
-        ]
+        "id": "canned-salmon-1b",
+        "text": "Canned pink salmon, 1 x 210 g (catch-up plate uses half)",
+        "section": "canned"
       },
       {
-        "store": "Check you have",
-        "items": [
-          {
-            "id": "oil-9tbsp",
-            "text": "Olive or neutral oil (about 9 tbsp across the week)"
-          }
-        ]
+        "id": "onions-6",
+        "text": "Brown onions, 6 (korma 2, tacos 1, ragu 1, fried rice 1, dahl 1)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "garlic-13",
+        "text": "Garlic, 13 cloves (2 small heads)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "ginger-4tsp",
+        "text": "Ginger, 4 tsp grated (korma, dahl)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "capsicum-1",
+        "text": "Capsicum, 1 (tacos)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "carrots-4",
+        "text": "Carrots, 4 (ragu 2, fried rice 2)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "broccoli-2b",
+        "text": "Broccoli, 2 heads (tray bake)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "potatoes-600",
+        "text": "Potatoes, 600 g (tray bake)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "lemons-3",
+        "text": "Lemons, 3 (tray bake, dahl, plus tacos wedges and hummus)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "avocado-2",
+        "text": "Avocados, 2 (tacos 1, prawn toast 1/4)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "banana-1",
+        "text": "Banana, 1 (1/2 needed, weetbix breakfast)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "apple-1",
+        "text": "Apple, 1 (1/4 needed, oat porridge)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "lettuce-1b",
+        "text": "Lettuce, 1 small (tacos)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "spinach-150",
+        "text": "Baby spinach, about 150 g (korma, omelette, dahl)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "eggs-6",
+        "text": "Eggs, 6 (5 needed: fried rice 3, omelette 1, scrambled egg 1)",
+        "section": "fridge"
+      },
+      {
+        "id": "yoghurt-400",
+        "text": "Natural full-fat yoghurt, 400 g (buy the smallest tub)",
+        "section": "fridge"
+      },
+      {
+        "id": "cheese-110",
+        "text": "Tasty cheese, 110 g (tacos 1 cup, baked beans toast 1 tbsp; buy the smallest block)",
+        "section": "fridge"
+      },
+      {
+        "id": "tofu-300",
+        "text": "Firm tofu, 300 g (fried rice 200 g, catch-up plate 100 g)",
+        "section": "fridge"
+      },
+      {
+        "id": "rice-1100",
+        "text": "Basmati rice, 1.1 kg (5 1/2 cups dry: korma, fried rice, dahl)",
+        "section": "rice-pasta"
+      },
+      {
+        "id": "pasta-500b",
+        "text": "Dried pasta shapes, 500 g (ragu)",
+        "section": "rice-pasta"
+      },
+      {
+        "id": "tortillas-8",
+        "text": "Small soft tortillas, 8 (tacos)",
+        "section": "international"
+      },
+      {
+        "id": "bread-6",
+        "text": "Wholemeal bread, 6 slices (buy 1 loaf and freeze the rest)",
+        "section": "bakery"
+      },
+      {
+        "id": "oats-3tbsp",
+        "text": "Rolled oats (3 tbsp needed, oat porridge)",
+        "section": "breakfast"
+      },
+      {
+        "id": "weetbix-1",
+        "text": "Weet-Bix (1 biscuit needed; buy the smallest box)",
+        "section": "breakfast"
+      },
+      {
+        "id": "infant-cereal-2tbsp",
+        "text": "Iron-fortified infant cereal (2 tbsp needed in total)",
+        "section": "breakfast"
+      },
+      {
+        "id": "red-lentils-500b",
+        "text": "Red lentils, 500 g (ragu 200 g, dahl 300 g)",
+        "section": "rice-pasta"
+      },
+      {
+        "id": "black-beans-1b",
+        "text": "Canned black beans, 1 (tacos)",
+        "section": "canned"
+      },
+      {
+        "id": "chickpeas-2b",
+        "text": "Canned chickpeas, 2 (korma, hummus)",
+        "section": "canned"
+      },
+      {
+        "id": "crushed-tomatoes-4b",
+        "text": "Canned crushed tomatoes, 4 (korma 1, ragu 2, dahl 1)",
+        "section": "canned"
+      },
+      {
+        "id": "baked-beans-3tbsp",
+        "text": "No-salt-added baked beans, 1 can (3 tbsp needed)",
+        "section": "canned"
+      },
+      {
+        "id": "soy-sauce-adults",
+        "text": "Low-salt soy sauce (adults at the table with the fried rice; recipe gives no amount)",
+        "section": "international"
+      },
+      {
+        "id": "ground-almonds-60",
+        "text": "Ground almonds, 60 g (korma)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "tahini-3tbsp",
+        "text": "Tahini (about 3 1/2 tbsp in total: tray bake, hummus, catch-up plate, yoghurt breakfast)",
+        "section": "international"
+      },
+      {
+        "id": "peanut-butter-1tsp",
+        "text": "100% smooth peanut butter (1 tsp in total)",
+        "section": "breakfast"
+      },
+      {
+        "id": "korma-paste-3tbsp",
+        "text": "Korma paste (3 tbsp needed; check the label for salt)",
+        "section": "international"
+      },
+      {
+        "id": "cumin-5tsp",
+        "text": "Ground cumin (5 tsp in total: korma 1, tacos 2, dahl 2)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "coriander-2tsp",
+        "text": "Ground coriander (2 tsp in total: korma 1, tacos 1)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "turmeric-2tsp",
+        "text": "Ground turmeric (2 tsp: dahl)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "paprika-2tsp",
+        "text": "Smoked paprika (2 tsp: tacos)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "garam-masala-1tsp",
+        "text": "Garam masala (1 tsp: dahl)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "mixed-herbs-1tbsp",
+        "text": "Dried mixed herbs (1 tbsp: ragu)",
+        "section": "baking-spices"
+      },
+      {
+        "id": "peas-corn-1cup",
+        "text": "Frozen peas and corn (1 cup: fried rice)",
+        "section": "frozen"
+      },
+      {
+        "id": "berries-few",
+        "text": "Frozen mixed berries (a few needed: yoghurt breakfast)",
+        "section": "frozen"
+      },
+      {
+        "id": "oil-9tbsp",
+        "text": "Olive or neutral oil (about 9 tbsp across the week)",
+        "section": "home-check"
       }
     ]
   },
@@ -238,6 +256,6 @@
     "buyDate": "2026-11-24",
     "covers": "Thu 26 Nov to Wed 2 Dec",
     "estimate": "Not built yet. This list is generated from the week 2 recipes, which haven't been written. Once they are, it will list only what they need.",
-    "groups": []
+    "items": []
   }
 ]

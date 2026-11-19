@@ -183,19 +183,58 @@ export function classifyExtra(text) {
   return "other";
 }
 
-// Which group of a list an aisle belongs in, matched against the group's store name.
-const STORE_MATCH = {
-  butcher: /butcher/i,
-  seafood: /seafood/i,
-  produce: /fruit|veg|produce/i,
-  fridge: /fridge/i,
-  pantry: /pantry/i,
-  household: /household/i,
+// Extras are free text, so their rough aisle (above) is mapped onto a section of the store layout.
+const AISLE_TO_SECTION = {
+  household: "household",
+  pantry: "pantry-other",
+  fridge: "fridge",
+  butcher: "butcher",
+  seafood: "seafood",
+  produce: "fruit-grocer",
+  other: "other",
 };
 
-export function groupForAisle(groups, aisle) {
-  const re = STORE_MATCH[aisle];
-  return re ? groups.findIndex((g) => re.test(g.store)) : -1;
+export function sectionForAisle(aisle) {
+  return AISLE_TO_SECTION[aisle] || "other";
 }
 
-export const OTHER_GROUP = "Household and other";
+// Lay a list's items out in store-walk order. layout is { sections: [{ key, label, aisle? }] } from
+// data/store-layout.json, so moving a section in that file reorders every list. Items whose section
+// isn't in the layout fall into "other" (or a trailing "Other" group), and empty sections are dropped.
+export function buildGroups(items, layout) {
+  const sections = layout.sections || [];
+  const known = new Set(sections.map((s) => s.key));
+  const groups = sections.map((s) => ({
+    key: s.key,
+    store: s.aisle ? `${s.label} (aisle ${s.aisle})` : s.label,
+    items: [],
+  }));
+  const byKey = Object.fromEntries(groups.map((g) => [g.key, g]));
+  let spill = null;
+  for (const it of items) {
+    if (known.has(it.section)) byKey[it.section].items.push(it);
+    else if (byKey.other) byKey.other.items.push(it);
+    else {
+      spill = spill || { key: "other", store: "Other", items: [] };
+      spill.items.push(it);
+    }
+  }
+  if (spill) groups.push(spill);
+  return groups.filter((g) => g.items.length);
+}
+
+/* ---------- ticking ---------- */
+
+// Two taps on the same item close together count as a tick. prev/cur are { t (ms), x, y } or null.
+export function isDoubleTap(prev, cur, windowMs = 450, slopPx = 30) {
+  if (!prev || !cur) return false;
+  const dt = cur.t - prev.t;
+  if (dt <= 0 || dt > windowMs) return false;
+  return Math.hypot((cur.x || 0) - (prev.x || 0), (cur.y || 0) - (prev.y || 0)) <= slopPx;
+}
+
+// Ticked-off order: most recently ticked first. Items with no recorded time (ticked before times were
+// kept) go last, in their original list order. entries are { t (ms or 0), o (original position) }.
+export function compareTicked(a, b) {
+  return (b.t || 0) - (a.t || 0) || a.o - b.o;
+}

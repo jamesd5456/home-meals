@@ -1,0 +1,22 @@
+{
+  "store": "Woolworths Woolooware Bay",
+  "verified": false,
+  "note": "Woolworths sections follow a typical walking order. Not yet checked against the Woolooware Bay aisles: tell Claude the real order (the Woolworths app shows each product's aisle number in store) and it gets updated here.",
+  "sections": [
+    { "key": "home-check", "label": "Check you have at home" },
+    { "key": "butcher", "label": "Butcher" },
+    { "key": "fruit-grocer", "label": "Fruit and veg grocer" },
+    { "key": "bakery", "label": "Woolworths: bread" },
+    { "key": "seafood", "label": "Woolworths: seafood" },
+    { "key": "fridge", "label": "Woolworths: dairy, eggs and tofu" },
+    { "key": "canned", "label": "Woolworths: canned" },
+    { "key": "rice-pasta", "label": "Woolworths: rice, pasta and dried legumes" },
+    { "key": "international", "label": "Woolworths: sauces, pastes and wraps" },
+    { "key": "baking-spices", "label": "Woolworths: baking, herbs and spices" },
+    { "key": "breakfast", "label": "Woolworths: breakfast, baby and spreads" },
+    { "key": "pantry-other", "label": "Woolworths: other pantry" },
+    { "key": "frozen", "label": "Woolworths: frozen" },
+    { "key": "household", "label": "Woolworths: household and cleaning" },
+    { "key": "other", "label": "Other" }
+  ]
+}

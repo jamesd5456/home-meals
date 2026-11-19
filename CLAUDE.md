@@ -3,3 +3,6 @@
 Standing rule for `data/shopping.json`: a shopping list holds only the ingredients the recipes in `data/recipes.json` use, in the exact amounts they need. No assumed staples, snacks, buffers or spare quantities. Add up the recipe ingredient lines for the meals scheduled in the list's window, and note the recipe beside each item. Where a recipe says "X or Y" use the one that needs no purchase, skip optional items, and where a pack can't be bought in the exact amount write "buy the smallest pack". If a week's recipes don't exist yet, leave its list empty.
 
 Keep personal details (names, dates of birth, roster, health history) out of this public repo. Run `npm test` before pushing.
+
+Shopping list shape: each list has a flat `items` array of `{ id, text, section }`. `section` is a key from `data/store-layout.json`, which holds the sections in store-walk order (separate butcher and grocer stops first, then Woolworths Woolooware Bay aisles). The app builds the groups from that file, so reordering the file reorders every list. Don't hand-group items in `shopping.json`. When the layout is confirmed against the real store, set `"verified": true` and add `aisle` numbers.
+
