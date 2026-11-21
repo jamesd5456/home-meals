@@ -264,6 +264,148 @@
     "short": "Tofu + salmon plate"
   },
   {
+    "id": "chicken-satay-stir-fry",
+    "title": "Chicken satay stir-fry with rice",
+    "type": "dinner",
+    "cuisine": "Thai-style",
+    "time": "30 min",
+    "serves": "4 adult serves plus a baby serve",
+    "allergens": [
+      "peanut"
+    ],
+    "iron": "Chicken thigh. Capsicum and broccoli add vitamin C to help absorption.",
+    "ingredients": [
+      "600 g chicken thigh fillets",
+      "1 cup basmati rice (dry)",
+      "1 red capsicum",
+      "2 carrots",
+      "300 g broccoli",
+      "1 cup frozen peas",
+      "1 brown onion",
+      "2 garlic cloves",
+      "1/3 cup smooth peanut butter",
+      "1 cup no-salt-added stock",
+      "1 tbsp low-salt soy sauce (adults only)",
+      "1 tsp ground coriander",
+      "1 tsp ground cumin",
+      "1 tbsp oil"
+    ],
+    "steps": [
+      "Cook the rice (1 cup rice, 2 cups water) and keep it warm. Slice the chicken into thin strips, slice the capsicum, carrots and onion, cut the broccoli into small florets and crush the garlic.",
+      "Heat the oil in a large pan. Brown the chicken for 5 minutes, then add the onion, carrots and garlic for 3 minutes.",
+      "Add the capsicum, broccoli, peas, coriander and cumin. Stir for 2 minutes.",
+      "Whisk the peanut butter into the stock, pour it in and simmer for 5 minutes until it coats everything. Take the baby's portion out now.",
+      "Stir the soy sauce into the adults' portions only. Serve over the rice."
+    ],
+    "baby": "Chicken cooked through and cut into thin strips or shredded, soft veg pieces she can grip, rice to scoop and satay sauce. No soy sauce for her.",
+    "notes": "Soy is in the adults' soy sauce only, so it isn't counted as a baby soy exposure. Leftovers reheat well (2 portions).",
+    "short": "Satay stir-fry"
+  },
+  {
+    "id": "salmon-potato-patties",
+    "title": "Salmon and potato patties with green beans and lemon-yoghurt dip",
+    "type": "dinner",
+    "cuisine": "Modern Australian",
+    "time": "35 min",
+    "serves": "About 10 patties (2 adults and baby, plus a few for lunch)",
+    "allergens": [
+      "fish",
+      "egg",
+      "dairy"
+    ],
+    "iron": "Canned salmon (soft bones included) for iron and omega-3.",
+    "ingredients": [
+      "2 x 210 g cans pink salmon (no added salt if available)",
+      "600 g potatoes",
+      "1 egg",
+      "1/3 cup rolled oats",
+      "1 lemon",
+      "1 tsp dried mixed herbs",
+      "300 g green beans",
+      "3/4 cup Greek yoghurt"
+    ],
+    "steps": [
+      "Peel and cube the potatoes, boil for 12 minutes and drain. Mash roughly. Drain the salmon and flake it, mashing the soft bones in.",
+      "Zest the lemon, then juice it. Mix the potato, salmon, egg, oats, the zest, half the juice and the herbs. Shape into patties.",
+      "Air fry at 190 C for 12 to 14 minutes, turning once, until golden.",
+      "Trim the green beans and steam for 5 minutes. Stir the rest of the lemon juice through the yoghurt for the dip."
+    ],
+    "baby": "Patties as finger-sized pieces, soft beans, dip on the side. Oats are not counted as a wheat exposure.",
+    "notes": "Leftover patties suit a lunch.",
+    "short": "Salmon patties"
+  },
+  {
+    "id": "moroccan-beef-chickpea-tagine",
+    "title": "Slow-cooker Moroccan beef and chickpea tagine with couscous",
+    "type": "dinner",
+    "cuisine": "Moroccan",
+    "time": "15 min prep (8 h low or 4 h high)",
+    "serves": "6 adult serves plus a baby serve (freeze 3)",
+    "allergens": [
+      "tree-nut",
+      "wheat"
+    ],
+    "iron": "Beef and chickpeas. Tomato adds vitamin C.",
+    "ingredients": [
+      "700 g diced beef",
+      "1 brown onion",
+      "2 garlic cloves",
+      "2 carrots",
+      "400 g sweet potato",
+      "1 x 400 g can chickpeas",
+      "1 x 400 g can crushed tomatoes",
+      "2 tbsp almond meal",
+      "2 tsp ground cumin",
+      "2 tsp ground coriander",
+      "1 tsp smoked paprika",
+      "1 tsp ground turmeric",
+      "1 cup no-salt-added stock",
+      "1 cup couscous",
+      "1 cup boiling no-salt-added stock, for the couscous"
+    ],
+    "steps": [
+      "Dice the onion, crush the garlic, chop the carrots and sweet potato into 2 cm pieces, and drain and rinse the chickpeas.",
+      "Put everything except the couscous in the slow cooker with the stock and stir. Cook for 8 hours on low (or 4 hours on high).",
+      "Before serving, pour the boiling stock over the couscous, cover for 5 minutes and fluff with a fork.",
+      "Cool within 2 hours, then freeze 3 portions flat in bags."
+    ],
+    "baby": "The beef falls apart, so serve it soft with sweet potato pieces, lightly squashed chickpeas and couscous clumps to scoop.",
+    "notes": "Freeze 3 portions for the night-shift run in December.",
+    "short": "Beef tagine"
+  },
+  {
+    "id": "lemon-garlic-prawn-linguine",
+    "title": "Lemon garlic prawn linguine with spinach and cherry tomatoes",
+    "type": "dinner",
+    "cuisine": "Italian",
+    "time": "15 min",
+    "serves": "2 adults plus a baby serve",
+    "allergens": [
+      "shellfish",
+      "wheat"
+    ],
+    "iron": "Prawn and spinach only, so iron is lower at this dinner. Lean on the breakfast.",
+    "ingredients": [
+      "200 g raw peeled prawns",
+      "200 g linguine",
+      "200 g cherry tomatoes",
+      "2 garlic cloves",
+      "1 lemon (zest and juice of 1/2)",
+      "80 g baby spinach",
+      "2 tbsp oil",
+      "1/2 cup no-salt-added stock"
+    ],
+    "steps": [
+      "Thaw the prawns in the fridge overnight. Boil the linguine to packet time. Pat the prawns dry, halve the tomatoes and crush the garlic.",
+      "Heat the oil and cook the prawns for 2 to 3 minutes until pink and cooked through, then add the garlic for 30 seconds.",
+      "Add the tomatoes, stock, and the zest and juice of half the lemon. Simmer for 3 minutes.",
+      "Stir in the spinach to wilt, then toss through the drained linguine."
+    ],
+    "baby": "Prawns minced finely or chopped small, never whole. Pasta cut short or in pieces she can grip.",
+    "notes": "Shellfish exposure.",
+    "short": "Prawn linguine"
+  },
+  {
     "id": "avocado-prawn-toast",
     "title": "Avocado toast fingers with minced prawn",
     "type": "breakfast",
@@ -452,6 +594,120 @@
     "baby": "Soft, fully cooked egg. Hummus spread thin.",
     "notes": "",
     "short": "Egg + hummus toast"
+  },
+  {
+    "id": "weetbix-banana-almond",
+    "title": "Weet-Bix with banana and almond meal",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "5 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "wheat",
+      "tree-nut"
+    ],
+    "iron": "Weet-Bix is fortified with iron (check the pack).",
+    "ingredients": [
+      "1 Weet-Bix",
+      "3 to 4 tbsp breast milk",
+      "1/2 banana",
+      "1 tsp almond meal"
+    ],
+    "steps": [
+      "Crumble the Weet-Bix into a bowl and soften with the breast milk.",
+      "Mash in the banana.",
+      "Stir in the almond meal until smooth."
+    ],
+    "baby": "Smooth and soft. No whole nuts or pieces.",
+    "notes": "",
+    "short": "Weet-Bix + almond"
+  },
+  {
+    "id": "cheese-spinach-omelette-strips",
+    "title": "Cheese and spinach omelette strips",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "10 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "egg",
+      "dairy"
+    ],
+    "iron": "Egg and spinach.",
+    "ingredients": [
+      "2 eggs",
+      "1 small handful baby spinach",
+      "2 tbsp grated cheese",
+      "1 tsp oil"
+    ],
+    "steps": [
+      "Chop the spinach finely and grate the cheese. Whisk the eggs with the spinach and cheese.",
+      "Cook in a lightly oiled small non-stick pan over medium heat until completely set through.",
+      "Cut into strips."
+    ],
+    "baby": "Make sure the egg is cooked through. Strips are easy to hold.",
+    "notes": "",
+    "short": "Cheese omelette strips"
+  },
+  {
+    "id": "spinach-ricotta-pancakes",
+    "title": "Spinach, egg and ricotta pancakes (batch)",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "20 min",
+    "serves": "About 8 small pancakes (freeze extras)",
+    "allergens": [
+      "egg",
+      "dairy",
+      "wheat"
+    ],
+    "iron": "Egg and spinach.",
+    "ingredients": [
+      "1 cup self-raising flour",
+      "2 eggs",
+      "1/2 cup ricotta (125 g)",
+      "1/2 cup cow's milk (used in cooking)",
+      "1 handful baby spinach"
+    ],
+    "steps": [
+      "Blitz the spinach with the milk until smooth.",
+      "Whisk in the eggs, ricotta and flour until just combined.",
+      "Cook small pancakes in a lightly oiled non-stick pan until golden on both sides.",
+      "Cool and freeze the extras flat."
+    ],
+    "baby": "Soft pancakes cut into strips. Cow's milk in cooking is fine; not as a main drink before 12 months.",
+    "notes": "Reheat frozen pancakes until warm, not hot.",
+    "short": "Ricotta pancakes"
+  },
+  {
+    "id": "almond-porridge-berries",
+    "title": "Porridge with almond meal, berries and ricotta",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "10 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "wheat",
+      "tree-nut",
+      "dairy"
+    ],
+    "iron": "Iron-fortified infant cereal.",
+    "ingredients": [
+      "1/3 cup rolled oats",
+      "1 tsp almond meal",
+      "2 tbsp frozen berries",
+      "1 tbsp iron-fortified infant cereal",
+      "1 tbsp ricotta",
+      "1/3 cup breast milk"
+    ],
+    "steps": [
+      "Mash the frozen berries after thawing them.",
+      "Cook the oats in the breast milk for 3 to 5 minutes until soft.",
+      "Stir in the infant cereal, almond meal, berries and ricotta."
+    ],
+    "baby": "Warm, not hot, and smooth enough for a spoon. Oats are not counted as a wheat exposure.",
+    "notes": "",
+    "short": "Almond porridge"
   },
   {
     "id": "hummus",

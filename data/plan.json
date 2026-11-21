@@ -1,5 +1,5 @@
 {
-  "note": "Week 1 is ready. More days are added as each fortnight is planned.",
+  "note": "Plan runs to Sun 29 Nov. More days are added as each week is planned.",
   "days": [
     {
       "date": "2026-11-18",
@@ -94,6 +94,30 @@
           "text": "Freeze 2 dahl portions in labelled containers, then add them on the Freezer page."
         }
       ]
+    },
+    {
+      "date": "2026-11-26",
+      "breakfast": "weetbix-banana-almond",
+      "dinner": "chicken-satay-stir-fry",
+      "note": "Satay leftovers make a good lunch."
+    },
+    {
+      "date": "2026-11-27",
+      "breakfast": "cheese-spinach-omelette-strips",
+      "dinner": "salmon-potato-patties",
+      "note": "Patties are quick in the air fryer."
+    },
+    {
+      "date": "2026-11-28",
+      "breakfast": "spinach-ricotta-pancakes",
+      "dinner": "moroccan-beef-chickpea-tagine",
+      "note": "Start the tagine in the slow cooker in the morning. Freeze 3 portions once cool, and freeze the extra pancakes."
+    },
+    {
+      "date": "2026-11-29",
+      "breakfast": "almond-porridge-berries",
+      "dinner": "lemon-garlic-prawn-linguine",
+      "note": "Move the prawns to the fridge the night before to thaw."
     }
   ]
 }

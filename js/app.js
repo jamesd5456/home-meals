@@ -654,10 +654,10 @@ function tonightCard(day) {
     h("h3", null, fmtDate(day.date), " ", shiftChip(day.date)),
     advice ? h("p", { class: "advice" }, advice) : null,
     day.jamesMeal ? h("p", null, h("span", { class: "label" }, "Your meal"), day.jamesMeal) : null,
+    breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
     dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
     dinner ? h("p", { class: "note" }, `${dinner.time} | ${dinner.serves}`) : null,
     dinner && dinner.baby ? h("div", { class: "baby" }, h("strong", null, "Baby version: "), dinner.baby) : null,
-    breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
     chips(dayAllergens(day)),
     prepList(groupPrep(day.prep).filter((g) => g.when !== "night-before")),
     day.note ? h("p", { class: "note" }, day.note) : null
@@ -670,8 +670,8 @@ function tomorrowCard(day) {
     "article",
     { class: "card" },
     h("h3", null, "Tomorrow: ", fmtDate(day.date), " ", shiftChip(day.date)),
-    day.dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
     day.breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
+    day.dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
     prepList(setup)
   );
 }
@@ -729,11 +729,11 @@ function viewCalendar() {
             " ",
             shiftChip(iso)
           ),
-          p && p.dinner
-            ? h("div", { class: "cal-meal" }, h("span", { class: "label" }, "Dinner"), recipeLink(p.dinner, true))
-            : null,
           p && p.breakfast
             ? h("div", { class: "cal-meal" }, h("span", { class: "label" }, "Baby"), recipeLink(p.breakfast, true))
+            : null,
+          p && p.dinner
+            ? h("div", { class: "cal-meal" }, h("span", { class: "label" }, "Dinner"), recipeLink(p.dinner, true))
             : null
         )
       );
