@@ -259,8 +259,8 @@
     "title": "Shopping list 2",
     "buy": "Tue 24 Nov",
     "buyDate": "2026-11-24",
-    "covers": "Thu 26 to Sun 29 Nov (Mon 30 Nov onward to follow once those recipes are written)",
-    "estimate": "Rough estimate only, not live Woolworths prices: about $60 to $70 (meat and seafood about $24, canned salmon about $9, fresh produce about $20, pantry and dairy about $11). Check it in the Woolworths app and send me the total.",
+    "covers": "Mon 23 to Sun 29 Nov",
+    "estimate": "Not priced yet. Rough guess about $85 to $100 for what's not already at home. This covers every dish cooked from Mon 23 to Sun 29 Nov (the Mon 23 ragu was cooked on the 22nd, so it isn't included). Some Tue 24 and Wed 25 items overlap what list 1 bought, so just tick those off.",
     "items": [
       {
         "id": "chicken-thigh-600",
@@ -271,6 +271,51 @@
         "id": "beef-diced-700",
         "text": "Diced beef, 700 g (tagine)",
         "section": "meat"
+      },
+      {
+        "id": "prawns-450",
+        "text": "Raw peeled prawns, frozen, 450 g (fried rice 250 g, linguine 200 g; about 200 g may be at home)",
+        "section": "frozen"
+      },
+      {
+        "id": "berries-2tbsp",
+        "text": "Frozen mixed berries, 2 tbsp (almond porridge)",
+        "section": "frozen"
+      },
+      {
+        "id": "peas-1cup",
+        "text": "Frozen peas, 1 cup (satay)",
+        "section": "frozen"
+      },
+      {
+        "id": "peas-corn-1cup",
+        "text": "Frozen peas and corn, 1 cup (fried rice)",
+        "section": "frozen"
+      },
+      {
+        "id": "onions-4",
+        "text": "Brown onions, 4 (fried rice 1, dahl 1, satay 1, tagine 1)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "garlic-11",
+        "text": "Garlic, 11 cloves (fried rice 2, dahl 3, satay 2, tagine 2, linguine 2)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "ginger-2tsp",
+        "text": "Ginger, 2 tsp grated (dahl)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "carrots-6",
+        "text": "Carrots, 6 (fried rice 2, satay 2, tagine 2)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "capsicum-1",
+        "text": "Red capsicum, 1 (satay)",
+        "section": "fruit-grocer"
       },
       {
         "id": "broccoli-300",
@@ -288,13 +333,8 @@
         "section": "fruit-grocer"
       },
       {
-        "id": "onions-2",
-        "text": "Brown onions, 2 (satay 1, tagine 1)",
-        "section": "fruit-grocer"
-      },
-      {
-        "id": "garlic-6",
-        "text": "Garlic, 6 cloves (satay 2, tagine 2, linguine 2)",
+        "id": "potatoes-600",
+        "text": "Potatoes, 600 g (salmon patties)",
         "section": "fruit-grocer"
       },
       {
@@ -303,14 +343,54 @@
         "section": "fruit-grocer"
       },
       {
-        "id": "lemons-2",
-        "text": "Lemons, 2 (patties 1, linguine 1/2, dip uses the rest of the patties lemon)",
+        "id": "lemons-3",
+        "text": "Lemons, 3 (dahl 1, hummus 1/2, patties 1, linguine 1/2)",
         "section": "fruit-grocer"
+      },
+      {
+        "id": "spinach",
+        "text": "Baby spinach (dahl 3 handfuls, linguine 80 g, omelette 1 small handful, pancakes 1 handful)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "banana-1",
+        "text": "Banana, 1 (1/2 needed, Weet-Bix breakfast)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "apple-1",
+        "text": "Apple, 1 (1/4 needed, oat porridge)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "eggs-9",
+        "text": "Eggs, 9 (fried rice 3, scrambled egg 1, patties 1, omelette 2, pancakes 2)",
+        "section": "deli"
+      },
+      {
+        "id": "tofu-200",
+        "text": "Firm tofu, 200 g (fried rice)",
+        "section": "dairy"
       },
       {
         "id": "ricotta-250",
         "text": "Ricotta, 125 g plus 1 tbsp (pancakes, porridge; buy the smallest tub, about half will be spare)",
         "section": "dairy"
+      },
+      {
+        "id": "yoghurt",
+        "text": "Natural yoghurt, 3/4 cup for the patties dip plus a spoonful per serve of dahl (buy the smallest tub)",
+        "section": "dairy"
+      },
+      {
+        "id": "milk-half-cup",
+        "text": "Cow's milk, 1/2 cup (pancakes; buy the smallest bottle)",
+        "section": "dairy"
+      },
+      {
+        "id": "bread-2",
+        "text": "Wholemeal bread, 2 slices (baked beans toast 1, scrambled egg toast 1; buy the smallest loaf)",
+        "section": "bakery"
       },
       {
         "id": "linguine-200",
@@ -328,78 +408,63 @@
         "section": "aisle-9"
       },
       {
-        "id": "crushed-tomatoes-1",
-        "text": "Canned crushed tomatoes, 1 x 400 g (tagine)",
+        "id": "crushed-tomatoes-2",
+        "text": "Canned crushed tomatoes, 2 x 400 g (dahl 1, tagine 1)",
         "section": "aisle-9"
       },
       {
-        "id": "h-stock-875",
-        "text": "No-salt-added stock, 875 ml made up from the concentrate (satay 1 cup, tagine 2 cups, linguine 1/2 cup)",
+        "id": "h-stock",
+        "text": "No-salt-added stock, 1.875 L made up from the concentrate (dahl 1 L, tagine 500 ml, satay 250 ml, linguine 125 ml)",
         "section": "home-check"
       },
       {
-        "id": "h-rice-1cup",
-        "text": "Basmati rice, 1 cup dry (satay)",
+        "id": "h-rice",
+        "text": "Basmati rice, 4 1/2 cups dry (fried rice 1 1/2, dahl 2, satay 1)",
         "section": "home-check"
       },
       {
-        "id": "h-pb-third",
-        "text": "Smooth peanut butter, 1/3 cup (satay)",
-        "section": "home-check"
-      },
-      {
-        "id": "h-peas-1cup",
-        "text": "Frozen peas, 1 cup (satay)",
-        "section": "home-check"
-      },
-      {
-        "id": "h-soy",
-        "text": "Low-salt soy sauce, 1 tbsp (satay, adults only)",
-        "section": "home-check"
-      },
-      {
-        "id": "h-spices",
-        "text": "Ground cumin 3 tsp, ground coriander 3 tsp, smoked paprika 1 tsp, ground turmeric 1 tsp, dried mixed herbs 1 tsp (satay, tagine, patties)",
-        "section": "home-check"
-      },
-      {
-        "id": "h-oil",
-        "text": "Oil, about 3 tbsp plus a little for the omelette and pancake pans",
-        "section": "home-check"
-      },
-      {
-        "id": "h-oats",
-        "text": "Rolled oats, 1/3 cup for the patties and 1/3 cup for the porridge",
-        "section": "home-check"
-      },
-      {
-        "id": "h-almond-meal",
-        "text": "Almond meal, 2 tbsp tagine plus 1 tsp at each of two breakfasts",
+        "id": "h-red-lentils",
+        "text": "Red lentils, 300 g (dahl)",
         "section": "home-check"
       },
       {
         "id": "h-chickpeas",
-        "text": "Canned chickpeas, 1 x 400 g (tagine)",
+        "text": "Canned chickpeas, 2 x 400 g (hummus 1, tagine 1)",
         "section": "home-check"
       },
       {
-        "id": "h-veg",
-        "text": "Carrots 4 (satay 2, tagine 2), red capsicum 1 (satay), potatoes 600 g (patties), baby spinach about 80 g for the linguine plus small handfuls for the omelette and pancakes",
+        "id": "h-baked-beans",
+        "text": "No-salt-added baked beans, 3 tbsp (baked beans toast)",
         "section": "home-check"
       },
       {
-        "id": "h-eggs",
-        "text": "Eggs, about 5 (omelette 2, patties 1, pancakes 2)",
+        "id": "h-tahini",
+        "text": "Tahini, 2 tbsp (hummus)",
         "section": "home-check"
       },
       {
-        "id": "h-prawns",
-        "text": "Frozen raw peeled prawns, 200 g (linguine; thaw in the fridge the night before)",
+        "id": "h-peanut-butter",
+        "text": "Smooth peanut butter, 1/3 cup plus 1/2 tsp (satay, oat porridge)",
         "section": "home-check"
       },
       {
-        "id": "h-dairy",
-        "text": "Greek yoghurt 3/4 cup (patties dip), grated cheese 2 tbsp (omelette), cow's milk 1/2 cup (pancakes)",
+        "id": "h-almond-meal",
+        "text": "Almond meal, 2 tbsp plus 2 tsp (tagine 2 tbsp, Weet-Bix breakfast 1 tsp, almond porridge 1 tsp)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-oats",
+        "text": "Rolled oats, 3 tbsp plus 2/3 cup (oat porridge 3 tbsp, patties 1/3 cup, almond porridge 1/3 cup)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-infant-cereal",
+        "text": "Iron-fortified infant cereal, 2 tbsp (oat porridge 1 tbsp, almond porridge 1 tbsp)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-weetbix",
+        "text": "Weet-Bix, 1 (Weet-Bix breakfast)",
         "section": "home-check"
       },
       {
@@ -408,10 +473,64 @@
         "section": "home-check"
       },
       {
-        "id": "h-breakfast",
-        "text": "Weet-Bix 1, banana 1/2, frozen berries 2 tbsp, iron-fortified infant cereal 1 tbsp",
+        "id": "h-cheese",
+        "text": "Tasty cheese, 3 tbsp (baked beans toast 1 tbsp, omelette 2 tbsp)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-soy",
+        "text": "Low-salt soy sauce, 1 tbsp for the satay plus a little at the table with the fried rice (adults only)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-cumin",
+        "text": "Ground cumin, 5 tsp (dahl 2, satay 1, tagine 2)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-coriander",
+        "text": "Ground coriander, 3 tsp (satay 1, tagine 2)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-turmeric",
+        "text": "Ground turmeric, 3 tsp (dahl 2, tagine 1)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-garam-masala",
+        "text": "Garam masala, 1 tsp (dahl)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-paprika",
+        "text": "Smoked paprika, 1 tsp (tagine)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-mixed-herbs",
+        "text": "Dried mixed herbs, 1 tsp (patties)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-oil",
+        "text": "Oil, 5 tbsp (fried rice 1, dahl 1, satay 1, linguine 2) plus 1 tsp for the omelette",
+        "section": "home-check"
+      },
+      {
+        "id": "h-olive-oil",
+        "text": "Olive oil, 2 tbsp (hummus)",
         "section": "home-check"
       }
     ]
+  },
+  {
+    "id": "list-3",
+    "title": "Shopping list 3",
+    "buy": "Tue 1 Dec",
+    "buyDate": "2026-12-01",
+    "covers": "Mon 30 Nov to Sun 6 Dec",
+    "estimate": "Not built yet. This list is generated from the recipes for Mon 30 Nov to Sun 6 Dec, which haven't been written. Once they are, it will list only what they need.",
+    "items": []
   }
 ]

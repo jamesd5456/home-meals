@@ -596,13 +596,21 @@ const FORECAST_URL =
 
 async function loadWeather() {
   try {
+    // show the last forecast straight away, then refresh it
+    const cached = JSON.parse(localStorage.getItem("wxCache") || "null");
+    if (cached && cached.data) state.weather = cached.data;
+  } catch (e) {}
+  try {
     const r = await fetch(FORECAST_URL);
     if (!r.ok) throw new Error(r.status);
     state.weather = parseForecast(await r.json());
-    route(false);
+    try {
+      localStorage.setItem("wxCache", JSON.stringify({ data: state.weather }));
+    } catch (e) {}
   } catch (e) {
-    state.weather = {}; // no forecast: the site just shows no weather notes
+    return; // no forecast: keep whatever we have, or show no weather notes
   }
+  if (state.plan.length) route(false);
 }
 
 function weatherChip(iso) {
@@ -1591,6 +1599,7 @@ function route(scrollTop) {
 /* ---------- start ---------- */
 
 async function init() {
+  loadWeather();
   try {
     const [recipes, plan, shopping, layout] = await Promise.all([
       loadJSON("data/recipes.json"),
@@ -1616,7 +1625,6 @@ async function init() {
   updateNav();
   window.addEventListener("hashchange", () => route(true));
   route(false);
-  loadWeather();
 }
 
 init();
