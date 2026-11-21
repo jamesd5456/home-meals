@@ -160,3 +160,16 @@ ul.ticks li .qty .unit { max-width: none; }
   ul.ticks li .qty { margin-left: 34px; }
   ul.ticks li > button { margin-left: auto; }
 }
+
+/* weather */
+.wx { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: 0.8rem; font-weight: 500; vertical-align: middle; }
+.wx-hot.wx { background: #fde3d2; color: #8a3b00; }
+.wx-cold.wx { background: #dbeafe; color: #1e4a85; }
+.wx-note.wx-hot { color: #b0501a; }
+.wx-note.wx-cold { color: #2a6bb8; }
+@media (prefers-color-scheme: dark) {
+  .wx-hot.wx { background: #4a2a14; color: #ffd2b0; }
+  .wx-cold.wx { background: #1b2f4d; color: #bcd6fb; }
+  .wx-note.wx-hot { color: #ffb88a; }
+  .wx-note.wx-cold { color: #9cc4f5; }
+}

@@ -3,6 +3,9 @@ import {
   addDaysISO,
   ageDays,
   buildGroups,
+  classifyNight,
+  parseForecast,
+  suggestSwap,
   classifyExtra,
   compareTicked,
   currentListIndex,
@@ -47,6 +50,7 @@ const state = {
   spendError: "",
   spendOffset: 0,
   recipeFilter: { type: "all", q: "" },
+  weather: {},
 };
 
 const ALLERGENS = {
@@ -585,14 +589,59 @@ function recipeLink(id, short) {
   return h("a", { href: `#/recipe/${id}` }, short ? r.short || r.title : r.title);
 }
 
+/* ---------- weather (Sydney forecast, Open-Meteo; hot above 27 C, cold below 15 C) ---------- */
+
+const FORECAST_URL =
+  "https://api.open-meteo.com/v1/forecast?latitude=-33.87&longitude=151.21&daily=temperature_2m_max&hourly=temperature_2m&timezone=Australia%2FSydney&forecast_days=7";
+
+async function loadWeather() {
+  try {
+    const r = await fetch(FORECAST_URL);
+    if (!r.ok) throw new Error(r.status);
+    state.weather = parseForecast(await r.json());
+    route(false);
+  } catch (e) {
+    state.weather = {}; // no forecast: the site just shows no weather notes
+  }
+}
+
+function weatherChip(iso) {
+  const w = state.weather[iso];
+  const kind = classifyNight(w);
+  if (!kind) return null;
+  return h(
+    "span",
+    { class: `wx wx-${kind}`, title: "Sydney forecast" },
+    kind === "hot" ? `Hot night ${Math.round(w.max)}\u00b0` : `Cool night ${Math.round(w.evening)}\u00b0`
+  );
+}
+
+// Chip plus a swap prompt when the dish is the wrong temperature for the forecast. The site only suggests.
+function weatherNote(iso) {
+  const w = state.weather[iso];
+  const kind = classifyNight(w);
+  if (!kind) return null;
+  const day = state.plan.find((d) => d.date === iso);
+  const dish = day && day.dinner && state.byId[day.dinner];
+  const swap = suggestSwap(state.plan, state.byId, iso, kind);
+  const line = kind === "hot" ? "Hot night forecast" : "Cool night forecast";
+  const note = swap
+    ? `${line}: swap with ${fmtDate(swap.date)} (${state.byId[swap.dinner].title})? Tell Claude and the shopping list gets rebuilt.`
+    : dish && dish.temp === (kind === "hot" ? "hot" : "cool")
+      ? `${line}, and no better-suited dinner is planned in the next week.`
+      : null;
+  return note ? h("p", { class: `note wx-note wx-${kind}` }, note) : null;
+}
+
 function dayCard(day) {
   return h(
     "article",
     { class: "card" },
-    h("h3", null, fmtDate(day.date), " ", shiftChip(day.date)),
+    h("h3", null, fmtDate(day.date), " ", shiftChip(day.date), " ", weatherChip(day.date)),
     day.breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
     day.dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
     chips(dayAllergens(day)),
+    weatherNote(day.date),
     day.note ? h("p", { class: "note" }, day.note) : null
   );
 }
@@ -651,7 +700,7 @@ function tonightCard(day) {
   return h(
     "article",
     { class: "card" },
-    h("h3", null, fmtDate(day.date), " ", shiftChip(day.date)),
+    h("h3", null, fmtDate(day.date), " ", shiftChip(day.date), " ", weatherChip(day.date)),
     advice ? h("p", { class: "advice" }, advice) : null,
     day.jamesMeal ? h("p", null, h("span", { class: "label" }, "Your meal"), day.jamesMeal) : null,
     breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
@@ -660,6 +709,7 @@ function tonightCard(day) {
     dinner && dinner.baby ? h("div", { class: "baby" }, h("strong", null, "Baby version: "), dinner.baby) : null,
     chips(dayAllergens(day)),
     prepList(groupPrep(day.prep).filter((g) => g.when !== "night-before")),
+    weatherNote(day.date),
     day.note ? h("p", { class: "note" }, day.note) : null
   );
 }
@@ -669,9 +719,10 @@ function tomorrowCard(day) {
   return h(
     "article",
     { class: "card" },
-    h("h3", null, "Tomorrow: ", fmtDate(day.date), " ", shiftChip(day.date)),
+    h("h3", null, "Tomorrow: ", fmtDate(day.date), " ", shiftChip(day.date), " ", weatherChip(day.date)),
     day.breakfast ? h("p", null, h("span", { class: "label" }, "Baby breakfast"), recipeLink(day.breakfast)) : null,
     day.dinner ? h("p", null, h("span", { class: "label" }, "Dinner"), recipeLink(day.dinner)) : null,
+    weatherNote(day.date),
     prepList(setup)
   );
 }
@@ -727,7 +778,9 @@ function viewCalendar() {
             { class: "cal-date" },
             dt.toLocaleDateString("en-AU", { weekday: "short", day: "numeric" }),
             " ",
-            shiftChip(iso)
+            shiftChip(iso),
+            " ",
+            weatherChip(iso)
           ),
           p && p.breakfast
             ? h("div", { class: "cal-meal" }, h("span", { class: "label" }, "Baby"), recipeLink(p.breakfast, true))
@@ -1563,6 +1616,7 @@ async function init() {
   updateNav();
   window.addEventListener("hashchange", () => route(true));
   route(false);
+  loadWeather();
 }
 
 init();

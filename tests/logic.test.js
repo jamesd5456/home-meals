@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   addDaysISO, diffDays, fortnightFor, summariseSpend, nightRuns, nightRunStatus,
   freezerSummary, ageDays, shiftAdvice, groupPrep,
+  classifyNight, parseForecast, suggestSwap,
   parseQty, currentListIndex, classifyExtra, sectionForAisle, buildGroups, isDoubleTap, compareTicked,
 } from "../js/logic.js";
 
@@ -143,3 +144,26 @@ const ticked = [
 assert.deepEqual(ticked.sort(compareTicked).map((x) => x.id), ["last", "mid", "first", "old2", "old"]);
 
 console.log("logic tests passed");
+
+// weather: hot above 27 (daily max), cold below 15 (6pm)
+assert.equal(classifyNight({ max: 27, evening: 20 }), null);
+assert.equal(classifyNight({ max: 27.1, evening: 20 }), "hot");
+assert.equal(classifyNight({ max: 20, evening: 15 }), null);
+assert.equal(classifyNight({ max: 20, evening: 14.9 }), "cold");
+assert.equal(classifyNight(undefined), null);
+const fc = parseForecast({
+  daily: { time: ["2026-11-22", "2026-11-23"], temperature_2m_max: [31.2, 22] },
+  hourly: { time: ["2026-11-22T17:00", "2026-11-22T18:00", "2026-11-23T18:00"], temperature_2m: [29, 28.5, 13] },
+});
+assert.deepEqual(fc, { "2026-11-22": { max: 31.2, evening: 28.5 }, "2026-11-23": { max: 22, evening: 13 } });
+assert.deepEqual(parseForecast(null), {});
+const wr = { a: { temp: "hot" }, b: { temp: "cool" }, c: { temp: "either" }, d: { temp: "cool" } };
+const wp = [
+  { date: "2026-11-21", dinner: "b" }, { date: "2026-11-22", dinner: "a" }, { date: "2026-11-23", dinner: "c" },
+  { date: "2026-11-24", dinner: "d" }, { date: "2026-11-25", dinner: "b" }, { date: "2026-12-10", dinner: "b" },
+];
+assert.equal(suggestSwap(wp, wr, "2026-11-22", "hot").date, "2026-11-24"); // skips the past day and the "either" dish
+assert.equal(suggestSwap(wp, wr, "2026-11-23", "hot"), null); // an either dish needs no swap
+assert.equal(suggestSwap(wp, wr, "2026-11-24", "cold"), null); // no hot dish ahead
+assert.equal(suggestSwap(wp, wr, "2026-11-21", "cold").date, "2026-11-22"); // cool dish on a cold night
+console.log("weather tests passed");

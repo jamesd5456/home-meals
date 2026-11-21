@@ -39,7 +39,8 @@
     ],
     "baby": "Shred the chicken or cut into soft strips, lightly squash the chickpeas, and keep the sauce thick so it clings. Serve with rice she can scoop or toast fingers. No added salt.",
     "notes": "Loved it. A batch gives about 5 adult serves plus a baby serve, so after dinner for 2 adults and baby there are about 3 adult serves left. Fridge for up to 3 days, or freeze for longer.",
-    "short": "Chicken korma"
+    "short": "Chicken korma",
+    "temp": "hot"
   },
   {
     "id": "beef-black-bean-tacos",
@@ -80,7 +81,8 @@
     ],
     "baby": "Soft strips of mince with squashed black beans, mashed avocado on tortilla strips, and a little melted cheese. No added salt.",
     "notes": "Leftover mince keeps in the fridge for up to 3 days.",
-    "short": "Beef tacos"
+    "short": "Beef tacos",
+    "temp": "either"
   },
   {
     "id": "salmon-tray-bake",
@@ -114,7 +116,8 @@
     ],
     "baby": "Flake the salmon and check carefully for bones. Squash the potato and steam the broccoli florets a little longer so they are soft. A spoonful of the drizzle on the side.",
     "notes": "Not ideal for reheating, so eat it fresh.",
-    "short": "Salmon bake"
+    "short": "Salmon bake",
+    "temp": "either"
   },
   {
     "id": "slow-cooker-beef-lentil-ragu",
@@ -150,7 +153,8 @@
     ],
     "baby": "Pasta shapes she can grip, with a thick ragu that clings. Squash any big lentils. Cheese is optional. No added salt.",
     "notes": "Fridge for up to 3 days. It also freezes well.",
-    "short": "Beef ragu"
+    "short": "Beef ragu",
+    "temp": "hot"
   },
   {
     "id": "prawn-tofu-egg-fried-rice",
@@ -188,7 +192,8 @@
     ],
     "baby": "Serve her portion before any soy sauce goes in. Chop the prawns finely, never whole pieces, and use soft tofu cubes. Rice clumps are easy to pick up.",
     "notes": "Cool leftover rice quickly and refrigerate within an hour. Reheat once until steaming hot.",
-    "short": "Prawn fried rice"
+    "short": "Prawn fried rice",
+    "temp": "either"
   },
   {
     "id": "red-lentil-dahl",
@@ -228,7 +233,8 @@
     ],
     "baby": "Thick dahl loaded onto toast fingers or a pre-loaded spoon, with yoghurt on the side. No added salt.",
     "notes": "Fridge for up to 3 days. Frozen portions are handy for busy days.",
-    "short": "Lentil dahl"
+    "short": "Lentil dahl",
+    "temp": "hot"
   },
   {
     "id": "catch-up-plate",
@@ -261,7 +267,8 @@
     ],
     "baby": "Tofu cubes soft enough to squash between fingers. Mashed salmon on toast fingers. Dip on the side.",
     "notes": "Optional. Offered before the plan starts so the less frequent foods do not go much beyond a week.",
-    "short": "Tofu + salmon plate"
+    "short": "Tofu + salmon plate",
+    "temp": "cool"
   },
   {
     "id": "chicken-satay-stir-fry",
@@ -299,7 +306,8 @@
     ],
     "baby": "Chicken cooked through and cut into thin strips or shredded, soft veg pieces she can grip, rice to scoop and satay sauce. No soy sauce for her.",
     "notes": "Soy is in the adults' soy sauce only, so it isn't counted as a baby soy exposure. Leftovers reheat well (2 portions).",
-    "short": "Satay stir-fry"
+    "short": "Satay stir-fry",
+    "temp": "either"
   },
   {
     "id": "salmon-potato-patties",
@@ -332,7 +340,8 @@
     ],
     "baby": "Patties as finger-sized pieces, soft beans, dip on the side. Oats are not counted as a wheat exposure.",
     "notes": "Leftover patties suit a lunch.",
-    "short": "Salmon patties"
+    "short": "Salmon patties",
+    "temp": "cool"
   },
   {
     "id": "moroccan-beef-chickpea-tagine",
@@ -371,7 +380,8 @@
     ],
     "baby": "The beef falls apart, so serve it soft with sweet potato pieces, lightly squashed chickpeas and couscous clumps to scoop.",
     "notes": "Freeze 3 portions for the night-shift run in December.",
-    "short": "Beef tagine"
+    "short": "Beef tagine",
+    "temp": "hot"
   },
   {
     "id": "lemon-garlic-prawn-linguine",
@@ -403,7 +413,8 @@
     ],
     "baby": "Prawns minced finely or chopped small, never whole. Pasta cut short or in pieces she can grip.",
     "notes": "Shellfish exposure.",
-    "short": "Prawn linguine"
+    "short": "Prawn linguine",
+    "temp": "either"
   },
   {
     "id": "avocado-prawn-toast",

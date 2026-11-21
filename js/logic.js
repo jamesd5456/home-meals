@@ -238,3 +238,57 @@ export function isDoubleTap(prev, cur, windowMs = 450, slopPx = 30) {
 export function compareTicked(a, b) {
   return (b.t || 0) - (a.t || 0) || a.o - b.o;
 }
+
+/* ---------- weather ---------- */
+
+// James's thresholds: above 27 C is hot, below 15 C is cold.
+export const HOT_ABOVE = 27;
+export const COLD_BELOW = 15;
+
+// Hot is judged on the day's forecast maximum, cold on the 6pm (dinner-time) temperature.
+export function classifyNight(w) {
+  if (!w) return null;
+  if (typeof w.max === "number" && w.max > HOT_ABOVE) return "hot";
+  if (typeof w.evening === "number" && w.evening < COLD_BELOW) return "cold";
+  return null;
+}
+
+// Turns an Open-Meteo response (daily max, hourly temperature) into { "YYYY-MM-DD": { max, evening } }.
+export function parseForecast(json) {
+  const out = {};
+  const d = json && json.daily;
+  if (d && Array.isArray(d.time) && Array.isArray(d.temperature_2m_max)) {
+    d.time.forEach((iso, i) => {
+      const v = d.temperature_2m_max[i];
+      if (typeof v === "number") out[iso] = { max: v };
+    });
+  }
+  const hr = json && json.hourly;
+  if (hr && Array.isArray(hr.time) && Array.isArray(hr.temperature_2m)) {
+    hr.time.forEach((t, i) => {
+      const v = hr.temperature_2m[i];
+      if (typeof t === "string" && t.endsWith("T18:00") && typeof v === "number") {
+        const iso = t.slice(0, 10);
+        out[iso] = Object.assign(out[iso] || {}, { evening: v });
+      }
+    });
+  }
+  return out;
+}
+
+// A hot dish on a hot night should swap for a cool dish; a cool dish on a cold night for a hot one.
+// Looks at the upcoming plan days (within `horizon` days, never past days) and returns the plan day to swap with.
+export function suggestSwap(plan, byId, iso, kind, horizon = 7) {
+  const day = plan.find((p) => p.date === iso);
+  const dish = day && day.dinner && byId[day.dinner];
+  if (!dish) return null;
+  const want = kind === "hot" ? "cool" : "hot";
+  const bad = kind === "hot" ? "hot" : "cool";
+  if (dish.temp !== bad) return null;
+  const cands = plan.filter((p) => {
+    if (p.date === iso || p.date < iso || p.date > addDaysISO(iso, horizon) || !p.dinner) return false;
+    const r = byId[p.dinner];
+    return r && r.temp === want;
+  });
+  return cands.length ? cands[0] : null;
+}
