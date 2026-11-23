@@ -164,11 +164,10 @@
     "time": "30 min (plus cooling the rice)",
     "serves": "5 to 6 serves, with lunch leftovers",
     "allergens": [
-      "shellfish",
       "soy",
       "egg"
     ],
-    "iron": "Egg, tofu and prawn each add some iron. Peas and capsicum or lemon on the side add vitamin C.",
+    "iron": "Egg and tofu add some iron for the baby (prawns are for the adults only). Peas and capsicum or lemon on the side add vitamin C.",
     "ingredients": [
       "1 1/2 cups basmati rice (dry)",
       "1 tbsp oil",
@@ -186,12 +185,13 @@
       "Cut the tofu into small cubes. Fry it in 2 teaspoons of oil until golden. Set aside.",
       "Beat the eggs. Scramble them in the pan until just set, then break up and set aside.",
       "Finely dice the onion and carrots and crush the garlic. Stir-fry the onion and carrot for 4 minutes, then add the garlic for 30 seconds.",
-      "Chop the thawed prawns. Add them and cook for about 3 minutes until pink and cooked through.",
       "Add the peas, corn and rice. Stir-fry for 4 to 5 minutes until hot.",
-      "Fold in the tofu and egg. Adults add soy sauce at the table."
+      "Fold in the tofu and egg. Take the baby's portion out now, before any prawns or soy sauce.",
+      "Chop the thawed prawns. Cook them in a separate small pan with its own utensils for about 3 minutes until pink and cooked through. Cook 3 extra prawns whole in the same pan, then cool them and keep them in the fridge for tomorrow's breakfast.",
+      "Stir the chopped prawns into the adults' bowls. Adults add soy sauce at the table."
     ],
-    "baby": "Serve her portion before any soy sauce goes in. Chop the prawns finely, never whole pieces, and use soft tofu cubes. Rice clumps are easy to pick up.",
-    "notes": "Cool leftover rice quickly and refrigerate within an hour. Reheat once until steaming hot.",
+    "baby": "Her portion has no prawns and no soy sauce. Use soft tofu cubes and rice clumps that are easy to pick up.",
+    "notes": "Prawns are for the adults only, so cook them in a separate pan with separate utensils. Cool leftover rice quickly and refrigerate within an hour. Reheat once until steaming hot.",
     "short": "Prawn fried rice",
     "temp": "either"
   },
@@ -203,7 +203,8 @@
     "time": "35 min",
     "serves": "6 serves (freeze 2)",
     "allergens": [
-      "dairy"
+      "dairy",
+      "sesame"
     ],
     "iron": "Lentils and spinach. The lemon juice adds vitamin C to help absorption.",
     "ingredients": [
@@ -220,7 +221,8 @@
       "3 handfuls baby spinach",
       "1 lemon",
       "2 cups basmati rice (dry), to serve",
-      "Natural yoghurt, to serve"
+      "Natural yoghurt, to serve",
+      "1 tsp tahini, for the baby's yoghurt"
     ],
     "steps": [
       "Dice the onion. Heat the oil and cook the onion for 5 minutes.",
@@ -228,10 +230,10 @@
       "Rinse the lentils. Add the lentils, tomatoes and stock. Simmer for 20 to 25 minutes, stirring and adding a splash more stock if needed, until the lentils are soft and the dahl is thick.",
       "Cook the rice while the dahl simmers.",
       "Juice the lemon. Stir in the spinach and lemon juice until the spinach wilts.",
-      "Serve with rice and a spoonful of yoghurt.",
+      "Serve with rice and a spoonful of yoghurt. Stir 1 tsp tahini into the baby's yoghurt.",
       "Cool, then freeze 2 portions in single-serve containers."
     ],
-    "baby": "Thick dahl loaded onto toast fingers or a pre-loaded spoon, with yoghurt on the side. No added salt.",
+    "baby": "Thick dahl loaded onto toast fingers or a pre-loaded spoon, with her yoghurt (tahini stirred in) on the side. No added salt.",
     "notes": "Fridge for up to 3 days. Frozen portions are handy for busy days.",
     "short": "Lentil dahl",
     "temp": "hot"
@@ -391,12 +393,11 @@
     "time": "15 min",
     "serves": "2 adults plus a baby serve",
     "allergens": [
-      "shellfish",
       "wheat"
     ],
-    "iron": "Prawn and spinach only, so iron is lower at this dinner. Lean on the breakfast.",
+    "iron": "Spinach only in the baby's portion, so iron is lower at this dinner. Lean on the breakfast.",
     "ingredients": [
-      "200 g raw peeled prawns",
+      "200 g raw peeled prawns, for the adults' bowls",
       "200 g linguine",
       "200 g cherry tomatoes",
       "2 garlic cloves",
@@ -407,12 +408,12 @@
     ],
     "steps": [
       "Thaw the prawns in the fridge overnight. Boil the linguine to packet time. Pat the prawns dry, halve the tomatoes and crush the garlic.",
-      "Heat the oil and cook the prawns for 2 to 3 minutes until pink and cooked through, then add the garlic for 30 seconds.",
-      "Add the tomatoes, stock, and the zest and juice of half the lemon. Simmer for 3 minutes.",
-      "Stir in the spinach to wilt, then toss through the drained linguine."
+      "Heat 1 tablespoon of the oil, add the garlic for 30 seconds, then the tomatoes, stock, and the zest and juice of half the lemon. Simmer for 3 minutes.",
+      "Stir in the spinach to wilt, then toss through the drained linguine. Take the baby's portion out now, before the prawns.",
+      "Heat the other tablespoon of oil in a separate small pan with its own utensils. Cook the prawns for 2 to 3 minutes until pink and cooked through, then stir them through the adults' bowls."
     ],
-    "baby": "Prawns minced finely or chopped small, never whole. Pasta cut short or in pieces she can grip.",
-    "notes": "Shellfish exposure.",
+    "baby": "No prawns in her portion. Pasta cut short or in pieces she can grip, with the tomato and spinach sauce.",
+    "notes": "Prawns are for the adults only. Cook them in a separate pan with separate utensils.",
     "short": "Prawn linguine",
     "temp": "either"
   },

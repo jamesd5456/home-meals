@@ -274,7 +274,7 @@
       },
       {
         "id": "prawns-450",
-        "text": "Raw peeled prawns, frozen, 450 g (fried rice 250 g, linguine 200 g; about 200 g may be at home)",
+        "text": "Raw peeled prawns, frozen, 450 g (fried rice 250 g including 3 cooked extra for Wednesday's breakfast, linguine 200 g; about 200 g may be at home)",
         "section": "frozen"
       },
       {
@@ -344,7 +344,7 @@
       },
       {
         "id": "lemons-3",
-        "text": "Lemons, 3 (dahl 1, hummus 1/2, patties 1, linguine 1/2)",
+        "text": "Lemons, 3 (dahl 1, patties 1, linguine 1/2, dip 1/2)",
         "section": "fruit-grocer"
       },
       {
@@ -364,7 +364,7 @@
       },
       {
         "id": "eggs-9",
-        "text": "Eggs, 9 (fried rice 3, scrambled egg 1, patties 1, omelette 2, pancakes 2)",
+        "text": "Eggs, 8 (fried rice 3, patties 1, omelette 2, pancakes 2)",
         "section": "deli"
       },
       {
@@ -389,7 +389,7 @@
       },
       {
         "id": "bread-2",
-        "text": "Wholemeal bread, 2 slices (baked beans toast 1, scrambled egg toast 1; buy the smallest loaf)",
+        "text": "Wholemeal bread, 2 slices (baked beans toast 1, prawn toast 1; buy the smallest loaf)",
         "section": "bakery"
       },
       {
@@ -429,7 +429,7 @@
       },
       {
         "id": "h-chickpeas",
-        "text": "Canned chickpeas, 2 x 400 g (hummus 1, tagine 1)",
+        "text": "Canned chickpeas, 1 x 400 g (tagine)",
         "section": "home-check"
       },
       {
@@ -439,7 +439,12 @@
       },
       {
         "id": "h-tahini",
-        "text": "Tahini, 2 tbsp (hummus)",
+        "text": "Tahini, 1 tsp (stirred into the baby's yoghurt with the dahl)",
+        "section": "home-check"
+      },
+      {
+        "id": "h-avocado",
+        "text": "Avocado, 1/4 (prawn toast)",
         "section": "home-check"
       },
       {
@@ -515,11 +520,6 @@
       {
         "id": "h-oil",
         "text": "Oil, 5 tbsp (fried rice 1, dahl 1, satay 1, linguine 2) plus 1 tsp for the omelette",
-        "section": "home-check"
-      },
-      {
-        "id": "h-olive-oil",
-        "text": "Olive oil, 2 tbsp (hummus)",
         "section": "home-check"
       }
     ]

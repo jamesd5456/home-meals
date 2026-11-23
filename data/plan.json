@@ -67,7 +67,7 @@
       "date": "2026-11-24",
       "breakfast": "baked-beans-cheese-toast",
       "dinner": "prawn-tofu-egg-fried-rice",
-      "note": "Cook the rice early so it can cool. Shopping list 2 today.",
+      "note": "Cook the rice early so it can cool. Prawns go in the adults' bowls only. Shopping list 2 today.",
       "prep": [
         {
           "when": "morning",
@@ -76,18 +76,22 @@
         {
           "when": "day",
           "text": "Shopping list 2 today."
+        },
+        {
+          "when": "evening",
+          "text": "Cook the prawns in a separate pan. Take the baby's portion out before the prawns and soy sauce. Cook 3 extra prawns, cool them and fridge them for tomorrow's breakfast."
         }
       ]
     },
     {
       "date": "2026-11-25",
-      "breakfast": "scrambled-egg-hummus-toast",
+      "breakfast": "avocado-prawn-toast",
       "dinner": "red-lentil-dahl",
-      "note": "Make the hummus first (see Recipes). Freeze 2 dahl portions.",
+      "note": "Prawn toast breakfast: use the 3 prawns cooked last night and offer it early. Stir 1 tsp tahini into the baby's yoghurt at dinner. Freeze 2 dahl portions.",
       "prep": [
         {
           "when": "morning",
-          "text": "Make the hummus first (see Recipes)."
+          "text": "Mince the 3 prawns cooked last night and offer breakfast early, so you can watch her for a couple of hours afterwards."
         },
         {
           "when": "after-dinner",
@@ -117,7 +121,7 @@
       "date": "2026-11-29",
       "breakfast": "almond-porridge-berries",
       "dinner": "lemon-garlic-prawn-linguine",
-      "note": "Move the prawns to the fridge the night before to thaw."
+      "note": "Move the prawns to the fridge the night before to thaw. Take the baby's portion out before the prawns go in."
     }
   ]
 }
