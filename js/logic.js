@@ -162,8 +162,17 @@ export function parseQty(text) {
   return { name: m[1].trim(), qty: Number(m[2]), unit, note };
 }
 
-// The list you're shopping for now: the first one whose shop day hasn't passed, else the last.
+// The list you're shopping for now. Lists with a `coversFrom` date: the latest one that has started covering days
+// (so list 2 stays current all week even after its shop day). Lists without it: the first one whose shop day
+// hasn't passed, else the last.
 export function currentListIndex(lists, todayISO) {
+  if (lists.some((l) => l.coversFrom)) {
+    let idx = 0;
+    lists.forEach((l, i) => {
+      if (l.coversFrom && l.coversFrom <= todayISO) idx = i;
+    });
+    return idx;
+  }
   const i = lists.findIndex((l) => l.buyDate && l.buyDate >= todayISO);
   return i === -1 ? Math.max(0, lists.length - 1) : i;
 }

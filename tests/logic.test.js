@@ -99,6 +99,18 @@ const lists = [{ buyDate: "2026-11-18" }, { buyDate: "2026-11-24" }];
 assert.equal(currentListIndex(lists, "2026-11-18"), 0);
 assert.equal(currentListIndex(lists, "2026-11-19"), 1);
 assert.equal(currentListIndex(lists, "2026-12-01"), 1);
+// lists with coversFrom: the latest list that has started covering days stays current, even after its shop day
+const lists2 = [
+  { buyDate: "2026-11-18", coversFrom: "2026-11-19" },
+  { buyDate: "2026-11-24", coversFrom: "2026-11-23" },
+  { buyDate: "2026-12-01", coversFrom: "2026-11-30" },
+];
+assert.equal(currentListIndex(lists2, "2026-11-18"), 0);
+assert.equal(currentListIndex(lists2, "2026-11-22"), 0);
+assert.equal(currentListIndex(lists2, "2026-11-23"), 1);
+assert.equal(currentListIndex(lists2, "2026-11-25"), 1);
+assert.equal(currentListIndex(lists2, "2026-11-29"), 1);
+assert.equal(currentListIndex(lists2, "2026-11-30"), 2);
 assert.equal(classifyExtra("dishwasher tablets"), "household");
 assert.equal(classifyExtra("chicken breast"), "butcher");
 assert.equal(classifyExtra("canned tomatoes"), "pantry");
