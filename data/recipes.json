@@ -747,5 +747,358 @@
     "baby": "No added salt in her portion. Spread thinly on toast fingers.",
     "notes": "Keeps in the fridge for about 3 days.",
     "short": "Hummus"
+  },
+  {
+    "id": "shakshuka-feta",
+    "title": "Shakshuka with feta and bread",
+    "type": "dinner",
+    "cuisine": "Middle Eastern",
+    "time": "30 min",
+    "serves": "2 adults plus a baby serve",
+    "allergens": [
+      "egg",
+      "wheat"
+    ],
+    "iron": "Eggs are the iron source here, so pair with a vitamin C food such as the capsicum in the sauce.",
+    "ingredients": [
+      "4 eggs",
+      "1 red capsicum",
+      "1 brown onion",
+      "2 garlic cloves",
+      "1 x 400 g can crushed tomatoes",
+      "1 tsp ground cumin",
+      "1 tsp smoked paprika",
+      "1/2 cup no-salt-added stock",
+      "50 g feta, for the adults' bowls",
+      "1 tbsp cooking oil",
+      "4 slices bread"
+    ],
+    "steps": [
+      "Dice the onion and capsicum and crush the garlic. Heat the oil in a deep frying pan and soften the onion and capsicum for 5 minutes. Add the garlic, cumin and paprika for 30 seconds.",
+      "Add the crushed tomatoes and stock and simmer for 10 minutes until thick.",
+      "Make 4 wells in the sauce and crack an egg into each. Cover and cook for 6 to 8 minutes, until the whites are set and the yolks are cooked through for the baby.",
+      "Crumble the feta over the adults' bowls only. Toast the bread."
+    ],
+    "baby": "Sauce and a cooked-through egg, mashed or in pieces she can pick up, with toast fingers to scoop. No feta.",
+    "notes": "Feta is for the adults only. Keep the egg fully cooked for the baby.",
+    "short": "Shakshuka",
+    "temp": "hot"
+  },
+  {
+    "id": "tofu-noodle-stir-fry",
+    "title": "Crispy tofu and veg noodle stir-fry with sesame",
+    "type": "dinner",
+    "cuisine": "Asian",
+    "time": "30 min",
+    "serves": "2 adults plus a baby serve",
+    "allergens": [
+      "soy",
+      "wheat",
+      "sesame"
+    ],
+    "iron": "Tofu is the iron source here. Serve it with the capsicum and broccoli for vitamin C.",
+    "ingredients": [
+      "300 g firm tofu",
+      "200 g dried wheat noodles",
+      "1 red capsicum",
+      "200 g broccoli",
+      "1 carrot",
+      "2 garlic cloves",
+      "1 tbsp tahini",
+      "1 tbsp low-salt soy sauce, for the adults",
+      "1/4 cup no-salt-added stock",
+      "2 tbsp cooking oil"
+    ],
+    "steps": [
+      "Press the tofu between paper towel for 10 minutes, then cut it into 2 cm cubes. Toss with 1 tablespoon of the oil and air fry at 200 C for 12 to 15 minutes, shaking halfway, until crisp outside.",
+      "Cook the noodles to packet time and drain. Slice the capsicum, cut the broccoli into small florets, grate the carrot and crush the garlic.",
+      "Heat the other tablespoon of oil in a wok or large pan. Stir fry the carrot, broccoli and capsicum for 4 minutes, adding the garlic for the last 30 seconds.",
+      "Whisk the tahini into the stock, add it with the noodles and toss for 2 minutes. Take the baby's portion out now.",
+      "Stir the soy sauce into the adults' portions only and fold through the crispy tofu."
+    ],
+    "baby": "Noodles cut short and soft vegetables she can grip, with tofu cubes squashed or in small pieces. Serve before the soy sauce goes in.",
+    "notes": "Tofu is the main iron source at this dinner, so give the baby a generous serve of it.",
+    "short": "Tofu noodle stir-fry",
+    "temp": "either"
+  },
+  {
+    "id": "pork-san-choy-bau",
+    "title": "Pork san choy bau with rice and cucumber",
+    "type": "dinner",
+    "cuisine": "Chinese-inspired",
+    "time": "25 min",
+    "serves": "2 adults plus a baby serve",
+    "allergens": [],
+    "iron": "Pork mince is a good iron source. The capsicum adds vitamin C.",
+    "ingredients": [
+      "500 g pork mince",
+      "1 small iceberg lettuce",
+      "1 red capsicum",
+      "1 carrot",
+      "1 zucchini",
+      "2 garlic cloves",
+      "1 Lebanese cucumber",
+      "1/2 cup no-salt-added stock",
+      "1 tsp ground coriander",
+      "1 tbsp low-salt soy sauce, for the adults",
+      "1/2 cup basmati rice",
+      "1 tbsp cooking oil"
+    ],
+    "steps": [
+      "Cook the rice (1/2 cup rice, 1 cup water). Dice the capsicum, grate the carrot and zucchini, crush the garlic, separate the lettuce leaves and slice the cucumber.",
+      "Brown the mince in the oil for 5 minutes. Add the garlic, vegetables and coriander and stir for 3 minutes.",
+      "Add the stock and simmer for 4 minutes. Take the baby's portion out now, then stir the soy sauce into the adults' portion.",
+      "Serve in lettuce cups with the rice and cucumber."
+    ],
+    "baby": "Mince cooked through and crumbly with soft vegetables, a strip of lettuce to grip, and rice in clumps. Serve before the soy sauce goes in.",
+    "notes": "Soy sauce is for the adults only, stirred in after the baby's portion is out.",
+    "short": "Pork san choy bau",
+    "temp": "either"
+  },
+  {
+    "id": "beef-meatballs-tomato-roast-veg",
+    "title": "Beef meatballs in tomato sauce with roast veg",
+    "type": "dinner",
+    "cuisine": "Italian-inspired",
+    "time": "35 min",
+    "serves": "2 adults plus a baby serve, with a packed portion",
+    "allergens": [
+      "egg"
+    ],
+    "iron": "Beef mince is a strong iron source. Broccoli and tomato add vitamin C.",
+    "ingredients": [
+      "500 g beef mince",
+      "1 egg",
+      "1/3 cup rolled oats",
+      "1 zucchini",
+      "1 tsp dried mixed herbs",
+      "1 x 400 g can crushed tomatoes",
+      "2 garlic cloves",
+      "1/2 cup no-salt-added stock",
+      "300 g broccoli",
+      "1 carrot",
+      "300 g potatoes",
+      "1 tbsp cooking oil"
+    ],
+    "steps": [
+      "Cut the potatoes into wedges, toss with the oil and air fry at 200 C for 10 minutes.",
+      "Grate the zucchini and squeeze out the water. Mix it with the mince, egg, oats and herbs, shape into about 16 small balls and air fry at 190 C for 10 to 12 minutes until cooked through.",
+      "Crush the garlic and simmer it with the crushed tomatoes and stock for 8 minutes.",
+      "Cut the broccoli into florets and slice the carrot. Add both to the potatoes for the last 8 minutes.",
+      "Toss the meatballs in the sauce. Pack one portion for work."
+    ],
+    "baby": "Small soft meatballs squashed or halved, sauce on the side, and roast veg and potato wedges to grip. No added salt.",
+    "notes": "Reheats well for a packed meal.",
+    "short": "Beef meatballs",
+    "temp": "either"
+  },
+  {
+    "id": "creamy-salmon-spinach-pea-pasta",
+    "title": "Creamy salmon, spinach and pea pasta with salad",
+    "type": "dinner",
+    "cuisine": "Italian-inspired",
+    "time": "20 min",
+    "serves": "2 adults plus a baby serve",
+    "allergens": [
+      "fish",
+      "dairy",
+      "wheat"
+    ],
+    "iron": "Salmon and spinach carry the iron here. Lemon and tomato add vitamin C.",
+    "ingredients": [
+      "200 g short pasta",
+      "350 g skinless salmon fillet (2 fillets)",
+      "100 g baby spinach",
+      "1 cup frozen peas",
+      "1/2 cup Greek yoghurt",
+      "1/4 cup grated tasty cheese",
+      "1/2 cup no-salt-added stock",
+      "2 garlic cloves",
+      "1/2 lemon",
+      "1 tbsp cooking oil",
+      "200 g cherry tomatoes",
+      "1 Lebanese cucumber"
+    ],
+    "steps": [
+      "Boil the pasta to packet time, adding the peas for the last 2 minutes. Drain.",
+      "Air fry the salmon at 190 C for 8 to 10 minutes. Flake it and check for any bones.",
+      "Crush the garlic and soften it in the oil for 30 seconds. Add the stock and simmer for 2 minutes. Take it off the heat and stir in the yoghurt, cheese and the zest and juice of the lemon half.",
+      "Fold the sauce through the pasta, peas, spinach and salmon.",
+      "Halve the tomatoes and slice the cucumber for the salad."
+    ],
+    "baby": "Short pasta she can grip, salmon flaked with bones checked, peas squashed and tomato quartered.",
+    "notes": "Serve straight away.",
+    "short": "Creamy salmon pasta",
+    "temp": "either"
+  },
+  {
+    "id": "slow-cooker-pulled-pork-tacos",
+    "title": "Slow cooker pulled pork soft tacos with slaw",
+    "type": "dinner",
+    "cuisine": "Mexican-inspired",
+    "time": "15 min prep, 6 h low or 4 h high",
+    "serves": "2 adults plus a baby serve",
+    "allergens": [
+      "wheat",
+      "dairy"
+    ],
+    "iron": "Pork shoulder is a good iron and zinc source. Lime and avocado add vitamin C and healthy fats.",
+    "ingredients": [
+      "800 g boneless pork shoulder",
+      "1 brown onion",
+      "2 garlic cloves",
+      "1 tsp ground cumin",
+      "1 tsp smoked paprika",
+      "1 tsp ground coriander",
+      "1/2 cup no-salt-added stock",
+      "6 small flour tortillas",
+      "150 g red cabbage",
+      "1/2 cup Greek yoghurt",
+      "1 lime",
+      "1 avocado",
+      "1 cup frozen corn"
+    ],
+    "steps": [
+      "Slice the onion and crush the garlic. Rub the pork with the cumin, paprika and coriander and put it in the slow cooker with the onion, garlic and stock.",
+      "Cook for 6 hours on low or 4 hours on high, until the pork shreds easily. Shred it in its juices.",
+      "Finely shred the cabbage and stir it through the yoghurt with the lime juice. Heat the corn, mash the avocado and warm the tortillas.",
+      "Serve as tacos, or as bowls with the tortillas on the side."
+    ],
+    "baby": "Shredded soft pork, avocado and corn off the cob, tortilla in strips to scoop, and slaw cut very fine. No salt.",
+    "notes": "Start the slow cooker after breakfast.",
+    "short": "Pulled pork tacos",
+    "temp": "hot"
+  },
+  {
+    "id": "tofu-scramble-capsicum-toast",
+    "title": "Tofu scramble on toast fingers with capsicum",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "10 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "soy",
+      "wheat"
+    ],
+    "iron": "Tofu is the iron source. Capsicum adds vitamin C.",
+    "ingredients": [
+      "150 g firm tofu",
+      "1/4 red capsicum",
+      "1 slice bread",
+      "1 tsp cooking oil"
+    ],
+    "steps": [
+      "Finely dice the capsicum and soften it in the oil for 2 minutes.",
+      "Crumble the tofu into the pan and cook for 4 minutes, mashing it down until it looks like scrambled egg.",
+      "Toast the bread, cut it into fingers and top with the scramble."
+    ],
+    "baby": "Crumbly and soft, with no added salt.",
+    "notes": "Offer it with a breastfeed as usual.",
+    "short": "Tofu scramble toast"
+  },
+  {
+    "id": "yoghurt-kiwi-tahini-cereal",
+    "title": "Yoghurt with kiwi, tahini and fortified cereal",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "5 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "dairy",
+      "sesame"
+    ],
+    "iron": "Iron-fortified infant cereal stirred in.",
+    "ingredients": [
+      "1/3 cup Greek yoghurt",
+      "1 kiwi fruit",
+      "1 tsp tahini",
+      "1 tbsp iron-fortified infant cereal"
+    ],
+    "steps": [
+      "Peel and mash the kiwi.",
+      "Stir the tahini and cereal through the yoghurt and top with the kiwi."
+    ],
+    "baby": "Smooth and soft. Mash the kiwi well.",
+    "notes": "",
+    "short": "Yoghurt + kiwi"
+  },
+  {
+    "id": "porridge-peanut-almond-cereal",
+    "title": "Porridge with peanut butter, almond meal and fortified cereal",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "10 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "peanut",
+      "tree-nut",
+      "wheat"
+    ],
+    "iron": "Iron-fortified infant cereal stirred in.",
+    "ingredients": [
+      "1/3 cup rolled oats",
+      "1/2 cup breast milk",
+      "1 tsp smooth peanut butter",
+      "1 tsp almond meal",
+      "1 tbsp iron-fortified infant cereal"
+    ],
+    "steps": [
+      "Cook the oats in the breast milk for 5 minutes until soft.",
+      "Stir in the peanut butter, almond meal and cereal until smooth."
+    ],
+    "baby": "Smooth, with no pieces of nut. Let it cool before serving.",
+    "notes": "",
+    "short": "Peanut + almond porridge"
+  },
+  {
+    "id": "canned-salmon-avocado-toast",
+    "title": "Canned salmon and avocado toast fingers",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "5 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "fish",
+      "wheat"
+    ],
+    "iron": "Salmon is an iron source.",
+    "ingredients": [
+      "105 g can red salmon",
+      "1/4 avocado",
+      "1 slice bread"
+    ],
+    "steps": [
+      "Drain the salmon, flake it and check for bones.",
+      "Mash the avocado. Toast the bread, cut it into fingers and top with the avocado and salmon."
+    ],
+    "baby": "Flake finely and check for bones.",
+    "notes": "Check the can for the lowest-salt option (not verified).",
+    "short": "Salmon + avocado toast"
+  },
+  {
+    "id": "yoghurt-banana-tahini-cereal",
+    "title": "Yoghurt with banana, tahini and fortified cereal",
+    "type": "breakfast",
+    "cuisine": "Baby breakfast",
+    "time": "5 min",
+    "serves": "1 baby serve",
+    "allergens": [
+      "dairy",
+      "sesame"
+    ],
+    "iron": "Iron-fortified infant cereal stirred in.",
+    "ingredients": [
+      "1/3 cup Greek yoghurt",
+      "1/2 banana",
+      "1 tsp tahini",
+      "1 tbsp iron-fortified infant cereal"
+    ],
+    "steps": [
+      "Mash the banana.",
+      "Stir the tahini and cereal through the yoghurt and top with the banana."
+    ],
+    "baby": "Smooth and soft.",
+    "notes": "",
+    "short": "Yoghurt + banana"
   }
 ]

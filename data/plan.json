@@ -1,5 +1,5 @@
 {
-  "note": "Plan runs to Sun 29 Nov. More days are added as each week is planned.",
+  "note": "Plan runs to Sun 6 Dec. More days are added as each week is planned.",
   "days": [
     {
       "date": "2026-11-18",
@@ -122,6 +122,79 @@
       "breakfast": "almond-porridge-berries",
       "dinner": "lemon-garlic-prawn-linguine",
       "note": "Move the prawns to the fridge the night before to thaw. Take the baby's portion out before the prawns go in."
+    },
+    {
+      "date": "2026-11-30",
+      "breakfast": "tofu-scramble-capsicum-toast",
+      "dinner": "moroccan-beef-chickpea-tagine",
+      "note": "Tagine leftovers. Reheat until steaming hot.",
+      "jamesMeal": "Tagine leftovers. Pack a portion before you leave."
+    },
+    {
+      "date": "2026-12-01",
+      "breakfast": "yoghurt-kiwi-tahini-cereal",
+      "dinner": "shakshuka-feta",
+      "note": "Crumble the feta over the adults' bowls only.",
+      "jamesMeal": "Frozen dahl from the freezer. Take it out the night before.",
+      "prep": [
+        {
+          "when": "evening",
+          "text": "Thaw and cook 3 raw prawns all the way through and fridge them for tomorrow's breakfast."
+        }
+      ]
+    },
+    {
+      "date": "2026-12-02",
+      "breakfast": "avocado-prawn-toast",
+      "dinner": "tofu-noodle-stir-fry",
+      "note": "Use the 3 prawns cooked last night and offer breakfast early. Soy sauce goes in the adults' portions only.",
+      "prep": [
+        {
+          "when": "morning",
+          "text": "Mince the 3 prawns cooked last night and offer breakfast early, so you can watch her for a couple of hours afterwards."
+        }
+      ]
+    },
+    {
+      "date": "2026-12-03",
+      "breakfast": "porridge-peanut-almond-cereal",
+      "dinner": "pork-san-choy-bau",
+      "note": "Soy sauce goes in the adults' portions only."
+    },
+    {
+      "date": "2026-12-04",
+      "breakfast": "canned-salmon-avocado-toast",
+      "dinner": "beef-meatballs-tomato-roast-veg",
+      "note": "Meatballs reheat well for a packed meal.",
+      "jamesMeal": "Meatballs and roast veg. Pack a portion before you leave."
+    },
+    {
+      "date": "2026-12-05",
+      "breakfast": "yoghurt-banana-tahini-cereal",
+      "dinner": "creamy-salmon-spinach-pea-pasta",
+      "note": "Quick dinner.",
+      "prep": [
+        {
+          "when": "evening",
+          "text": "Move 3 raw prawns from the freezer to the fridge to thaw for tomorrow's breakfast."
+        }
+      ]
+    },
+    {
+      "date": "2026-12-06",
+      "breakfast": "avocado-prawn-toast",
+      "dinner": "slow-cooker-pulled-pork-tacos",
+      "note": "Cook the 3 prawns first and offer breakfast early, then start the slow cooker. If you'd rather keep starch down, serve as bowls with the tortillas on the side.",
+      "prep": [
+        {
+          "when": "morning",
+          "text": "Cook and mince the 3 prawns and offer breakfast early, so you can watch her for a couple of hours afterwards."
+        },
+        {
+          "when": "morning",
+          "text": "Then start the slow cooker (6 hours on low or 4 hours on high)."
+        }
+      ]
     }
   ]
 }

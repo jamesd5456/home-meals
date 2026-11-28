@@ -1,539 +1,902 @@
 [
   {
-    "id": "list-1",
-    "coversFrom": "2026-11-19",
-    "title": "Shopping list 1",
-    "buy": "Wed 18 Nov",
-    "buyDate": "2026-11-18",
-    "covers": "Thu 19 to Wed 25 Nov",
-    "estimate": "Trimmed on 18 Nov to the exact recipe amounts. Not priced yet: check it in the Woolworths app and send me the total.",
+    "id": "shop",
+    "title": "Shopping list",
+    "covers": "Mon 30 Nov to Sun 6 Dec",
+    "shops": "Sun 29 Nov (Mon 30 Nov to Sun 6 Dec), Sun 6 Dec (Mon 7 to Sun 13), Sun 13 Dec (Mon 14 to Wed 16)",
+    "estimate": "Everything the meals need is here, including things likely at home under \"Check you have at home\". Mon 30 Nov to Wed 2 Dec were shopped on 24 and 25 Nov, so those are check-at-home lines, not buys. Thu 3 to Sun 6 buys are roughly $90 to $105 (my estimate, not live prices). Anything still unticked from the old lists 1 and 2 is included at the end of each aisle.",
     "items": [
+      {
+        "id": "w1-capsicum",
+        "text": "Red capsicum, 1 (Thu san choy bau)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-onion",
+        "text": "Brown onion, 1 (Sun pulled pork)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-garlic",
+        "text": "Garlic, 8 cloves (Thu 2, Fri 2, Sat 2, Sun 2)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-carrots",
+        "text": "Carrots, 2 (Thu san choy bau 1, Fri meatballs 1)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-broccoli",
+        "text": "Broccoli, 300 g (Fri meatballs)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-zucchini",
+        "text": "Zucchini, 2 (Thu san choy bau 1, Fri meatballs 1)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-cucumbers",
+        "text": "Lebanese cucumbers, 2 (Thu san choy bau 1, Sat salad 1)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-lettuce",
+        "text": "Iceberg lettuce, 1 small (Thu san choy bau)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-spinach",
+        "text": "Baby spinach, 100 g (Sat salmon pasta)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-cherry-tomatoes",
+        "text": "Cherry tomatoes, 200 g (Sat salad)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-red-cabbage",
+        "text": "Red cabbage, 150 g (Sun slaw)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-lemon",
+        "text": "Lemon, 1 (1/2 needed, Sat salmon pasta)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-lime",
+        "text": "Lime, 1 (Sun slaw)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-banana",
+        "text": "Banana, 1 (1/2 needed, Sat breakfast)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-avocados",
+        "text": "Avocados, 2 (Fri breakfast 1/4, Sun breakfast 1/4, Sun tacos 1)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-potatoes",
+        "text": "Potatoes, 300 g (Fri meatballs)",
+        "section": "fruit-grocer"
+      },
+      {
+        "id": "w1-egg",
+        "text": "Eggs, 1 (Fri meatballs; buy the smallest carton)",
+        "section": "deli"
+      },
+      {
+        "id": "w1-pork-mince",
+        "text": "Pork mince, 500 g (Thu san choy bau)",
+        "section": "meat"
+      },
+      {
+        "id": "w1-beef-mince",
+        "text": "Beef mince, 500 g (Fri meatballs)",
+        "section": "meat"
+      },
+      {
+        "id": "w1-salmon",
+        "text": "Skinless salmon fillets, 350 g (Sat salmon pasta, 2 fillets)",
+        "section": "meat"
+      },
+      {
+        "id": "w1-pork-shoulder",
+        "text": "Boneless pork shoulder, 800 g (Sun pulled pork)",
+        "section": "meat"
+      },
+      {
+        "id": "w1-yoghurt",
+        "text": "Greek yoghurt (1 1/3 cups needed: Sat breakfast 1/3, Sat pasta 1/2, Sun slaw 1/2; buy the smallest tub)",
+        "section": "dairy"
+      },
+      {
+        "id": "w1-tortillas",
+        "text": "Small flour tortillas, 6 (Sun tacos; buy the smallest pack)",
+        "section": "aisle-2"
+      },
+      {
+        "id": "w1-pasta",
+        "text": "Short pasta, 200 g (Sat salmon pasta; buy the smallest pack)",
+        "section": "aisle-8"
+      },
+      {
+        "id": "w1-crushed-tomatoes",
+        "text": "Canned crushed tomatoes, 1 x 400 g (Fri meatballs)",
+        "section": "aisle-9"
+      },
+      {
+        "id": "w1-canned-salmon",
+        "text": "Canned red salmon, 1 x 105 g (Fri breakfast; lowest-salt option if you can)",
+        "section": "aisle-9"
+      },
+      {
+        "id": "w1-prawns",
+        "text": "Raw peeled prawns, frozen, 100 g (6 prawns: 3 for Wed 2 breakfast, 3 for Sun 6 breakfast; check the freezer first and buy the smallest pack)",
+        "section": "frozen"
+      },
+      {
+        "id": "w1-h-tofu",
+        "text": "Firm tofu (450 g needed: Mon breakfast 150 g, Wed stir-fry 300 g)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-capsicum",
+        "text": "Red capsicum (2 1/4 needed: Mon breakfast 1/4, Tue shakshuka 1, Wed stir-fry 1)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-onion",
+        "text": "Brown onion, 1 (Tue shakshuka)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-garlic",
+        "text": "Garlic, 4 cloves (Tue shakshuka 2, Wed stir-fry 2)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-carrot",
+        "text": "Carrot, 1 (Wed stir-fry)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-broccoli",
+        "text": "Broccoli, 200 g (Wed stir-fry)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-eggs",
+        "text": "Eggs, 4 (Tue shakshuka)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-feta",
+        "text": "Feta, 50 g (Tue shakshuka, adults only)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-crushed-tomatoes",
+        "text": "Canned crushed tomatoes, 1 x 400 g (Tue shakshuka)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-noodles",
+        "text": "Dried wheat noodles, 200 g (Wed stir-fry)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-kiwi",
+        "text": "Kiwi fruit, 1 (Tue breakfast)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-avocado",
+        "text": "Avocado (1/4 needed, Wed breakfast)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-yoghurt",
+        "text": "Greek yoghurt (1/3 cup needed, Tue breakfast)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-bread",
+        "text": "Bread (8 slices needed: Mon breakfast 1, Tue shakshuka 4, Wed breakfast 1, Fri breakfast 1, Sun breakfast 1; freeze the rest of the loaf)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-stock",
+        "text": "No-salt-added stock (2 3/4 cups needed, made up from the concentrate: Tue 1/2, Wed 1/4, Thu 1/2, Fri 1/2, Sat 1/2, Sun 1/2)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-rice",
+        "text": "Basmati rice (1/2 cup dry needed, Thu san choy bau)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-oats",
+        "text": "Rolled oats (2/3 cup needed: Thu breakfast 1/3, Fri meatballs 1/3)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-peanut-butter",
+        "text": "Smooth peanut butter (1 tsp needed, Thu breakfast)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-almond-meal",
+        "text": "Almond meal (1 tsp needed, Thu breakfast)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-tahini",
+        "text": "Tahini (1 tbsp plus 2 tsp needed: Tue breakfast 1 tsp, Wed stir-fry 1 tbsp, Sat breakfast 1 tsp)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-infant-cereal",
+        "text": "Iron-fortified infant cereal (3 tbsp needed: Tue, Thu and Sat breakfasts)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-peas",
+        "text": "Frozen peas, 1 cup (Sat salmon pasta)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-corn",
+        "text": "Frozen corn, 1 cup (Sun tacos)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-cheese",
+        "text": "Tasty cheese (1/4 cup grated needed, Sat salmon pasta)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-cumin",
+        "text": "Ground cumin (2 tsp needed: Tue shakshuka 1, Sun pulled pork 1)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-paprika",
+        "text": "Smoked paprika (2 tsp needed: Tue shakshuka 1, Sun pulled pork 1)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-coriander",
+        "text": "Ground coriander (2 tsp needed: Thu san choy bau 1, Sun pulled pork 1)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-herbs",
+        "text": "Dried mixed herbs, 1 tsp (Fri meatballs)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-soy",
+        "text": "Low-salt soy sauce (2 tbsp needed, adults only: Wed stir-fry 1, Thu san choy bau 1)",
+        "section": "home-check"
+      },
+      {
+        "id": "w1-h-oil",
+        "text": "Cooking oil (6 tbsp plus 1 tsp needed: Mon breakfast 1 tsp, Tue 1 tbsp, Wed 2 tbsp, Thu 1 tbsp, Fri 1 tbsp, Sat 1 tbsp)",
+        "section": "home-check"
+      },
       {
         "id": "chicken-thigh-800b",
         "text": "Chicken thigh fillets, 800 g (korma)",
-        "section": "meat"
+        "section": "meat",
+        "list": "list-1"
       },
       {
         "id": "beef-mince-1kgb",
         "text": "Beef mince, 1 kg (tacos 500 g, ragu 500 g)",
-        "section": "meat"
+        "section": "meat",
+        "list": "list-1"
       },
       {
         "id": "salmon-fillets-2b",
         "text": "Salmon fillets, 2 (about 300 to 350 g, tray bake)",
-        "section": "meat"
+        "section": "meat",
+        "list": "list-1"
       },
       {
         "id": "prawns-300b",
         "text": "Raw peeled prawns, frozen, 300 g (fried rice 250 g, plus a few for Thursday's breakfast)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-1"
       },
       {
         "id": "canned-salmon-1b",
         "text": "Canned pink salmon, 1 x 210 g (catch-up plate uses half)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-1"
       },
       {
         "id": "onions-6",
         "text": "Brown onions, 6 (korma 2, tacos 1, ragu 1, fried rice 1, dahl 1)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "garlic-13",
         "text": "Garlic, 13 cloves (2 small heads)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "ginger-4tsp",
         "text": "Ginger, 4 tsp grated (korma, dahl)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "capsicum-1",
         "text": "Capsicum, 1 (tacos)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "carrots-4",
         "text": "Carrots, 4 (ragu 2, fried rice 2)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "broccoli-2b",
         "text": "Broccoli, 2 heads (tray bake)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "potatoes-600",
         "text": "Potatoes, 600 g (tray bake)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "lemons-3",
         "text": "Lemons, 3 (tray bake, dahl, plus tacos wedges and hummus)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "avocado-2",
         "text": "Avocados, 2 (tacos 1, prawn toast 1/4)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "banana-1",
         "text": "Banana, 1 (1/2 needed, weetbix breakfast)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "apple-1",
         "text": "Apple, 1 (1/4 needed, oat porridge)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "lettuce-1b",
         "text": "Lettuce, 1 small (tacos)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "spinach-150",
         "text": "Baby spinach, about 150 g (korma, omelette, dahl)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-1"
       },
       {
         "id": "eggs-6",
         "text": "Eggs, 6 (5 needed: fried rice 3, omelette 1, scrambled egg 1)",
-        "section": "deli"
+        "section": "deli",
+        "list": "list-1"
       },
       {
         "id": "yoghurt-400",
         "text": "Natural full-fat yoghurt, 400 g (buy the smallest tub)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-1"
       },
       {
         "id": "cheese-110",
         "text": "Tasty cheese, 110 g (tacos 1 cup, baked beans toast 1 tbsp; buy the smallest block)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-1"
       },
       {
         "id": "tofu-300",
         "text": "Firm tofu, 300 g (fried rice 200 g, catch-up plate 100 g)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-1"
       },
       {
         "id": "rice-1100",
         "text": "Basmati rice, 1.1 kg (5 1/2 cups dry: korma, fried rice, dahl)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-1"
       },
       {
         "id": "stock-1625ml",
         "text": "No-salt-added liquid stock, 1.625 L (korma 125 ml, ragu 500 ml, dahl 1 L; buy the smallest packs that cover it)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-1"
       },
       {
         "id": "pasta-500b",
         "text": "Dried pasta shapes, 500 g (ragu)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-1"
       },
       {
         "id": "tortillas-8",
         "text": "Small soft tortillas, 8 (tacos)",
-        "section": "aisle-2"
+        "section": "aisle-2",
+        "list": "list-1"
       },
       {
         "id": "bread-6",
         "text": "Wholemeal bread, 6 slices (buy 1 loaf and freeze the rest)",
-        "section": "bakery"
+        "section": "bakery",
+        "list": "list-1"
       },
       {
         "id": "oats-3tbsp",
         "text": "Rolled oats (3 tbsp needed, oat porridge)",
-        "section": "aisle-4"
+        "section": "aisle-4",
+        "list": "list-1"
       },
       {
         "id": "weetbix-1",
         "text": "Weet-Bix (1 biscuit needed; buy the smallest box)",
-        "section": "aisle-4"
+        "section": "aisle-4",
+        "list": "list-1"
       },
       {
         "id": "infant-cereal-2tbsp",
         "text": "Iron-fortified infant cereal (2 tbsp needed in total)",
-        "section": "baby"
+        "section": "baby",
+        "list": "list-1"
       },
       {
         "id": "red-lentils-500b",
         "text": "Red lentils, 500 g (ragu 200 g, dahl 300 g)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-1"
       },
       {
         "id": "black-beans-1b",
         "text": "Canned black beans, 1 (tacos)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-1"
       },
       {
         "id": "chickpeas-2b",
         "text": "Canned chickpeas, 2 (korma, hummus)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-1"
       },
       {
         "id": "crushed-tomatoes-4b",
         "text": "Canned crushed tomatoes, 4 (korma 1, ragu 2, dahl 1)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-1"
       },
       {
         "id": "baked-beans-3tbsp",
         "text": "No-salt-added baked beans, 1 can (3 tbsp needed)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-1"
       },
       {
         "id": "soy-sauce-adults",
         "text": "Low-salt soy sauce (adults at the table with the fried rice; recipe gives no amount)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-1"
       },
       {
         "id": "ground-almonds-60",
         "text": "Ground almonds, 60 g (korma)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "tahini-3tbsp",
         "text": "Tahini (about 3 1/2 tbsp in total: tray bake, hummus, catch-up plate, yoghurt breakfast)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-1"
       },
       {
         "id": "peanut-butter-1tsp",
         "text": "100% smooth peanut butter (1 tsp in total)",
-        "section": "aisle-3"
+        "section": "aisle-3",
+        "list": "list-1"
       },
       {
         "id": "korma-paste-3tbsp",
         "text": "Korma paste (3 tbsp needed; check the label for salt)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-1"
       },
       {
         "id": "cumin-5tsp",
         "text": "Ground cumin (5 tsp in total: korma 1, tacos 2, dahl 2)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "coriander-2tsp",
         "text": "Ground coriander (2 tsp in total: korma 1, tacos 1)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "turmeric-2tsp",
         "text": "Ground turmeric (2 tsp: dahl)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "paprika-2tsp",
         "text": "Smoked paprika (2 tsp: tacos)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "garam-masala-1tsp",
         "text": "Garam masala (1 tsp: dahl)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "mixed-herbs-1tbsp",
         "text": "Dried mixed herbs (1 tbsp: ragu)",
-        "section": "aisle-10"
+        "section": "aisle-10",
+        "list": "list-1"
       },
       {
         "id": "peas-corn-1cup",
         "text": "Frozen peas and corn (1 cup: fried rice)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-1"
       },
       {
         "id": "berries-few",
         "text": "Frozen mixed berries (a few needed: yoghurt breakfast)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-1"
       },
       {
         "id": "oil-9tbsp",
         "text": "Olive or neutral oil (about 9 tbsp across the week)",
-        "section": "home-check"
-      }
-    ]
-  },
-  {
-    "id": "list-2",
-    "coversFrom": "2026-11-23",
-    "title": "Shopping list 2",
-    "buy": "Tue 24 Nov",
-    "buyDate": "2026-11-24",
-    "covers": "Mon 23 to Sun 29 Nov",
-    "estimate": "Not priced yet. Rough guess about $85 to $100 for what's not already at home. This covers every dish cooked from Mon 23 to Sun 29 Nov (the Mon 23 ragu was cooked on the 22nd, so it isn't included). Some Tue 24 and Wed 25 items overlap what list 1 bought, so just tick those off.",
-    "items": [
+        "section": "home-check",
+        "list": "list-1"
+      },
       {
         "id": "chicken-thigh-600",
         "text": "Chicken thigh fillets, 600 g (satay)",
-        "section": "meat"
+        "section": "meat",
+        "list": "list-2"
       },
       {
         "id": "beef-diced-700",
         "text": "Diced beef, 700 g (tagine)",
-        "section": "meat"
+        "section": "meat",
+        "list": "list-2"
       },
       {
         "id": "prawns-450",
         "text": "Raw peeled prawns, frozen, 450 g (fried rice 250 g including 3 cooked extra for Wednesday's breakfast, linguine 200 g; about 200 g may be at home)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-2"
       },
       {
         "id": "berries-2tbsp",
         "text": "Frozen mixed berries, 2 tbsp (almond porridge)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-2"
       },
       {
         "id": "peas-1cup",
         "text": "Frozen peas, 1 cup (satay)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-2"
       },
       {
         "id": "peas-corn-1cup",
         "text": "Frozen peas and corn, 1 cup (fried rice)",
-        "section": "frozen"
+        "section": "frozen",
+        "list": "list-2"
       },
       {
         "id": "onions-4",
         "text": "Brown onions, 4 (fried rice 1, dahl 1, satay 1, tagine 1)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "garlic-11",
         "text": "Garlic, 11 cloves (fried rice 2, dahl 3, satay 2, tagine 2, linguine 2)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "ginger-2tsp",
         "text": "Ginger, 2 tsp grated (dahl)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "carrots-6",
         "text": "Carrots, 6 (fried rice 2, satay 2, tagine 2)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "capsicum-1",
         "text": "Red capsicum, 1 (satay)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "broccoli-300",
         "text": "Broccoli, 300 g (satay)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "green-beans-300",
         "text": "Green beans, 300 g (salmon patties)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "sweet-potato-400",
         "text": "Sweet potato, 400 g (tagine)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "potatoes-600",
         "text": "Potatoes, 600 g (salmon patties)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "cherry-tomatoes-200",
         "text": "Cherry tomatoes, 200 g (linguine)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "lemons-3",
         "text": "Lemons, 3 (dahl 1, patties 1, linguine 1/2, dip 1/2)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "spinach",
         "text": "Baby spinach (dahl 3 handfuls, linguine 80 g, omelette 1 small handful, pancakes 1 handful)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "banana-1",
         "text": "Banana, 1 (1/2 needed, Weet-Bix breakfast)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "apple-1",
         "text": "Apple, 1 (1/4 needed, oat porridge)",
-        "section": "fruit-grocer"
+        "section": "fruit-grocer",
+        "list": "list-2"
       },
       {
         "id": "eggs-9",
         "text": "Eggs, 8 (fried rice 3, patties 1, omelette 2, pancakes 2)",
-        "section": "deli"
+        "section": "deli",
+        "list": "list-2"
       },
       {
         "id": "tofu-200",
         "text": "Firm tofu, 200 g (fried rice)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-2"
       },
       {
         "id": "ricotta-250",
         "text": "Ricotta, 125 g plus 1 tbsp (pancakes, porridge; buy the smallest tub, about half will be spare)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-2"
       },
       {
         "id": "yoghurt",
         "text": "Natural yoghurt, 3/4 cup for the patties dip plus a spoonful per serve of dahl (buy the smallest tub)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-2"
       },
       {
         "id": "milk-half-cup",
         "text": "Cow's milk, 1/2 cup (pancakes; buy the smallest bottle)",
-        "section": "dairy"
+        "section": "dairy",
+        "list": "list-2"
       },
       {
         "id": "bread-2",
         "text": "Wholemeal bread, 2 slices (baked beans toast 1, prawn toast 1; buy the smallest loaf)",
-        "section": "bakery"
+        "section": "bakery",
+        "list": "list-2"
       },
       {
         "id": "linguine-200",
         "text": "Linguine, 200 g (prawn linguine; buy the smallest pack)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-2"
       },
       {
         "id": "couscous-1cup",
         "text": "Couscous, 1 cup (tagine; buy the smallest pack)",
-        "section": "aisle-8"
+        "section": "aisle-8",
+        "list": "list-2"
       },
       {
         "id": "canned-salmon-2",
         "text": "Canned pink salmon, 2 x 210 g (patties; no added salt if available)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-2"
       },
       {
         "id": "crushed-tomatoes-2",
         "text": "Canned crushed tomatoes, 2 x 400 g (dahl 1, tagine 1)",
-        "section": "aisle-9"
+        "section": "aisle-9",
+        "list": "list-2"
       },
       {
         "id": "h-stock",
         "text": "No-salt-added stock, 1.875 L made up from the concentrate (dahl 1 L, tagine 500 ml, satay 250 ml, linguine 125 ml)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-rice",
         "text": "Basmati rice, 4 1/2 cups dry (fried rice 1 1/2, dahl 2, satay 1)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-red-lentils",
         "text": "Red lentils, 300 g (dahl)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-chickpeas",
         "text": "Canned chickpeas, 1 x 400 g (tagine)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-baked-beans",
         "text": "No-salt-added baked beans, 3 tbsp (baked beans toast)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-tahini",
         "text": "Tahini, 1 tsp (stirred into the baby's yoghurt with the dahl)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-avocado",
         "text": "Avocado, 1/4 (prawn toast)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-peanut-butter",
         "text": "Smooth peanut butter, 1/3 cup plus 1/2 tsp (satay, oat porridge)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-almond-meal",
         "text": "Almond meal, 2 tbsp plus 2 tsp (tagine 2 tbsp, Weet-Bix breakfast 1 tsp, almond porridge 1 tsp)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-oats",
         "text": "Rolled oats, 3 tbsp plus 2/3 cup (oat porridge 3 tbsp, patties 1/3 cup, almond porridge 1/3 cup)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-infant-cereal",
         "text": "Iron-fortified infant cereal, 2 tbsp (oat porridge 1 tbsp, almond porridge 1 tbsp)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-weetbix",
         "text": "Weet-Bix, 1 (Weet-Bix breakfast)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-flour",
         "text": "Self-raising flour, 1 cup (pancakes)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-cheese",
         "text": "Tasty cheese, 3 tbsp (baked beans toast 1 tbsp, omelette 2 tbsp)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-soy",
         "text": "Low-salt soy sauce, 1 tbsp for the satay plus a little at the table with the fried rice (adults only)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-cumin",
         "text": "Ground cumin, 5 tsp (dahl 2, satay 1, tagine 2)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-coriander",
         "text": "Ground coriander, 3 tsp (satay 1, tagine 2)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-turmeric",
         "text": "Ground turmeric, 3 tsp (dahl 2, tagine 1)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-garam-masala",
         "text": "Garam masala, 1 tsp (dahl)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-paprika",
         "text": "Smoked paprika, 1 tsp (tagine)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-mixed-herbs",
         "text": "Dried mixed herbs, 1 tsp (patties)",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       },
       {
         "id": "h-oil",
         "text": "Oil, 5 tbsp (fried rice 1, dahl 1, satay 1, linguine 2) plus 1 tsp for the omelette",
-        "section": "home-check"
+        "section": "home-check",
+        "list": "list-2"
       }
     ]
-  },
-  {
-    "id": "list-3",
-    "coversFrom": "2026-11-30",
-    "title": "Shopping list 3",
-    "buy": "Tue 1 Dec",
-    "buyDate": "2026-12-01",
-    "covers": "Mon 30 Nov to Sun 6 Dec",
-    "estimate": "Not built yet. This list is generated from the recipes for Mon 30 Nov to Sun 6 Dec, which haven't been written. Once they are, it will list only what they need.",
-    "items": []
   }
 ]

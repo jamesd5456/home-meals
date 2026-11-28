@@ -8,7 +8,6 @@ import {
   suggestSwap,
   classifyExtra,
   compareTicked,
-  currentListIndex,
   diffDays,
   fortnightFor,
   freezerSummary,
@@ -286,6 +285,11 @@ function sortDone() {
     });
     sec.hidden = !doneUl.children.length;
     sec.querySelector(".store").textContent = `Ticked off (${doneUl.children.length})`;
+    const clearBtn = d.querySelector("button.clear-ticks");
+    if (clearBtn) {
+      clearBtn.hidden = !doneUl.children.length;
+      clearBtn.textContent = `Clear ticked-off items (${doneUl.children.length})`;
+    }
   });
 }
 
@@ -475,7 +479,8 @@ function startRealtime() {
       if (!row || !row.list_key) return;
       if (payload.eventType === "DELETE") applyRemoteTick({ ...row, checked: false });
       else applyRemoteTick(row);
-      refreshTicks();
+      if (row.list_key === "cleared") drawExtras(); // the other phone cleared its ticked-off items
+      else refreshTicks();
     })
     .subscribe();
   // Separate channel so a missing extras table can never break tick sync.
@@ -1108,8 +1113,18 @@ function drawExtras() {
 
 // A list's items in store-walk order, with the extras slotted into the matching section
 // (or "Other" if the aisle can't be guessed). Only the current list gets the extras.
+// Items you've cleared (the "Clear ticked-off items" button) are hidden. The clear is stored as a tick under the
+// list key "cleared", so it syncs between phones with no extra database setup.
+function clearedKey(list, it) {
+  return `${it.list || list.id}::${it.id}`;
+}
+
+function isCleared(list, it) {
+  return isChecked("cleared", clearedKey(list, it));
+}
+
 function groupsFor(list, withExtras) {
-  const items = list.items.map((it) => ({ ...it }));
+  const items = list.items.filter((it) => !isCleared(list, it)).map((it) => ({ ...it }));
   if (withExtras) {
     for (const x of state.extras) {
       items.push({ id: x.id, text: x.item, extra: true, section: sectionForAisle(classifyExtra(x.item)) });
@@ -1126,23 +1141,16 @@ function extraRemoveBtn(x) {
   );
 }
 
-// Anything still unticked on the previous list, once its shop day has passed.
-function carriedOver(idx) {
-  const prev = state.shopping[idx - 1];
-  if (!prev || !prev.buyDate || prev.buyDate >= localISO()) return null;
-  const left = [];
-  for (const g of buildGroups(prev.items, state.layout))
-    for (const it of g.items) {
-      if (isChecked(prev.id, it.id)) continue;
-      left.push({ id: it.id, text: `${it.text} (${g.store})` });
-    }
-  if (!left.length) return null;
-  return h(
-    "div",
-    null,
-    h("div", { class: "store" }, `Carried over from ${prev.title}`),
-    h("ul", { class: "ticks" }, left.map((it) => tickItem(prev.id, it)))
-  );
+// Remove every ticked-off item from the list in one go: list items are marked cleared, ticked extras are deleted.
+async function clearTickedOff(list) {
+  const ticked = list.items.filter((it) => !isCleared(list, it) && isChecked(it.list || list.id, it.id));
+  const extras = state.extras.filter((x) => isChecked("extras", x.id));
+  const n = ticked.length + extras.length;
+  if (!n) return;
+  if (!window.confirm(`Remove ${n} ticked-off item${n === 1 ? "" : "s"} from the list?`)) return;
+  await Promise.all(ticked.map((it) => setChecked("cleared", clearedKey(list, it), true)));
+  for (const x of extras) await removeExtra(x.id);
+  drawExtras();
 }
 
 function viewShopping() {
@@ -1151,22 +1159,14 @@ function viewShopping() {
       ? "Double-tap an item to tick it off. Ticks sync live between your phones."
       : "Double-tap an item to tick it off. Log in so ticks sync between your phones; until then they save on this device only."
     : "Double-tap an item to tick it off. Ticks save on this device only.";
-  return h(
-    "section",
-    null,
-    h("h2", null, "Shopping"),
-    h("p", { class: "muted" }, note),
-    state.layout.note ? h("p", { class: "muted" }, state.layout.note) : null,
-    state.shopping.map((list, idx) => {
-      const isCurrent = idx === currentListIndex(state.shopping, localISO());
-      const groups = groupsFor(list, isCurrent);
-      return h(
+  const list = state.shopping[0];
+  const body = list
+    ? h(
         "details",
-        { class: "list card", "data-list": list.id, open: isCurrent },
-        h("summary", null, `${list.title}: ${list.buy}`, h("span", { class: "progress" })),
+        { class: "list card", "data-list": list.id, open: true },
+        h("summary", null, list.title, h("span", { class: "progress" })),
         h("p", { class: "note" }, `Covers ${list.covers}. ${list.estimate}`),
-        carriedOver(idx),
-        groups.map((g) =>
+        groupsFor(list, true).map((g) =>
           h(
             "div",
             { class: "group" },
@@ -1177,33 +1177,30 @@ function viewShopping() {
               g.items.map((it) =>
                 it.extra
                   ? tickItem("extras", it, extraRemoveBtn(it))
-                  : tickItem(list.id, it, null, { qty: parseQty(it.text) })
+                  : tickItem(it.list || list.id, it, null, { qty: parseQty(it.text) })
               )
             )
           )
         ),
         h(
           "button",
-          {
-            type: "button",
-            class: "secondary clear-ticks",
-            onclick: async () => {
-              if (!window.confirm("Clear all ticks on " + list.title + "?")) return;
-              for (const it of list.items) {
-                if (isChecked(list.id, it.id)) await setChecked(list.id, it.id, false);
-              }
-              refreshTicks();
-            },
-          },
-          "Clear ticks"
+          { type: "button", class: "secondary clear-ticks", hidden: true, onclick: () => clearTickedOff(list) },
+          "Clear ticked-off items"
         )
-      );
-    }),
+      )
+    : h("p", { class: "muted" }, "No shopping list yet.");
+  return h(
+    "section",
+    null,
+    h("h2", null, "Shopping"),
+    h("p", { class: "muted" }, note),
+    state.layout.note ? h("p", { class: "muted" }, state.layout.note) : null,
+    body,
     h(
       "details",
       { class: "list card", "data-list": "extras", open: true },
-      h("summary", null, "Extras and one-off items", h("span", { class: "progress" })),
-      h("p", { class: "note" }, "Add anything that isn't on the lists: a forgotten ingredient, cleaning supplies, toiletries. It lands in this week's list under the matching aisle, or under Household and other if I can't tell. Either of you can add from your phone."),
+      h("summary", null, "Add an extra item", h("span", { class: "progress" })),
+      h("p", { class: "note" }, "Add anything that isn't on the list: a forgotten ingredient, cleaning supplies, toiletries. It lands in the list under the matching aisle, or under Household and other if I can't tell. Either of you can add from your phone."),
       h("div", { id: "extras-box" }, extrasContent().filter(Boolean))
     )
   );
