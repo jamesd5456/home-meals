@@ -8,12 +8,12 @@
     "items": [
       {
         "id": "w1-capsicum",
-        "text": "Red capsicum* (1 3/4 needed: Mon breakfast 1/4, Tue shakshuka 1/2, Wed stir-fry 1/2, Thu san choy bau 1/2; Mon to Wed already shopped)",
+        "text": "Red capsicum*, 2 (1 3/4 needed: Mon breakfast 1/4, Tue shakshuka 1/2, Wed stir-fry 1/2, Thu san choy bau 1/2; Mon to Wed already shopped)",
         "section": "fruit-grocer"
       },
       {
         "id": "w1-onion",
-        "text": "Brown onion* (1 needed: Tue shakshuka 1/2, Sun pulled pork 1/2)",
+        "text": "Brown onion*, 1 (Tue shakshuka 1/2, Sun pulled pork 1/2)",
         "section": "fruit-grocer"
       },
       {
@@ -23,7 +23,7 @@
       },
       {
         "id": "w1-carrots",
-        "text": "Carrots* (2 1/2 needed: Wed stir-fry 1/2, Thu san choy bau 1, Fri meatballs 1)",
+        "text": "Carrots*, 3 (2 1/2 needed: Wed stir-fry 1/2, Thu san choy bau 1, Fri meatballs 1)",
         "section": "fruit-grocer"
       },
       {
@@ -83,7 +83,7 @@
       },
       {
         "id": "w1-avocados",
-        "text": "Avocados* (1 1/4 needed: Wed breakfast 1/4, Fri breakfast 1/4, Sun breakfast 1/4, Sun tacos 1/2)",
+        "text": "Avocados*, 2 (1 1/4 needed: Wed breakfast 1/4, Fri breakfast 1/4, Sun breakfast 1/4, Sun tacos 1/2)",
         "section": "fruit-grocer"
       },
       {
@@ -128,17 +128,17 @@
       },
       {
         "id": "w1-yoghurt",
-        "text": "Greek yoghurt* (1 1/3 cups needed: Tue breakfast 1/3, Sat breakfast 1/3, Sat pasta 1/3, Sun slaw 1/3; buy the smallest tub)",
+        "text": "Greek yoghurt*, 1 tub (1 1/3 cups needed: Tue breakfast 1/3, Sat breakfast 1/3, Sat pasta 1/3, Sun slaw 1/3; buy the smallest tub)",
         "section": "dairy"
       },
       {
         "id": "w1-cheese",
-        "text": "Tasty cheese* (2 tbsp grated needed, Sat salmon pasta)",
+        "text": "Tasty cheese*, 2 tbsp (grated, Sat salmon pasta)",
         "section": "dairy"
       },
       {
         "id": "w1-bread",
-        "text": "Bread* (7 slices needed: Mon breakfast 1, Tue shakshuka 3, Wed breakfast 1, Fri breakfast 1, Sun breakfast 1; freeze the rest of the loaf)",
+        "text": "Bread*, 7 slices (Mon breakfast 1, Tue shakshuka 3, Wed breakfast 1, Fri breakfast 1, Sun breakfast 1; freeze the rest of the loaf)",
         "section": "bakery"
       },
       {
@@ -148,12 +148,12 @@
       },
       {
         "id": "w1-peanut-butter",
-        "text": "Smooth peanut butter* (1 tsp needed, Thu breakfast)",
+        "text": "Smooth peanut butter*, 1 tsp (Thu breakfast)",
         "section": "aisle-3"
       },
       {
         "id": "w1-oats",
-        "text": "Rolled oats* (2/3 cup needed: Thu breakfast 1/3, Fri meatballs 1/3)",
+        "text": "Rolled oats*, 160 ml (2/3 cup: Thu breakfast 1/3 cup, Fri meatballs 1/3 cup)",
         "section": "aisle-4"
       },
       {
@@ -168,17 +168,17 @@
       },
       {
         "id": "w1-rice",
-        "text": "Basmati rice* (1/2 cup dry needed, Thu san choy bau)",
+        "text": "Basmati rice*, 125 ml (1/2 cup dry, Thu san choy bau)",
         "section": "aisle-8"
       },
       {
         "id": "w1-stock",
-        "text": "No-salt-added stock* (1 3/4 cups needed, made up from the concentrate: Tue 1/4, Wed 1/4, Thu 1/3, Fri 1/4, Sat 1/3, Sun 1/3)",
+        "text": "No-salt-added stock*, 440 ml (1 3/4 cups, made up from the concentrate: Tue 1/4, Wed 1/4, Thu 1/3, Fri 1/4, Sat 1/3, Sun 1/3 cup)",
         "section": "aisle-8"
       },
       {
         "id": "w1-tahini",
-        "text": "Tahini* (4 tsp needed: Tue breakfast 1 tsp, Wed stir-fry 2 tsp, Sat breakfast 1 tsp)",
+        "text": "Tahini*, 4 tsp (Tue breakfast 1 tsp, Wed stir-fry 2 tsp, Sat breakfast 1 tsp)",
         "section": "aisle-8"
       },
       {
@@ -193,52 +193,52 @@
       },
       {
         "id": "w1-soy",
-        "text": "Low-salt soy sauce* (4 tsp needed, adults only: Wed stir-fry 2, Thu san choy bau 2)",
+        "text": "Low-salt soy sauce*, 4 tsp (adults only: Wed stir-fry 2, Thu san choy bau 2)",
         "section": "aisle-9"
       },
       {
         "id": "w1-oil",
-        "text": "Cooking oil* (4 tbsp needed: Mon breakfast 1 tsp, Tue 2 tsp, Wed 1 tbsp, Thu 2 tsp, Fri 2 tsp, Sat 2 tsp)",
+        "text": "Cooking oil*, 4 tbsp (Mon breakfast 1 tsp, Tue 2 tsp, Wed 1 tbsp, Thu 2 tsp, Fri 2 tsp, Sat 2 tsp)",
         "section": "aisle-9"
       },
       {
         "id": "w1-almond-meal",
-        "text": "Almond meal* (1 tsp needed, Thu breakfast)",
+        "text": "Almond meal*, 1 tsp (Thu breakfast)",
         "section": "aisle-10"
       },
       {
         "id": "w1-cumin",
-        "text": "Ground cumin* (1 1/2 tsp needed: Tue shakshuka 1/2, Sun pulled pork 1)",
+        "text": "Ground cumin*, 1.5 tsp (Tue shakshuka 1/2, Sun pulled pork 1)",
         "section": "aisle-10"
       },
       {
         "id": "w1-paprika",
-        "text": "Smoked paprika* (1 tsp needed: Tue shakshuka 1/2, Sun pulled pork 1/2)",
+        "text": "Smoked paprika*, 1 tsp (Tue shakshuka 1/2, Sun pulled pork 1/2)",
         "section": "aisle-10"
       },
       {
         "id": "w1-coriander",
-        "text": "Ground coriander* (1 tsp needed: Thu san choy bau 1/2, Sun pulled pork 1/2)",
+        "text": "Ground coriander*, 1 tsp (Thu san choy bau 1/2, Sun pulled pork 1/2)",
         "section": "aisle-10"
       },
       {
         "id": "w1-herbs",
-        "text": "Dried mixed herbs*, 1/2 tsp (Fri meatballs)",
+        "text": "Dried mixed herbs*, 0.5 tsp (Fri meatballs)",
         "section": "aisle-10"
       },
       {
         "id": "w1-infant-cereal",
-        "text": "Iron-fortified infant cereal* (3 tbsp needed: Tue, Thu and Sat breakfasts)",
+        "text": "Iron-fortified infant cereal*, 3 tbsp (Tue, Thu and Sat breakfasts)",
         "section": "baby"
       },
       {
         "id": "w1-peas",
-        "text": "Frozen peas*, 1/2 cup (Sat salmon pasta)",
+        "text": "Frozen peas*, 0.5 cup (Sat salmon pasta)",
         "section": "frozen"
       },
       {
         "id": "w1-corn",
-        "text": "Frozen corn*, 1/2 cup (Sun tacos)",
+        "text": "Frozen corn*, 0.5 cup (Sun tacos)",
         "section": "frozen"
       },
       {
@@ -350,7 +350,7 @@
       },
       {
         "id": "spinach-150",
-        "text": "Baby spinach, about 150 g (korma, omelette, dahl)",
+        "text": "Baby spinach, 150 g (about; korma, omelette, dahl)",
         "section": "fruit-grocer",
         "list": "list-1"
       },
@@ -410,19 +410,19 @@
       },
       {
         "id": "oats-3tbsp",
-        "text": "Rolled oats (3 tbsp needed, oat porridge)",
+        "text": "Rolled oats, 3 tbsp (oat porridge)",
         "section": "aisle-4",
         "list": "list-1"
       },
       {
         "id": "weetbix-1",
-        "text": "Weet-Bix (1 biscuit needed; buy the smallest box)",
+        "text": "Weet-Bix, 1 biscuit (buy the smallest box)",
         "section": "aisle-4",
         "list": "list-1"
       },
       {
         "id": "infant-cereal-2tbsp",
-        "text": "Iron-fortified infant cereal (2 tbsp needed in total)",
+        "text": "Iron-fortified infant cereal, 2 tbsp (needed in total)",
         "section": "baby",
         "list": "list-1"
       },
@@ -458,7 +458,7 @@
       },
       {
         "id": "soy-sauce-adults",
-        "text": "Low-salt soy sauce (adults at the table with the fried rice; recipe gives no amount)",
+        "text": "Low-salt soy sauce, 1 bottle (adults at the table with the fried rice; recipe gives no amount)",
         "section": "aisle-9",
         "list": "list-1"
       },
@@ -470,73 +470,73 @@
       },
       {
         "id": "tahini-3tbsp",
-        "text": "Tahini (about 3 1/2 tbsp in total: tray bake, hummus, catch-up plate, yoghurt breakfast)",
+        "text": "Tahini, 3.5 tbsp (about, in total: tray bake, hummus, catch-up plate, yoghurt breakfast)",
         "section": "aisle-8",
         "list": "list-1"
       },
       {
         "id": "peanut-butter-1tsp",
-        "text": "100% smooth peanut butter (1 tsp in total)",
+        "text": "100% smooth peanut butter, 1 tsp (in total)",
         "section": "aisle-3",
         "list": "list-1"
       },
       {
         "id": "korma-paste-3tbsp",
-        "text": "Korma paste (3 tbsp needed; check the label for salt)",
+        "text": "Korma paste, 3 tbsp (check the label for salt)",
         "section": "aisle-8",
         "list": "list-1"
       },
       {
         "id": "cumin-5tsp",
-        "text": "Ground cumin (5 tsp in total: korma 1, tacos 2, dahl 2)",
+        "text": "Ground cumin, 5 tsp (in total: korma 1, tacos 2, dahl 2)",
         "section": "aisle-10",
         "list": "list-1"
       },
       {
         "id": "coriander-2tsp",
-        "text": "Ground coriander (2 tsp in total: korma 1, tacos 1)",
+        "text": "Ground coriander, 2 tsp (in total: korma 1, tacos 1)",
         "section": "aisle-10",
         "list": "list-1"
       },
       {
         "id": "turmeric-2tsp",
-        "text": "Ground turmeric (2 tsp: dahl)",
+        "text": "Ground turmeric, 2 tsp (dahl)",
         "section": "aisle-10",
         "list": "list-1"
       },
       {
         "id": "paprika-2tsp",
-        "text": "Smoked paprika (2 tsp: tacos)",
+        "text": "Smoked paprika, 2 tsp (tacos)",
         "section": "aisle-10",
         "list": "list-1"
       },
       {
         "id": "garam-masala-1tsp",
-        "text": "Garam masala (1 tsp: dahl)",
+        "text": "Garam masala, 1 tsp (dahl)",
         "section": "aisle-10",
         "list": "list-1"
       },
       {
         "id": "mixed-herbs-1tbsp",
-        "text": "Dried mixed herbs (1 tbsp: ragu)",
+        "text": "Dried mixed herbs, 1 tbsp (ragu)",
         "section": "aisle-10",
         "list": "list-1"
       },
       {
         "id": "peas-corn-1cup",
-        "text": "Frozen peas and corn (1 cup: fried rice)",
+        "text": "Frozen peas and corn, 1 cup (fried rice)",
         "section": "frozen",
         "list": "list-1"
       },
       {
         "id": "berries-few",
-        "text": "Frozen mixed berries (a few needed: yoghurt breakfast)",
+        "text": "Frozen mixed berries, 1 bag (a few needed: yoghurt breakfast)",
         "section": "frozen",
         "list": "list-1"
       },
       {
         "id": "oil-9tbsp",
-        "text": "Olive or neutral oil* (about 9 tbsp across the week)",
+        "text": "Olive or neutral oil*, 9 tbsp (about, across the week)",
         "section": "aisle-9",
         "list": "list-1"
       },
@@ -644,7 +644,7 @@
       },
       {
         "id": "spinach",
-        "text": "Baby spinach (dahl 3 handfuls, linguine 80 g, omelette 1 small handful, pancakes 1 handful)",
+        "text": "Baby spinach, 1 bag (dahl 3 handfuls, linguine 80 g, omelette 1 small handful, pancakes 1 handful)",
         "section": "fruit-grocer",
         "list": "list-2"
       },
@@ -680,13 +680,13 @@
       },
       {
         "id": "yoghurt",
-        "text": "Natural yoghurt, 3/4 cup for the patties dip plus a spoonful per serve of dahl (buy the smallest tub)",
+        "text": "Natural yoghurt, 0.75 cup (patties dip, plus a spoonful per serve of dahl; buy the smallest tub)",
         "section": "dairy",
         "list": "list-2"
       },
       {
         "id": "milk-half-cup",
-        "text": "Cow's milk, 1/2 cup (pancakes; buy the smallest bottle)",
+        "text": "Cow's milk, 0.5 cup (pancakes; buy the smallest bottle)",
         "section": "dairy",
         "list": "list-2"
       },
@@ -758,13 +758,13 @@
       },
       {
         "id": "h-avocado",
-        "text": "Avocado*, 1/4 (prawn toast)",
+        "text": "Avocado*, 0.25 (prawn toast)",
         "section": "fruit-grocer",
         "list": "list-2"
       },
       {
         "id": "h-peanut-butter",
-        "text": "Smooth peanut butter*, 1/3 cup plus 1/2 tsp (satay, oat porridge)",
+        "text": "Smooth peanut butter*, 0.33 cup (plus 1/2 tsp: satay, oat porridge)",
         "section": "aisle-3",
         "list": "list-2"
       },
