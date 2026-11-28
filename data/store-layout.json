@@ -3,10 +3,6 @@
   "verified": false,
   "sections": [
     {
-      "key": "home-check",
-      "label": "Check you have at home"
-    },
-    {
       "key": "butcher",
       "label": "Separate butcher (only for meat you choose to buy there)"
     },
